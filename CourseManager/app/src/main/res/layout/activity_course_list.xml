@@ -9,5 +9,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="comp3350group8.coursemanager.CourseList">
 
-   
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAddCourse"
+        android:id="@+id/btnAddCourse"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"       />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/CourseList"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/btnAddCourse"    />
 </RelativeLayout>
