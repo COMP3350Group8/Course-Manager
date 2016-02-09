@@ -10,24 +10,25 @@ public class Database {
 	/* static ArrayList, stored in memory to act as a database 
 	for now, it only needs to handle one list */
 	private static ArrayList<Object> list;
-	
+
 	public static void init() {
 		list = new ArrayList<Object>();
 	}
-	
-	public static void createList(listName) {
-		
+
+	public static void insert(item, listName) {
+		list.add(item);
 	}
 	
-	public static void insert(item, listName, ) {
-		
+	public static void update(ID, item, listName) {
+		list.remove(ID);
+		list.add(ID, item);
 	}
-	
-	public static Object remove(item, listName, ) {
-		
+
+	public static Object remove(ID, listName) {
+		list.remove(ID);
 	}
-	
-	private static Object search(item, listName) {
+
+	private static Object query(item, listName) {
 		
 	}
 }
