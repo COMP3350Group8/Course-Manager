@@ -27,4 +27,14 @@ public class StubDatabase implements AppDatabase {
     public ListItem remove(int id) {
         return list.remove(id);
     }
+
+    public String[] read() {
+        String[] array = new String[list.size()];
+
+        for (int i = 0; i < list.size(); i++) {
+            array[i] = list.get(i).toString();
+        }
+
+        return array;
+    }
 }

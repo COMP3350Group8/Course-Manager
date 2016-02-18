@@ -5,4 +5,5 @@ package comp3350group8.coursemanager;
  */
 public abstract class ListItem {
     public abstract boolean equals(ListItem otherItem);
+    public abstract String toString();
 }

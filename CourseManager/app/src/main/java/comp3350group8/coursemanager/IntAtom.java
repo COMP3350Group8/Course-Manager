@@ -26,4 +26,8 @@ public class IntAtom extends ListItem {
 
         return equal;
     }
+
+    public String toString() {
+        return "" + item;
+    }
 }

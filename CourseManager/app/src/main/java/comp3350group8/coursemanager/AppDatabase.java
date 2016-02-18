@@ -7,4 +7,5 @@ public interface AppDatabase {
     public void insert(ListItem item);
     public void update(int id, ListItem item);
     public ListItem remove(int id);
+    public String[] read();
 }
