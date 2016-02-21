@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Course Manager</string>
+    <string name="btnAdd">Add</string>
+    <string name="btnAddCourse">Add Course</string>
+    <string name="CourseTitle">Course Title</string>
+    <string name="CourseCode">Course Code</string>
+    <string name="SaveCourse">Save</string>
+    <string name="CloseCourse">Close</string>
 </resources>

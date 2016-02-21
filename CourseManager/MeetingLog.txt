@@ -1,0 +1,30 @@
+	Jan. 21, 2016
+- Product is largely nailed down, it will track students’ course grades
+- Mostly for university students, undergraduate students in particular
+- Lots of things in university that need to be tracked
+- Do tasks need to be able to be broken down into subtasks? It is a good option
+- Should be password protected
+- Would like to see it completed in the next few months
+- User stories:
+	- Calculating grades/GPA
+	- Viewing schedule
+	- Viewing previous grades
+	- Adding tasks/assignments
+	- Study tool
+
+	February 5, 2016
+- Everyone is here but Graham
+- Someone is going to take the lead for each of the iterations
+- Group github account
+- One user story for the first iteration needs to be implemented and tested
+	- Course list, information
+	- User accounts
+	- Schedule
+- Database stub to be stored on memory as a Class         
+
+	February 8, 2016
+- Graham is sick
+- Breaking up tasks:
+	- Ian & Graham -Stub Database
+	- David & Yusuf & Anthony - GUI
+- We’ll decide on another meeting over WhatsApp
