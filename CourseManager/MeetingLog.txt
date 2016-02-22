@@ -28,3 +28,8 @@
 	- Ian & Graham -Stub Database
 	- David & Yusuf & Anthony - GUI
 - We’ll decide on another meeting over WhatsApp
+
+	February 22, 2016
+- Code for database and GUI have been combined
+- Wiki page has been created
+- Student class is being created
