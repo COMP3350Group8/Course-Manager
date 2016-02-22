@@ -36,3 +36,22 @@
 - Code for database and GUI have been combined
 - Wiki page has been created
 - Student class is being created
+
+Iteration 1
+-------------
+
+Main Screen (4 days)
+- David worked on the GUI for main screen (1 day)
+- David, Anthony and Yusef created main screen code (2 days)
+- Group combined and fixed code for main screen(1 day)
+
+Add Course (4 days)
+- David, Anthony and Yusef created code for Add Course (3 days)
+- Group combined and fixed code (1 day)
+
+Course List (4 days)
+- David, Anthony and Yusef created code for Course List (3 days)
+- Group combined and fixed code (1 day)
+
+Database (5 days)
+- Ian created database (5 days)
