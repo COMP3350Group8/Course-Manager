@@ -29,6 +29,9 @@
 	- David & Yusuf & Anthony - GUI
 - We’ll decide on another meeting over WhatsApp
 
+	Ferbruary 21, 2016
+- Combined David and Ian's code and cleaned up (Graham)
+
 	February 22, 2016
 - Code for database and GUI have been combined
 - Wiki page has been created
