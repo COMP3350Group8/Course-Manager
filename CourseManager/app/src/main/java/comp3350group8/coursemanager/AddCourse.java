@@ -21,22 +21,21 @@ public class AddCourse extends Activity {
     //final Intent newActivity = new Intent(AddCourse.this, ListOfCourses.class);
     public void buttonOnClick (View v)
     {
-        String []data = new String[3];
+        // String []data = new String[3];
+
+        // retrieve the data supplied to the form
         EditText courseName = (EditText) findViewById(R.id.courseName);
         EditText courseloc = (EditText) findViewById(R.id.location);
         EditText coursedescr = (EditText) findViewById(R.id.description);
 
+        // create instance of Course and send to the database
         Course newCourse = new Course(courseName.getText().toString(), courseloc.getText().toString(), coursedescr.getText().toString());
         staticDB.insert(newCourse, "Courses");
-        //newActivity.putExtra("name", courseName.toString());
-        //newActivity.putExtra("location", courseloc.toString());
-        //newActivity.putExtra("description", coursedescr.toString());
-        data[0]= courseName.getText().toString();
-        data[1] = courseloc.getText().toString();
-        data[2] = coursedescr.getText().toString();
 
+        //data[0]= courseName.getText().toString();
+        //data[1] = courseloc.getText().toString();
+        //data[2] = coursedescr.getText().toString();
 
-        //startActivity(newActivity);
         startActivity(new Intent(AddCourse.this, ListOfCourses.class));
 
     }

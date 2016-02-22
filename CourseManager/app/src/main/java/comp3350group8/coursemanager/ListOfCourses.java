@@ -19,12 +19,16 @@ public class ListOfCourses extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listofcourses);
+
+        // create course table
         staticDB.createTable("Courses");
 
         //Bundle info = getIntent().getExtras();
 
         lv = (ListView) findViewById(R.id.listView);
         //String[] course= {"COMP 1010", "COMP 1020", "COMP 2130","COMP 2140", "COMP 2150"};
+
+        // retrieve contents of "Courses" if any
         String[] course = staticDB.getTable("Courses");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter);

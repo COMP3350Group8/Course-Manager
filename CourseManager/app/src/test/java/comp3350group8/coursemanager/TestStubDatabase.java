@@ -7,6 +7,7 @@ import junit.framework.TestCase;
 import comp3350group8.coursemanager.staticDB;
 
 public class TestStubDatabase extends TestCase {
+    @Test
     public void testStub() {
         staticDB.init();
 
@@ -22,5 +23,11 @@ public class TestStubDatabase extends TestCase {
             String[] array = staticDB.getTable("" + i);
             assertNotNull(array);
         }
+
+        staticDB.update(new IntAtom(70), 0, "0");
+        staticDB.update(new IntAtom(70), 2, "6");
+        staticDB.update(new IntAtom(70), 10, "6");
+
+        staticDB.print();
     }
 }
