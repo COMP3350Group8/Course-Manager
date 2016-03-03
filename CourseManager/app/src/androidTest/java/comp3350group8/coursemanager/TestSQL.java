@@ -7,6 +7,11 @@ import junit.framework.TestCase;
  */
 public class TestSQL extends TestCase {
     public void testCase() {
+        SQLDatabase q = new SQLDatabase("Test");
 
+        for (int i = 0; i < 100; i++) {
+            IntAtom item = new IntAtom(i);
+            q.insert(item);
+        }
     }
 }
