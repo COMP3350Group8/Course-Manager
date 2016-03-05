@@ -1,10 +1,13 @@
 package comp3350group8.coursemanager;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
@@ -13,46 +16,94 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * Created by Ian Smith on 2016-02-17.
  * needs to implement a database
  */
-public class SQLDatabase  implements Database {
-    private SQLiteDatabase db;
-    private String name;
-    private File dbFile;
+public class SQLDatabase  extends SQLiteOpenHelper {
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "Whole Database";
 
-    public SQLDatabase(String name) {
-        this.name = name;
-        String path = "//data/data/comp3350group8.coursemanager/databases/" + name;
-        db = openOrCreateDatabase(name, null);
-        db.execSQL("CREATE TABLE IF NOT EXISTS " + name + "(value INT);");
-        dbFile = new File(path);
+    public SQLDatabase(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void insert(ListItem item) {
-        String stringified = item.toString();
-        db.execSQL("INSERT INTO " + name + " VALUES(" + stringified + ");");
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String CREATE_INIT_TABLE = "CREATE TABLE ints ( " +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "Value INT)";
+
+        // coluumns are ID and Value for table ints
+        db.execSQL(CREATE_INIT_TABLE);
     }
 
-    public void update(int id, ListItem item) {
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS Init");
 
+        this.onCreate(db);
     }
 
-    public ListItem remove(int id) {
-        return null;
+    private static final String TABLE_INTS = "ints";
+
+    // ints table columns
+    private static final String KEY_ID = "ID";
+    private static final String KEY_VALUE = "Value";
+    private static final String[] COLUMNS = {KEY_ID, KEY_VALUE};
+
+    // CRUD methods
+
+    // insert parameter into the database
+    public void insert(IntAtom item) {
+        // get reference to writable db
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // get content values
+        ContentValues values = new ContentValues();
+        values.put(KEY_VALUE, item.getItem()); // get value
+
+        db.insert(TABLE_INTS, null, values);
+
+        db.close();
     }
 
-    public String[] read() {
-        return null;
+    public IntAtom getInt(int id) {
+        IntAtom atom = null;
+
+        if (id > 0) {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            // build query
+            Cursor cursor =
+                    db.query(TABLE_INTS, COLUMNS, " id = ?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+            boolean successful = cursor.moveToFirst();
+
+            if (successful) {
+                atom = new IntAtom(Integer.parseInt(cursor.getString(0)));
+            }
+            cursor.close();
+        }
+
+        return atom;
     }
 
-    public String fetch() {
-        Cursor resultSet = db.rawQuery("Select * from " + name, null);
-        resultSet.moveToFirst();
-        String out = resultSet.getString(1);
-        resultSet.close();
+    public ArrayList<IntAtom> getAllInts() {
+        ArrayList<IntAtom> list = new ArrayList<IntAtom>();
 
-        return out;
+        String query = "SELECT * FROM " + TABLE_INTS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        IntAtom atom = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                atom = new IntAtom(Integer.parseInt(cursor.getString(1)));
+
+                list.add(atom);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return list;
     }
 
-    public void destroy() {
-        db.deleteDatabase(dbFile);
-    }
 }

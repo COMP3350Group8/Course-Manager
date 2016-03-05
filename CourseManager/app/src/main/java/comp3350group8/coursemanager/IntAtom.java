@@ -18,7 +18,7 @@ public class IntAtom extends ListItem {
         boolean equal = false;
 
         if (otherItem instanceof IntAtom) {
-            IntAtom other = (IntAtom)otherItem;
+            IntAtom other = (IntAtom) otherItem;
             int q = other.item;
 
             equal = item == q;
@@ -29,5 +29,10 @@ public class IntAtom extends ListItem {
 
     public String toString() {
         return "" + item;
+    }
+
+    public String getAttributes() {
+        String out = "value INT";
+        return out;
     }
 }

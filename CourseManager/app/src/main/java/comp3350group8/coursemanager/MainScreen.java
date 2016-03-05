@@ -12,9 +12,11 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+
+        SQLDatabase db = new SQLDatabase(this);
+
         staticDB.init();
     }
-
 
     public void buttonOnClick (View v)
     {
