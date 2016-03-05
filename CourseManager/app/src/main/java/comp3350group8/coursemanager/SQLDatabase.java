@@ -1,7 +1,12 @@
 package comp3350group8.coursemanager;
 
+import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.File;
+
+import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 /**
@@ -11,10 +16,14 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 public class SQLDatabase  implements Database {
     private SQLiteDatabase db;
     private String name;
+    private File dbFile;
 
     public SQLDatabase(String name) {
         this.name = name;
+        String path = "//data/data/comp3350group8.coursemanager/databases/" + name;
         db = openOrCreateDatabase(name, null);
+        db.execSQL("CREATE TABLE IF NOT EXISTS " + name + "(value INT);");
+        dbFile = new File(path);
     }
 
     public void insert(ListItem item) {
@@ -34,7 +43,16 @@ public class SQLDatabase  implements Database {
         return null;
     }
 
+    public String fetch() {
+        Cursor resultSet = db.rawQuery("Select * from " + name, null);
+        resultSet.moveToFirst();
+        String out = resultSet.getString(1);
+        resultSet.close();
+
+        return out;
+    }
+
     public void destroy() {
-        //db.deleteDatabase();
+        db.deleteDatabase(dbFile);
     }
 }
