@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                     db.query(TABLE_INTS, COLUMNS, " id = ?", new String[]{String.valueOf(id)}, null, null, null, null);
 
             boolean successful = cursor.moveToFirst();
+            Log.d("GetInt", "" + successful);
 
             if (successful) {
                 atom = new IntAtom(Integer.parseInt(cursor.getString(0)));
@@ -89,7 +91,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         String query = "SELECT * FROM " + TABLE_INTS;
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
 
         IntAtom atom = null;
@@ -97,7 +99,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 atom = new IntAtom(Integer.parseInt(cursor.getString(1)));
-
+                Log.d("list", atom.toString());
                 list.add(atom);
             } while (cursor.moveToNext());
         }
