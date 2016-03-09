@@ -29,7 +29,19 @@ public class Course extends ListItem
         return equal;
     }
 
+    public String getName() {
+        return course;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
     public String toString() {
-        return "" + course + " is located at " + location + ". " + description;
+        return "Name: " + course + ", Location: " + location + ", Description: " + description;
     }
 }

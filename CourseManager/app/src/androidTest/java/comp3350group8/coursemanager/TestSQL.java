@@ -10,6 +10,6 @@ public class TestSQL extends TestCase {
         SQLDatabase q = new SQLDatabase(null);
 
         IntAtom c = new IntAtom(0);
-        q.insert(c);
+        q.insertInt(c);
     }
 }
