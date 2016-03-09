@@ -1,4 +1,4 @@
-	Jan. 21, 2016
+﻿	Jan. 21, 2016
 - Product is largely nailed down, it will track students’ course grades
 - Mostly for university students, undergraduate students in particular
 - Lots of things in university that need to be tracked
@@ -36,6 +36,19 @@
 - Code for database and GUI have been combined
 - Wiki page has been created
 - Student class is being created
+
+February 26, 2016
+- Iteration 2 needs the SQL database, and more user stories to be added
+- we should also finish the adding course information feature
+- for next iteration (guessing on description) from detailed stories:
+	- tasks - 4 days - High Priority - Anthony
+	- create profiles - 5 days - High Priority - David
+	- grade calculation - 2 days - Low Priority
+	- course information - 3 days - Medium Priority - Yusuf
+	- SQL database - two weeks - High Priority - Ian & Graham
+	- implement proper gui for course list - 2 days - High Priority
+- need to have the stub implemented better for testing
+
 
 Iteration 1
 -------------
