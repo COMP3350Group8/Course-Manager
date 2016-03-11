@@ -24,4 +24,11 @@ public class MainScreen extends AppCompatActivity {
         startActivity(new Intent(MainScreen.this, ListOfCourses.class));
 
     }
+
+    public void buttonOnClick2 (View v)
+    {
+
+        startActivity(new Intent(MainScreen.this, LoginActivity.class));
+
+    }
 }

@@ -76,7 +76,8 @@
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/editText4"
-        android:layout_alignEnd="@+id/editText4" />
+        android:layout_alignEnd="@+id/editText4"
+        android:onClick="buttonOnClick2" />
 
     <EditText
         android:layout_width="wrap_content"
