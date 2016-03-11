@@ -32,9 +32,7 @@ public class StubDatabase extends SQLDatabase {
         //db.add(new SubTable("Courses"));
     //}
 
-    private static final String TABLE_COURSES = "Courses";
-    private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription"};
-
+    // returns the SubTable associated with name
     private SubTable retrieveTable(String name) {
         SubTable out = null;
 
@@ -47,11 +45,13 @@ public class StubDatabase extends SQLDatabase {
         return out;
     }
 
+    // inserts a Course into the Courses SubTable
     public void insertCourse(Course course) {
         SubTable table = retrieveTable("Courses");
         table.insert(course);
     }
 
+    // returns the course located in Courses at index id
     public Course getCourse(int id) {
         Course course = null;
 
@@ -66,6 +66,7 @@ public class StubDatabase extends SQLDatabase {
         return course;
     }
 
+    // returns an arraylist of all the courses in the SubTable
     public ArrayList<Course> getAllCourses() {
         ArrayList<ListItem> list = retrieveTable("Courses").getAll();
 

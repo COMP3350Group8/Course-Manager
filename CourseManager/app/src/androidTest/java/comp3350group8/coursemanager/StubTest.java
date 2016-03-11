@@ -19,6 +19,10 @@ public class StubTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting to create database");
         db = new StubDatabase(context);
 
+        // should fail but not crash
+        testCourseQuery();
+        testCourseRetrieval();
+
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();

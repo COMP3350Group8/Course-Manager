@@ -22,6 +22,11 @@ public class SQLiteTest extends AndroidTestCase {
         testIntRetrieval();
         testIntQuery();
 
+        // should fail but not crash
+        testCourseRetrieval();
+        testCourseQuery();
+
+        // actual test
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();
@@ -72,8 +77,12 @@ public class SQLiteTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting total recall of courses");
         ArrayList<Course> list = db.getAllCourses();
 
-        for (int i = 0; i < list.size(); i++) {
-            Log.d("DEBUG", "" + list.get(i));
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Log.d("DEBUG", "" + list.get(i));
+            }
+        } else {
+            Log.d("DEBUG", "Course list was empty.");
         }
     }
 
