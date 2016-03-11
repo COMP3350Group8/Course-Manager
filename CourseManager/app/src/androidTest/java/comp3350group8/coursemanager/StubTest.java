@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by Ian Smith on 2016-03-05.
  */
-public class SQLiteTest extends AndroidTestCase {
+public class StubTest extends AndroidTestCase {
     private SQLDatabase db;
 
     @Override
@@ -17,42 +17,15 @@ public class SQLiteTest extends AndroidTestCase {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
-        db = new SQLDatabase(context);
-        
-        testIntInsertion();
-        testIntRetrieval();
-        testIntQuery();
+        db = new StubDatabase(context);
 
         // should fail but not crash
-        testCourseRetrieval();
         testCourseQuery();
+        testCourseRetrieval();
 
-        // actual test
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();
-    }
-
-    //@Test
-    public void testIntInsertion() {
-        for (int i = 0; i < 10; i++) {
-            IntAtom c = new IntAtom(i);
-            Log.d("DEBUG", "Attempting to insert " + i);
-            db.insertInt(c);
-        }
-    }
-
-    public void testIntRetrieval() {
-        Log.d("DEBUG", "Attempting total recall");
-        ArrayList<IntAtom> list = db.getAllInts();
-
-        for (int i = 0; i < list.size(); i++) {
-            Log.d("DEBUG", "" + list.get(i));
-        }
-    }
-
-    public void testIntQuery() {
-        Log.d("DEBUG", "Attempted query: " + db.getInt(1));
     }
 
     public void testCourseInsertion() {
@@ -78,12 +51,8 @@ public class SQLiteTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting total recall of courses");
         ArrayList<Course> list = db.getAllCourses();
 
-        if (list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                Log.d("DEBUG", "" + list.get(i));
-            }
-        } else {
-            Log.d("DEBUG", "Course list was empty.");
+        for (int i = 0; i < list.size(); i++) {
+            Log.d("DEBUG", "" + list.get(i));
         }
     }
 

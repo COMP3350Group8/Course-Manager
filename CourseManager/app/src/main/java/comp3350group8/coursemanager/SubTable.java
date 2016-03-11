@@ -15,6 +15,10 @@ public class SubTable {
         list = new ArrayList<ListItem>();
     }
 
+    public int size() {
+        return list.size();
+    }
+
     // returns the name of the list
     public String getName() {return name;}
 
@@ -31,6 +35,17 @@ public class SubTable {
         }
 
         return null;
+    }
+
+    public ListItem get(int index) {
+        if (index >= 0 && index < list.size()) {
+            return list.get(index);
+        }
+        return null;
+    }
+
+    public ArrayList<ListItem> getAll() {
+        return list;
     }
 
     // places item in at list[id]
