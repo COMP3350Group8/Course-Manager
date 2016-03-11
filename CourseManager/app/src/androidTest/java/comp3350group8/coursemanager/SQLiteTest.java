@@ -18,6 +18,7 @@ public class SQLiteTest extends AndroidTestCase {
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
         db = new SQLDatabase(context);
+        
         testIntInsertion();
         testIntRetrieval();
         testIntQuery();
