@@ -36,6 +36,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 "CourseName TEXT, " +
                 "CourseLocation TEXT, " +
                 "CourseDescription TEXT)";
+        String CREATE_USER_TABLE = "CREATE TABLE Users ( "+
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                "name TEXT, " +
+                "password TEXT," +" studentNum, TEXT"+ "email, TEXT"+ "school, TEXT)";
 
         String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -45,6 +49,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         // coluumns are ID and Value for table ints
         db.execSQL(CREATE_INIT_TABLE);
+        db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_COURSES_TABLE);
         db.execSQL(CREATE_STUDENT_TABLE);
     }
@@ -59,7 +64,26 @@ public class SQLDatabase  extends SQLiteOpenHelper {
     private static final String[] STUDENT_COLUMNS = {"ID", "StudentID", "StudentName", "StudentEmail"};
 
     private static final String TABLE_COURSES = "Courses";
+    private static final String TABLE_USERS = "Users";
+    private static final String[] USER_COLUMNS = {"Name","Password","studentNum", "school", "email"};
     private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription"};
+
+    public void insertUser(User user)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(USER_COLUMNS[1], user.getName());
+        values.put(USER_COLUMNS[2], user.getPassWord());
+        values.put(USER_COLUMNS[3], user.getStudentNum());
+        values.put(USER_COLUMNS[4], user.getSchool());
+        values.put(USER_COLUMNS[5], user.getEmail());
+
+        db.insert(TABLE_USERS, null, values);
+        db.close();
+
+    }
+
 
     public void insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -96,6 +120,41 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         }
 
         return course;
+    }
+
+    public User getUser(String email, String password)
+    {
+        User user = null;
+
+        if(email!=null && password!=null)
+        {
+            SQLiteDatabase db = this.getReadableDatabase();
+            boolean success = false;
+
+            // build query
+            Cursor cursor =
+                    db.query(TABLE_USERS, USER_COLUMNS, email, new String[]{email, password}, null, null, null, null);
+            if(cursor!=null)
+            {
+                cursor.moveToFirst();
+                success = true;
+
+            }
+
+            if(success)
+            {
+                String name = cursor.getString(0);
+                String pasword = cursor.getString(1);
+                String studentNum = cursor.getString(2);
+                String school= cursor.getString(3);
+                String emailAdd = cursor.getString(4);
+                user = new User(name, pasword, studentNum, school, emailAdd);
+
+            }
+            cursor.close();
+
+        }
+        return user;
     }
 
     public ArrayList<Course> getAllCourses() {

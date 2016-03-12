@@ -15,12 +15,14 @@ public class MainScreen extends AppCompatActivity {
         setContentView(R.layout.activity_main_screen);
 
         SQLDatabase db = new SQLDatabase(this);
-
         staticDB.init();
     }
 
-    public void buttonOnClick (View v)
+
+
+    public void buttonOnClick (View v)//when a new account is created
     {
+        SQLDatabase db = new SQLDatabase(this);
         EditText name, password, studentNum, email, school;
         name = (EditText) findViewById(R.id.name);
         password= (EditText) findViewById(R.id.password);
@@ -30,10 +32,11 @@ public class MainScreen extends AppCompatActivity {
 
         User newUser = new User(name.toString(),password.toString(), studentNum.toString(),
                 email.toString(),school.toString());
+        db.insertUser(newUser);
         startActivity(new Intent(MainScreen.this, ListOfCourses.class));
     }
 
-    public void buttonOnClick2 (View v)
+    public void buttonOnClick2 (View v)//code when user decides to log in
     {
         startActivity(new Intent(MainScreen.this, LoginActivity.class));
 

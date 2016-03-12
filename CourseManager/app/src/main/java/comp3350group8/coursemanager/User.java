@@ -29,4 +29,14 @@ public class User {
     {
         return name;
     }
+
+    public String getStudentNum()
+    {
+        return studentNum;
+    }
+
+    public String getSchool()
+    {
+        return school;
+    }
 }

@@ -11,16 +11,17 @@ import android.widget.TextView;
 public class LoginActivity extends AppCompatActivity {
 
     Button blogin;
-    EditText etUsername, etPassword;
+    EditText email, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        etUsername = (EditText) findViewById(R.id.etuserName);
+        email = (EditText) findViewById(R.id.etuserName);
         etPassword =(EditText) findViewById(R.id.etPassword);
         blogin =(Button) findViewById(R.id.bLogin);
+        //User user = db.getUser(email, etPassword);
     }
 
     public void buttonOnClick(View v)
