@@ -25,18 +25,26 @@ public class AddCourse extends Activity {
 
         // retrieve the data supplied to the form
         EditText courseName = (EditText) findViewById(R.id.courseName);
-        EditText courseloc = (EditText) findViewById(R.id.location);
-        EditText coursedescr = (EditText) findViewById(R.id.description);
+        if(courseName.length() ==  0) {
+            courseName.setError("Enter course");
+        }
+        else {
+            EditText courseloc = (EditText) findViewById(R.id.location);
 
-        // create instance of Course and send to the database
-        Course newCourse = new Course(courseName.getText().toString(), courseloc.getText().toString(), coursedescr.getText().toString());
-        staticDB.insert(newCourse, "Courses");
+            EditText coursedescr = (EditText) findViewById(R.id.description);
 
-        //data[0]= courseName.getText().toString();
-        //data[1] = courseloc.getText().toString();
-        //data[2] = coursedescr.getText().toString();
+            // create instance of Course and send to the database
+            Course newCourse = new Course(courseName.getText().toString(),
+                    courseloc.getText().toString(),
+                    coursedescr.getText().toString());
+            staticDB.insert(newCourse, "Courses");
 
-        startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+            //data[0]= courseName.getText().toString();
+            //data[1] = courseloc.getText().toString();
+            //data[2] = coursedescr.getText().toString();
+
+            startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+        }
 
     }
 }
