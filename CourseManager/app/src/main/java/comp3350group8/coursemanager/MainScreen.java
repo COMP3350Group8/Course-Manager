@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import comp3350group8.coursemanager.R;
 
@@ -20,15 +21,21 @@ public class MainScreen extends AppCompatActivity {
 
     public void buttonOnClick (View v)
     {
+        EditText name, password, studentNum, email, school;
+        name = (EditText) findViewById(R.id.name);
+        password= (EditText) findViewById(R.id.password);
+        studentNum = (EditText) findViewById(R.id.studentNum);
+        email = (EditText) findViewById(R.id.emailAddress);
+        school = (EditText) findViewById(R.id.school);
 
+        User newUser = new User(name.toString(),password.toString(), studentNum.toString(),
+                email.toString(),school.toString());
         startActivity(new Intent(MainScreen.this, ListOfCourses.class));
-
     }
 
     public void buttonOnClick2 (View v)
     {
-
-        //startActivity(new Intent(MainScreen.this, LoginActivity.class));
+        startActivity(new Intent(MainScreen.this, LoginActivity.class));
 
     }
 }
