@@ -38,4 +38,8 @@ public class ListOfCourses extends Activity {
         startActivity(new Intent(ListOfCourses.this, AddCourse.class));
 
     }
+    public void button2OnClick (View v)
+    {
+        startActivity(new Intent(ListofCourses.this, TaskList.class));
+    }
 }
