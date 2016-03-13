@@ -19,56 +19,57 @@ public class staticDB {
         db.add(list);
     }
 
-    // inserts a supplied item into the list indicated by name
-    public static void insert(ListItem item, String name){
+    // returns the SubTable associated with name
+    public static SubTable searchTable(String name) {
+        SubTable out = null;
+
         for (int i = 0; i < db.size(); i++) {
             SubTable curr = db.get(i);
 
             if (curr.getName().equals(name)) {
-                curr.insert(item);
+                out = curr;
+                break;
             }
+        }
+
+        return out;
+    }
+
+    // inserts a supplied item into the list indicated by name
+    public static void insert(ListItem item, String name){
+        SubTable fromName = searchTable(name);
+
+        if (null != fromName) {
+            fromName.insert(item);
         }
     }
 
     // returns the item indicated by item
     public static ListItem query(ListItem item, String name) {
-        // go through the list and find the sub-list with the name name
-        for (int i = 0; i < db.size(); i++) {
-            SubTable curr = db.get(i);
-            
-            if (curr.getName().equals(name)){
-                return curr.getItem(item);
-            }
-        }
+        SubTable fromName = searchTable(name);
 
+        if (null != fromName) {
+            return fromName.getItem(item);
+        }
         return null;
     }
 
     // returns an array of strings representing the contents of the table
     public static String[] getTable(String name) {
-        String[] out = null;
+        SubTable fromName = searchTable(name);
 
-        for (int i = 0; i < db.size(); i++) {
-            SubTable curr = db.get(i);
-
-            if (curr.getName().equals(name)){
-                return curr.toStringArray();
-            }
+        if (null != fromName) {
+            return fromName.toStringArray();
         }
-        out = new String[1];
-        out[0] ="";
-
         return null;
     }
 
     // inserts item into the list at the supplied index (id)
     public static void update(ListItem item, int id, String name) {
-        for (int i = 0; i < db.size(); i++) {
-            SubTable curr = db.get(i);
+        SubTable fromName = searchTable(name);
 
-            if (curr.getName().equals(name)) {
-                curr.replace(item, id);
-            }
+        if (null != fromName) {
+            fromName.replace(item, id);
         }
     }
 
