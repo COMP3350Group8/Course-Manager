@@ -4,10 +4,9 @@ package comp3350group8.coursemanager;
  * Created by David on 2016-03-12.
  */
 public class User {
-    private String name, password, email, school;
-    private int studentNum;
+    private String name, password, email, school, studentNum;
 
-    public User(String name, String password, int studentNum, String email, String school)
+    public User(String name, String password, String studentNum, String email, String school)
     {
         this.name= name;
         this.password= password;
@@ -31,7 +30,7 @@ public class User {
         return name;
     }
 
-    public int getStudentNum()
+    public String getStudentNum()
     {
         return studentNum;
     }
