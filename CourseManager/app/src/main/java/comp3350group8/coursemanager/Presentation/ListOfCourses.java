@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Presentation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +9,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import comp3350group8.coursemanager.AppDatabase;
 import comp3350group8.coursemanager.R;
+import comp3350group8.coursemanager.staticDB;
 
 
 /**

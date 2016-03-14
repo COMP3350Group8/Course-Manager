@@ -1,6 +1,9 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Persistence;
 
 import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Business.ListItem;
+import comp3350group8.coursemanager.SubTable;
 
 /**
  * Created by David on 2016-02-22.

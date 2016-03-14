@@ -1,18 +1,17 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Persistence;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import comp3350group8.coursemanager.AppDatabase;
-import comp3350group8.coursemanager.ListItem;
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.ListItem;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.SubTable;
 
 /**
  * Created by Ian Smith on 2016-02-12.
  */
-
-import java.util.ArrayList;
 
 /**
  * Created by David on 2016-02-22.

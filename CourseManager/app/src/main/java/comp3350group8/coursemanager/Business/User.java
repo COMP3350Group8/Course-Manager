@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Business;
 
 /**
  * Created by David on 2016-03-12.

@@ -1,6 +1,8 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Business;
 
 import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Business.ListItem;
 
 /**
  * Created by David on 2016-02-22.

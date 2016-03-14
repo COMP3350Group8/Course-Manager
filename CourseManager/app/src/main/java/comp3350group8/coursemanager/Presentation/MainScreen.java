@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Presentation;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.ListOfCourses;
+import comp3350group8.coursemanager.LoginActivity;
 import comp3350group8.coursemanager.R;
+import comp3350group8.coursemanager.SQLDatabase;
+import comp3350group8.coursemanager.User;
+import comp3350group8.coursemanager.staticDB;
 
 public class MainScreen extends AppCompatActivity {
     @Override

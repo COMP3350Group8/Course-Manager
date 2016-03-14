@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Persistence;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +9,10 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Course;
+import comp3350group8.coursemanager.IntAtom;
+import comp3350group8.coursemanager.User;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;

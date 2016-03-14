@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Presentation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.Course;
+import comp3350group8.coursemanager.ListOfCourses;
 import comp3350group8.coursemanager.R;
+import comp3350group8.coursemanager.staticDB;
 
 /**
  * Created by David on 2016-02-17.
