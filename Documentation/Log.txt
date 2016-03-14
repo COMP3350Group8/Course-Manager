@@ -53,6 +53,10 @@ March 5, 2016
 - Wrote draft of SQLDatabase to extend SQLiteOpenHelper and a test for it (Ian)
 - Had previously done research into the implementation of an SQLite Database for Android(Ian)
 
+March 8, 2016
+- Made a rough class for TaskList and AddTask (Anthony)
+- Made rough layout for the TaskList and AddTask screens (Anthony)
+
 March 11, 2016
 - Created Student class and added code to SQL to handle students. (Graham) 
 - Added a StubDatabase subclass of SQLDatabase (dependency injection) and ran unit tests on it (Ian)
@@ -65,6 +69,7 @@ March 13, 2016
 - Wrote unit tests for business classes (Ian)
 - Removed bug from SQLDatabase's getUser() method, rewrote query to use rawQuery() method (Ian)
 - There seems to be some issues with the Controllers, still uncertain if the database can be accessed everywhere
+- Pushed TaskList and AddTask classes/layouts (Anthony)
 
 
 
