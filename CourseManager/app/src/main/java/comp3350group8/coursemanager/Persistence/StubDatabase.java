@@ -1,18 +1,19 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Persistence;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
-import comp3350group8.coursemanager.AppDatabase;
-import comp3350group8.coursemanager.ListItem;
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.ListItem;
+import comp3350group8.coursemanager.Business.SubTable;
+import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Business.User;
 
 /**
  * Created by Ian Smith on 2016-02-12.
  */
-
-import java.util.ArrayList;
 
 /**
  * Created by David on 2016-02-22.
@@ -24,6 +25,12 @@ public class StubDatabase extends SQLDatabase {
         super(context);
         db = new ArrayList<SubTable>();
         db.add(new SubTable("Courses"));
+        db.add(new SubTable("Users"));
+        db.add(new SubTable("Tasks"));
+        Log.d("Constructor", "Called");
+
+        insertCourse(new Course("COMP 1010", "E2-105","None"));
+        insertTask(new Task("None", "01/27/93", "12:00am"));
     }
 
     //@Override
@@ -47,8 +54,10 @@ public class StubDatabase extends SQLDatabase {
 
     // inserts a Course into the Courses SubTable
     public void insertCourse(Course course) {
+        Log.d("DEBUG", "Inserting " + course.toString());
         SubTable table = retrieveTable("Courses");
         table.insert(course);
+        Log.d("DEBUG", "table: " + table.toString());
     }
 
     // returns the course located in Courses at index id
@@ -71,6 +80,7 @@ public class StubDatabase extends SQLDatabase {
         ArrayList<ListItem> list = retrieveTable("Courses").getAll();
 
         ArrayList<Course> out = new ArrayList<Course>();
+        Log.d("SIZE", "getallCourses: " + list.size());
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) instanceof Course) {
@@ -82,4 +92,26 @@ public class StubDatabase extends SQLDatabase {
         return out;
     }
 
+    public void insertUser(User user){
+        SubTable table = retrieveTable("Users");
+        table.insert(user);
+    }
+
+    public void insertTask(Task task) {
+        SubTable table = retrieveTable("Tasks");
+        table.insert(task);
+    }
+
+    public ArrayList<Task> getTasks() {
+        ArrayList<ListItem> tasks = new ArrayList<ListItem>();
+        SubTable table = retrieveTable("Tasks");
+        tasks = table.getAll();
+
+        ArrayList<Task> list = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i++) {
+            list.add((Task)tasks.get(i));
+        }
+
+        return list;
+    }
 }

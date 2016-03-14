@@ -1,6 +1,8 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Business;
 
 import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Business.ListItem;
 
 /**
  * Created by David on 2016-02-22.
@@ -14,7 +16,7 @@ public class SubTable {
         name = n;
         list = new ArrayList<ListItem>();
     }
-
+//
     public int size() {
         return list.size();
     }
@@ -78,5 +80,9 @@ public class SubTable {
         }
         array = array + "]";
         return out + array;
+    }
+
+    public boolean isEmpty() {
+        return list.size() == 0;
     }
 }

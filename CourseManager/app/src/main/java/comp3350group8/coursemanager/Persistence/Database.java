@@ -1,4 +1,6 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Persistence;
+
+import comp3350group8.coursemanager.Business.ListItem;
 
 /**
  * Created by Ian Smith on 2016-03-02.

@@ -1,4 +1,4 @@
-﻿	Jan. 21, 2016
+﻿﻿	Jan. 21, 2016
 - Product is largely nailed down, it will track students’ course grades
 - Mostly for university students, undergraduate students in particular
 - Lots of things in university that need to be tracked

@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Presentation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,13 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.R;
+import comp3350group8.coursemanager.Persistence.staticDB;
 
 /**
  * Created by David on 2016-02-17.
  */
 public class AddCourse extends Activity {
+    private SQLDatabase db = new StubDatabase(this);
+
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcourse);
 
@@ -37,7 +44,7 @@ public class AddCourse extends Activity {
             Course newCourse = new Course(courseName.getText().toString(),
                     courseloc.getText().toString(),
                     coursedescr.getText().toString());
-            staticDB.insert(newCourse, "Courses");
+            db.insertCourse(newCourse);
 
             //data[0]= courseName.getText().toString();
             //data[1] = courseloc.getText().toString();

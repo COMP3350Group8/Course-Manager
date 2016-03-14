@@ -1,10 +1,14 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.DatabaseTests;
 
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 import android.util.Log;
 
 import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
 
 /**
  * Created by Ian Smith on 2016-03-05.

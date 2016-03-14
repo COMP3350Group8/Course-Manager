@@ -2,6 +2,9 @@ package comp3350group8.coursemanager;
 
 import junit.framework.TestCase;
 
+import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+
 /**
  * Created by Ian Smith on 2016-03-02.
  */

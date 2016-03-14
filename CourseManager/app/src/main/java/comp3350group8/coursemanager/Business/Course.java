@@ -1,6 +1,4 @@
-package comp3350group8.coursemanager;
-
-import comp3350group8.coursemanager.ListItem;
+package comp3350group8.coursemanager.Business;
 
 /**
  * Created by David on 2016-02-22.
@@ -23,7 +21,7 @@ public class Course extends ListItem
 
         if (otherItem instanceof Course) {
             Course other = (Course)otherItem;
-            equal = other.course.equals(course);
+            equal = other.course.equals(course) && other.location.equals(location) && other.description.equals(description);
         }
 
         return equal;
