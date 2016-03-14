@@ -48,6 +48,13 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 "UserEmail TEXT," +
                 "UserSchool TEXT)";
 
+        String CREATE_TASK_TABLE = "CREATE TABLE Users ( " +
+                "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "TaskName TEXT," +
+                "TaskDate TEXT," +
+                "TaskTime TEXT,)";
+
+
         /* String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "StudentID INTEGER, " +
@@ -160,7 +167,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 int studentNum = Integer.parseInt(cursor.getString(3));
                 String school= cursor.getString(4);
                 String emailAdd = cursor.getString(5);
-                user = new User(name, pasword, studentNum, school, emailAdd);
+                user = new User(name, password, studentNum, school, emailAdd);
 
             }
             cursor.close();
