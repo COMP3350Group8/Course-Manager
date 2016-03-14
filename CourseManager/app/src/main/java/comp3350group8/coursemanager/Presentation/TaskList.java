@@ -1,12 +1,21 @@
 package comp3350group8.coursemanager.Presentation;
 
+import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
+import comp3350group8.coursemanager.Persistence.staticDB;
+
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Persistence.AppDatabase;
 import comp3350group8.coursemanager.Persistence.staticDB;
@@ -17,25 +26,39 @@ import comp3350group8.coursemanager.R;
  * Created by Anthony on 2016-03-08.
  */
 public class TaskList extends Activity {
-    public static AppDatabase db;
+    private SQLDatabase db;
     private ListView lv;
 
     protected void onCreate(Bundle savedInstanceState) {
+        db = new StubDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasklist);
 
-        // create task table
-        staticDB.createTable("Tasks");
-
         //Bundle info = getIntent().getExtras();
 
-        lv = (ListView) findViewById(R.id.listView);
+        lv = (ListView) findViewById(R.id.listView2);
         //String[] task= {"Do COMP 1020 Assignment", "Study for Database Exam", "Hand in Honesty Declaration"};
 
+
         // retrieve contents of "Tasks" if any
-        String[] course = staticDB.getTable("Tasks");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
+        //String[] task = staticDB.getTable("Tasks");
+        ArrayList<Task> task = db.getTasks();
+        /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
+        lv.setAdapter(adapter); */
+        String[] out = getTasks(task);
+        Log.d("DEBUG", "" + out.length);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, out);
         lv.setAdapter(adapter);
+    }
+
+    public String[] getTasks(ArrayList<Task> tasks) {
+        String[] list = new String[tasks.size()];
+
+        for (int i = 0; i< tasks.size(); i++) {
+            list[i] = tasks.get(i).toString();
+        }
+
+        return list;
     }
 
     //Back Button

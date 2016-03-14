@@ -3,20 +3,24 @@ package comp3350group8.coursemanager.Presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.Persistence.staticDB;
 import comp3350group8.coursemanager.R;
-import comp3350group8.coursemanager.Presentation.TaskList;
+
 
 /**
  * Created by Anthony on 2016-03-08.
  */
 public class AddTask extends Activity {
+    private SQLDatabase db;
     protected void onCreate(Bundle savedInstanceState) {
+        db = new StubDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask);
 
@@ -31,11 +35,9 @@ public class AddTask extends Activity {
 
     //Save Task Button
     public void button6OnClick(View v) {
-        // String []data = new String[3];
-
         // retrieve the data supplied to the form
         EditText taskName = (EditText) findViewById(R.id.taskName);
-        if (taskName.length() == 0) {
+        if (taskName.getText().length() == 0) {
             taskName.setError("Enter task");
         } else {
             EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
@@ -43,15 +45,12 @@ public class AddTask extends Activity {
             EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
 
             // create instance of Task and send to the database
-
             Task newTask = new Task(taskName.getText().toString(),
                     taskduedate.getText().toString(),
                     taskduetime.getText().toString());
-            staticDB.insert(newTask, "Tasks");
+            Log.d("DEBUG", newTask.toString());
+            db.insertTask(newTask);
 
-            //data[0]= taskName.getText().toString();
-            //data[1] = taskduedate.getText().toString();
-            //data[2] = taskduetime.getText().toString();
             startActivity(new Intent(AddTask.this, TaskList.class));
 
         }

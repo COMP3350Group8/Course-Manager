@@ -1,12 +1,15 @@
 package comp3350group8.coursemanager.Persistence;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.ListItem;
 import comp3350group8.coursemanager.Business.SubTable;
+import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Business.User;
 
 /**
  * Created by Ian Smith on 2016-02-12.
@@ -22,6 +25,8 @@ public class StubDatabase extends SQLDatabase {
         super(context);
         db = new ArrayList<SubTable>();
         db.add(new SubTable("Courses"));
+        db.add(new SubTable("Users"));
+        db.add(new SubTable("Tasks"));
     }
 
     //@Override
@@ -45,6 +50,7 @@ public class StubDatabase extends SQLDatabase {
 
     // inserts a Course into the Courses SubTable
     public void insertCourse(Course course) {
+        Log.d("DEBUG", course.toString());
         SubTable table = retrieveTable("Courses");
         table.insert(course);
     }
@@ -80,4 +86,26 @@ public class StubDatabase extends SQLDatabase {
         return out;
     }
 
+    public void insertUser(User user){
+        SubTable table = retrieveTable("Users");
+        table.insert(user);
+    }
+
+    public void insertTask(Task task) {
+        SubTable table = retrieveTable("Tasks");
+        table.insert(task);
+    }
+
+    public ArrayList<Task> getTasks() {
+        ArrayList<ListItem> tasks = new ArrayList<ListItem>();
+        SubTable table = retrieveTable("Tasks");
+        tasks = table.getAll();
+
+        ArrayList<Task> list = new ArrayList<Task>();
+        for (int i = 0; i < tasks.size(); i++) {
+            list.add((Task)tasks.get(i));
+        }
+
+        return list;
+    }
 }

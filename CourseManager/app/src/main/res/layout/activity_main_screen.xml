@@ -23,27 +23,27 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/name"
+        android:editable="false"
+        android:hint="Enter your name"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:editable="false"
-        android:hint="Enter your name"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
+        android:inputType="text"
         android:ems="10"
         android:id="@+id/studentNum"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:hint="Student Number"
         android:editable="true"
-        android:layout_below="@+id/name" />
+        android:layout_below="@+id/name"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/name"
+        android:layout_alignEnd="@+id/name" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -51,12 +51,12 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/emailAddress"
-        android:layout_below="@+id/studentNum"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:hint="Email Address"
+        android:layout_below="@+id/studentNum"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/studentNum"
+        android:layout_alignEnd="@+id/studentNum" />
 
     <Button
         android:layout_width="fill_parent"
@@ -75,9 +75,9 @@
         android:text="Sign In"
         android:id="@+id/button2"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/emailAddress"
-        android:layout_alignEnd="@+id/emailAddress"
-        android:onClick="buttonOnClick2" />
+        android:onClick="buttonOnClick2"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -85,12 +85,12 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/school"
+        android:hint="School"
         android:layout_below="@+id/emailAddress"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/emailAddress"
-        android:layout_alignEnd="@+id/emailAddress"
-        android:hint="School " />
+        android:layout_alignEnd="@+id/emailAddress" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -98,12 +98,12 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
+        android:hint="Enter Password"
+        android:layout_below="@+id/school"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/school"
-        android:hint="Enter Password"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignRight="@+id/school"
+        android:layout_alignEnd="@+id/school" />
 
 
 </RelativeLayout>

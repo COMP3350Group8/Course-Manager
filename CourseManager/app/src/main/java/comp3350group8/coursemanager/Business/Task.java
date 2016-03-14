@@ -23,7 +23,7 @@ public class Task extends ListItem {
         this.name = name;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
-        //this.course = course.getName();
+        this.course = null;
     }
 
     public boolean equals(ListItem otherItem) {
@@ -39,7 +39,8 @@ public class Task extends ListItem {
     public String getTaskName() {return name;}
     public String getDate() {return dueDate;}
     public String getTime() {return dueTime;}
-    //public String getTaskCourse() {return name;}
+   // public String getTaskCourse() {return name;}
+
     public String toString() {
         return "Task: " + name + " Course: " + course + " Due Date: " + dueDate + " Due Time: " + dueTime;
     }

@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.staticDB;
 
@@ -14,7 +16,9 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class AddCourse extends Activity {
+    private SQLDatabase db;
     protected void onCreate(Bundle savedInstanceState) {
+        db = new StubDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcourse);
 
@@ -39,7 +43,7 @@ public class AddCourse extends Activity {
             Course newCourse = new Course(courseName.getText().toString(),
                     courseloc.getText().toString(),
                     coursedescr.getText().toString());
-            staticDB.insert(newCourse, "Courses");
+            db.insertCourse(newCourse);
 
             //data[0]= courseName.getText().toString();
             //data[1] = courseloc.getText().toString();

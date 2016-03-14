@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
 
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
@@ -20,7 +21,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
+    private static int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -29,23 +30,30 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         String CREATE_INIT_TABLE = "CREATE TABLE ints ( " +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "Value INT)";
+                " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " Value INT)";
 
         String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "CourseName TEXT, " +
-                "CourseLocation TEXT, " +
-                "CourseDescription TEXT)";
+                " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " CourseName TEXT, " +
+                " CourseLocation TEXT, " +
+                " CourseDescription TEXT)";
 
         String CREATE_USER_TABLE = "CREATE TABLE Users ( "+
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                "UserName TEXT," +
-                "UserPassword TEXT," +
-                "UserNum TEXT," +
-                "UserEmail TEXT," +
-                "UserSchool TEXT)";
+                " ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
+                " UserName TEXT, " +
+                " UserPassword TEXT, " +
+                " UserNum TEXT, " +
+                " UserEmail TEXT, " +
+                " UserSchool TEXT)";
+
+        String CREATE_TASK_TABLE = "CREATE TABLE Tasks ( " +
+                " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " TaskName TEXT, " +
+                " TaskDate TEXT, " +
+                " TaskTime TEXT,)";
 
         /* String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -58,6 +66,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         db.execSQL(CREATE_INIT_TABLE);
         db.execSQL(CREATE_COURSES_TABLE);
         db.execSQL(CREATE_USER_TABLE);
+        db.execSQL(CREATE_TASK_TABLE);
         // db.execSQL(CREATE_STUDENT_TABLE);
     }
 
@@ -65,6 +74,8 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS Init");
         db.execSQL("DROP TABLE IF EXISTS Courses");
         db.execSQL("DROP TABLE IF EXISTS Users");
+        db.execSQL("DROP TABLE IF EXISTS Tasks");
+        DATABASE_VERSION = newVersion;
 
         this.onCreate(db);
     }
@@ -253,6 +264,47 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 atom = new IntAtom(Integer.parseInt(cursor.getString(1)));
                 Log.d("list", atom.toString());
                 list.add(atom);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return list;
+    }
+
+    //Adding Tasks
+    private static final String TABLE_TASKS = "Tasks";
+    private static final String[] TASK_COLUMNS = {"TaskName", "TaskDueDate", "TaskDueTime"};
+
+    public void insertTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(TASK_COLUMNS[1], task.getTaskName());
+        values.put(TASK_COLUMNS[2], task.getDate());
+        values.put(TASK_COLUMNS[3], task.getTime());
+
+        db.insert(TABLE_TASKS, null, values);
+        db.close();
+    }
+
+    public ArrayList<Task> getTasks() {
+        ArrayList<Task> list = new ArrayList<Task>();
+
+        String query = "SELECT * FROM " + TABLE_TASKS;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        IntAtom atom = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(0);
+                String date = cursor.getString(1);
+                String time = cursor.getString(2);
+                Task task = new Task(name, date, time);
+                list.add(task);
+
             } while (cursor.moveToNext());
         }
         cursor.close();
