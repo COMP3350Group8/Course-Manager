@@ -9,8 +9,8 @@ import java.sql.Time;
 public class Task extends ListItem {
 
     private String name, course;
-    private Date dueDate;
-    private Time dueTime;
+    private String dueDate;
+    private String dueTime;
 
     public Task() {         //null constructor
         this.name = null;
@@ -19,11 +19,11 @@ public class Task extends ListItem {
         this.dueTime = null;
     }
 
-    public Task(String name, Date dueDate, Time dueTime, Course course){
+    public Task(String name, String dueDate, String dueTime){
         this.name = name;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
-        this.course = course.getName();
+        //this.course = course.getName();
     }
 
     public boolean equals(ListItem otherItem) {
@@ -37,9 +37,9 @@ public class Task extends ListItem {
         return equal;
     }
     public String getTaskName() {return name;}
-    public Date getDate() {return dueDate;}
-    public Time getTime() {return dueTime;}
-    public String getTaskCourse() {return name;}
+    public String getDate() {return dueDate;}
+    public String getTime() {return dueTime;}
+    //public String getTaskCourse() {return name;}
     public String toString() {
         return "Task: " + name + " Course: " + course + " Due Date: " + dueDate + " Due Time: " + dueTime;
     }
