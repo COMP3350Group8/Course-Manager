@@ -49,6 +49,10 @@ February 26, 2016
 	- implement proper gui for course list - 2 days - High Priority
 - need to have the stub implemented better for testing
 
+March 8, 2016
+- Made a rough class for TaskList and AddTask (Anthony)
+- Made rough layout for the TaskList and AddTask screens (Anthony)
+
 March 11, 2016
 - Created Student class and added code to SQL to handle students. (Graham) 
 - Added a StubDatabase subclass of SQLDatabase (dependency injection) and ran unit tests on it (Ian)
@@ -61,6 +65,7 @@ March 13, 2016
 - Wrote unit tests for business classes (Ian)
 - Removed bug from SQLDatabase's getUser() method, rewrote query to use rawQuery() method (Ian)
 - There seems to be some issues with the Controllers, still uncertain if the database can be accessed everywhere
+- Pushed Add Task and Task List layout and classes to Develop (Anthony)
 
 March 14, 2016
 - We all got together after class to put our code together and do some final testing. During this time we found that the SQLDatabase
