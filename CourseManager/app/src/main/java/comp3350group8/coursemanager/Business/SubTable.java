@@ -81,4 +81,8 @@ public class SubTable {
         array = array + "]";
         return out + array;
     }
+
+    public boolean isEmpty() {
+        return list.size() == 0;
+    }
 }

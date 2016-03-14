@@ -27,6 +27,10 @@ public class StubDatabase extends SQLDatabase {
         db.add(new SubTable("Courses"));
         db.add(new SubTable("Users"));
         db.add(new SubTable("Tasks"));
+        Log.d("Constructor", "Called");
+
+        insertCourse(new Course("COMP 1010", "E2-105","None"));
+        insertTask(new Task("None", "01/27/93", "12:00am"));
     }
 
     //@Override
@@ -50,9 +54,10 @@ public class StubDatabase extends SQLDatabase {
 
     // inserts a Course into the Courses SubTable
     public void insertCourse(Course course) {
-        Log.d("DEBUG", course.toString());
+        Log.d("DEBUG", "Inserting " + course.toString());
         SubTable table = retrieveTable("Courses");
         table.insert(course);
+        Log.d("DEBUG", "table: " + table.toString());
     }
 
     // returns the course located in Courses at index id
@@ -75,6 +80,7 @@ public class StubDatabase extends SQLDatabase {
         ArrayList<ListItem> list = retrieveTable("Courses").getAll();
 
         ArrayList<Course> out = new ArrayList<Course>();
+        Log.d("SIZE", "getallCourses: " + list.size());
 
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i) instanceof Course) {

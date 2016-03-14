@@ -16,9 +16,10 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class AddCourse extends Activity {
-    private SQLDatabase db;
+    private SQLDatabase db = new StubDatabase(this);
+
     protected void onCreate(Bundle savedInstanceState) {
-        db = new StubDatabase(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcourse);
 

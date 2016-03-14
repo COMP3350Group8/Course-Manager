@@ -25,10 +25,10 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class ListOfCourses extends Activity {
-    private SQLDatabase db;
+    private SQLDatabase db = new StubDatabase(this);
     private ListView lv;
     protected void onCreate(Bundle savedInstanceState) {
-        db = new StubDatabase(this);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listofcourses);
 
@@ -42,7 +42,7 @@ public class ListOfCourses extends Activity {
         Log.d("DEBUG", "size = " + courses.size());
         String[] course = getCourses(courses);
         if (course.length > 0) {
-            Log.d("DEBUG", course[0]);
+            Log.d("DEBUGG", course[0]);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter);
