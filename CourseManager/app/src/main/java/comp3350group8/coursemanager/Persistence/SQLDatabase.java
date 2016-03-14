@@ -98,7 +98,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         values.put(USER_COLUMNS[3], user.getStudentNum());
         values.put(USER_COLUMNS[4], user.getEmail());
         values.put(USER_COLUMNS[5], user.getSchool());
-        Log.d("DEBUG", values.toString());
+        //Log.d("DEBUG", values.toString());
 
         db.insert(TABLE_USERS, null, values);
         db.close();
