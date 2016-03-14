@@ -36,37 +36,44 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 "CourseName TEXT, " +
                 "CourseLocation TEXT, " +
                 "CourseDescription TEXT)";
+
         String CREATE_USER_TABLE = "CREATE TABLE Users ( "+
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
-                "name TEXT, " +
-                "password TEXT," +" studentNum, TEXT"+ "email, TEXT"+ "school, TEXT)";
+                "UserName TEXT," +
+                "UserPassword TEXT," +
+                "UserNum TEXT," +
+                "UserEmail TEXT," +
+                "UserSchool TEXT)";
 
-        String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
+        /* String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "StudentID INTEGER, " +
                 "StudentName TEXT, " +
                 "StudentEmail TEXT)";
+        */
 
         // coluumns are ID and Value for table ints
         db.execSQL(CREATE_INIT_TABLE);
-        db.execSQL(CREATE_USER_TABLE);
         db.execSQL(CREATE_COURSES_TABLE);
-        db.execSQL(CREATE_STUDENT_TABLE);
+        db.execSQL(CREATE_USER_TABLE);
+        // db.execSQL(CREATE_STUDENT_TABLE);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS Init");
+        db.execSQL("DROP TABLE IF EXISTS Courses");
+        db.execSQL("DROP TABLE IF EXISTS Users");
 
         this.onCreate(db);
     }
 
-    private static final String TABLE_STUDENTS = "Students";
-    private static final String[] STUDENT_COLUMNS = {"ID", "StudentID", "StudentName", "StudentEmail"};
+    //private static final String TABLE_STUDENTS = "Students";
+    //private static final String[] STUDENT_COLUMNS = {"ID", "StudentID", "StudentName", "StudentEmail"};
 
     private static final String TABLE_COURSES = "Courses";
     private static final String TABLE_USERS = "Users";
-    private static final String[] USER_COLUMNS = {"Name","Password","studentNum", "school", "email"};
     private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription"};
+    private static final String[] USER_COLUMNS = {"ID", "UserName", "UserPassword", "UserNum", "UserEmail", "UserSchool"};
 
     public void insertUser(User user)
     {
@@ -76,8 +83,8 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         values.put(USER_COLUMNS[1], user.getName());
         values.put(USER_COLUMNS[2], user.getPassWord());
         values.put(USER_COLUMNS[3], user.getStudentNum());
-        values.put(USER_COLUMNS[4], user.getSchool());
-        values.put(USER_COLUMNS[5], user.getEmail());
+        values.put(USER_COLUMNS[4], user.getEmail());
+        values.put(USER_COLUMNS[5], user.getSchool());
 
         db.insert(TABLE_USERS, null, values);
         db.close();
@@ -132,8 +139,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             boolean success = false;
 
             // build query
-            Cursor cursor =
-                    db.query(TABLE_USERS, USER_COLUMNS, email, new String[]{email, password}, null, null, null, null);
+            //Cursor cursor = db.query(TABLE_USERS, USER_COLUMNS, USER_COLUMNS[4] + " = '" + email + "' AND " + USER_COLUMNS[2] + " = '" + password + "'", new String[]{email, password}, null, null, null, null);
+            String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USER_COLUMNS[4] + "=? AND " + USER_COLUMNS[2] + "=?";
+            String[] args = new String[] {email, password};
+            Cursor cursor = db.rawQuery(query, args);
             if(cursor!=null)
             {
                 cursor.moveToFirst();
@@ -143,11 +152,11 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
             if(success)
             {
-                String name = cursor.getString(0);
-                String pasword = cursor.getString(1);
-                String studentNum = cursor.getString(2);
-                String school= cursor.getString(3);
+                String name = cursor.getString(1);
+                String pasword = cursor.getString(2);
+                String studentNum = cursor.getString(3);
                 String emailAdd = cursor.getString(4);
+                String school = cursor.getString(5);
                 user = new User(name, pasword, studentNum, school, emailAdd);
 
             }

@@ -31,6 +31,9 @@ public class SQLiteTest extends AndroidTestCase {
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();
+
+        testUserInsertion();
+        testUserQuery();
     }
 
     //@Test
@@ -85,6 +88,21 @@ public class SQLiteTest extends AndroidTestCase {
         } else {
             Log.d("DEBUG", "Course list was empty.");
         }
+    }
+
+    public void testUserInsertion() {
+        Log.d("DEBUG", "Inserting users");
+        // users take name, password, studentNum, email, school
+        User[] users = {new User("Ian", "car", "7658", "smithi35", "umanitoba"), new User("David", "password", "987", "dowasi", "umanitoba"), new User("Graham", " ", "123", "gsilver", "umanitoba")};
+
+        for (int i = 0; i < users.length; i++) {
+            db.insertUser(users[i]);
+        }
+    }
+
+    public void testUserQuery() {
+        Log.d("DEBUG", "Querying user: " + db.getUser("smithi35", "car"));
+        Log.d("DEBUG", "Querying user: " + db.getUser("gsilver", " "));
     }
 
     @Override
