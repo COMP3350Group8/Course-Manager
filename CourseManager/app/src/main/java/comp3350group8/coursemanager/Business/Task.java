@@ -42,6 +42,6 @@ public class Task extends ListItem {
    // public String getTaskCourse() {return name;}
 
     public String toString() {
-        return "Task: " + name + " Course: " + course + " Due Date: " + dueDate + " Due Time: " + dueTime;
+        return "Task: " + name + " Due Date: " + dueDate + " Due Time: " + dueTime;
     }
 }
