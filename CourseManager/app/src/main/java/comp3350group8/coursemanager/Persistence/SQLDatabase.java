@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
 
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
@@ -257,6 +258,22 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         cursor.close();
 
         return list;
+    }
+
+    //Adding Tasks
+    private static final String TABLE_TASKS = "Tasks";
+    private static final String[] TASK_COLUMNS = {"TaskName", "TaskDueDate", "TaskDueTime"};
+
+    public void insertTask(Task task) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(TASK_COLUMNS[1], task.getTaskName());
+        values.put(TASK_COLUMNS[2], task.getDate());
+        values.put(TASK_COLUMNS[3], task.getTime());
+
+        db.insert(TABLE_TASKS, null, values);
+        db.close();
     }
 
 }
