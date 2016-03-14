@@ -6,6 +6,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
+
+
 /**
  * Created by Ian Smith on 2016-03-05.
  */

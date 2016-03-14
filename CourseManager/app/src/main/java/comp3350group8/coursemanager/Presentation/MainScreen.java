@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import comp3350group8.coursemanager.ListOfCourses;
-import comp3350group8.coursemanager.LoginActivity;
+import comp3350group8.coursemanager.Presentation.ListOfCourses;
+import comp3350group8.coursemanager.Presentation.LoginActivity;
 import comp3350group8.coursemanager.R;
-import comp3350group8.coursemanager.SQLDatabase;
-import comp3350group8.coursemanager.User;
-import comp3350group8.coursemanager.staticDB;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Persistence.staticDB;
 
 public class MainScreen extends AppCompatActivity {
     @Override
@@ -35,7 +35,7 @@ public class MainScreen extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailAddress);
         school = (EditText) findViewById(R.id.school);
 
-        User newUser = new User(name.toString(),password.toString(), studentNum.toString(),
+        User newUser = new User(name.toString(),password.toString(), Integer.parseInt(studentNum.toString()),
                 email.toString(),school.toString());
         db.insertUser(newUser);
         startActivity(new Intent(MainScreen.this, ListOfCourses.class));

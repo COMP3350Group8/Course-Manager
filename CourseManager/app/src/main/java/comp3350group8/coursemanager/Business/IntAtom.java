@@ -1,7 +1,5 @@
 package comp3350group8.coursemanager.Business;
 
-import comp3350group8.coursemanager.ListItem;
-
 /**
  * Created by Ian Smith on 2016-02-12.
  */

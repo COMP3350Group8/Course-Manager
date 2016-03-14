@@ -9,16 +9,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import comp3350group8.coursemanager.AppDatabase;
 import comp3350group8.coursemanager.R;
-import comp3350group8.coursemanager.staticDB;
+import comp3350group8.coursemanager.Persistence.staticDB;
 
 
 /**
  * Created by David on 2016-02-17.
  */
 public class ListOfCourses extends Activity {
-    public static AppDatabase db;
     private ListView lv;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

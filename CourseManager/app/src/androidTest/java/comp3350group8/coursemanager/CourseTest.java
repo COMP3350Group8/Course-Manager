@@ -1,4 +1,6 @@
 package comp3350group8.coursemanager;
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.IntAtom;
 
 import android.util.Log;
 

@@ -1,8 +1,11 @@
 package comp3350group8.coursemanager;
+import comp3350group8.coursemanager.Business.User;
 
 import android.util.Log;
 
 import junit.framework.TestCase;
+
+import comp3350group8.coursemanager.Business.IntAtom;
 
 /**
  * Created by Ian Smith on 2016-03-13.
@@ -11,7 +14,7 @@ public class UserTest extends TestCase {
     public void testUser() {
         Log.d("DEBUG", "Testing user class");
 
-        User[] users = {new User("Ian", "car", "789", "smithi35", "umanitoba"), new User("David", "password", "123", "dowasi", "umanitoba"), new User("Graham", " ", "456", "gsilver", "umanitoba")};
+        User[] users = {new User("Ian", "car", 789, "smithi35", "umanitoba"), new User("David", "password", 123, "dowasi", "umanitoba"), new User("Graham", " ", 456, "gsilver", "umanitoba")};
         assertNotNull(users[0]);
         assertNotNull(users[1].getEmail());
         assertNotNull(users[2].getName());

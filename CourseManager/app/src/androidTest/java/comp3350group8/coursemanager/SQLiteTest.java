@@ -6,6 +6,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
+
 /**
  * Created by Ian Smith on 2016-03-05.
  */
@@ -93,7 +98,7 @@ public class SQLiteTest extends AndroidTestCase {
     public void testUserInsertion() {
         Log.d("DEBUG", "Inserting users");
         // users take name, password, studentNum, email, school
-        User[] users = {new User("Ian", "car", "7658", "smithi35", "umanitoba"), new User("David", "password", "987", "dowasi", "umanitoba"), new User("Graham", " ", "123", "gsilver", "umanitoba")};
+        User[] users = {new User("Ian", "car", 7658, "smithi35", "umanitoba"), new User("David", "password", 987, "dowasi", "umanitoba"), new User("Graham", " ", 123, "gsilver", "umanitoba")};
 
         for (int i = 0; i < users.length; i++) {
             db.insertUser(users[i]);
