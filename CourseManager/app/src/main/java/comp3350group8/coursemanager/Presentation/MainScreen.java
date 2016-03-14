@@ -33,8 +33,8 @@ public class MainScreen extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailAddress);
         school = (EditText) findViewById(R.id.school);
 
-        User newUser = new User(name.toString(),password.toString(), studentNum.toString(),
-                email.toString(),school.toString());
+        User newUser = new User(name.toString(),password.toString(), Integer.parseInt(studentNum.toString()),
+                email.toString(), school.toString());
         db.insertUser(newUser);
         startActivity(new Intent(MainScreen.this, ListOfCourses.class));
     }
