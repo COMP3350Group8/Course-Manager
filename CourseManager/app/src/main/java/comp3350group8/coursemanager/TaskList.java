@@ -20,7 +20,7 @@ public class TaskList extends Activity {
     //Back Button
     public void button3OnClick (View v)
     {
-        startActivity(new Intent(TaskList.this, listofcourses.class));
+        startActivity(new Intent(TaskList.this, ListOfCourses.class));
 
     }
 
