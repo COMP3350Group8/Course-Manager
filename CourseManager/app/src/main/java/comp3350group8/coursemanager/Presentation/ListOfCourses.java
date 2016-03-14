@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.*;
+import android.widget.ListAdapter;
 
+import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Business.ListItem;
+import comp3350group8.coursemanager.Business.SubTable;
 import comp3350group8.coursemanager.Persistence.AppDatabase;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.staticDB;
@@ -33,9 +35,13 @@ public class ListOfCourses extends Activity {
         //String[] course= {"COMP 1010", "COMP 1020", "COMP 2130","COMP 2140", "COMP 2150"};
 
         // retrieve contents of "Courses" if any
-        String[] course = staticDB.getTable("Courses");
+       /*String[] course = staticDB.getTable("Courses");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter);
+*/
+        SubTable table = staticDB.searchTable("Courses");
+        ArrayList<ListItem> items = table.getAll();
+        lv.setAdapter(new myListAdapter(ListOfCourses.this, items));
 
         //select a course
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -45,6 +51,7 @@ public class ListOfCourses extends Activity {
                 Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
         });
+
     }
     public void buttonOnClick (View v)
     {
