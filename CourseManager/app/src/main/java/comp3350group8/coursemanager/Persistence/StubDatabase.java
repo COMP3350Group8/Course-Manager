@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.ListItem;
-import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Business.SubTable;
 
 /**

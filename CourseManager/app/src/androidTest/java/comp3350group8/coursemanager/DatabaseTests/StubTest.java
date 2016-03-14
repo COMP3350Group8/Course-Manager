@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager.DatabaseTests;
+package comp3350group8.coursemanager;
 
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
-
 
 /**
  * Created by Ian Smith on 2016-03-05.

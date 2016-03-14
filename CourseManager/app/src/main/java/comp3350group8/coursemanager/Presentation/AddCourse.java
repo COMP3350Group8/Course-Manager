@@ -7,9 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350group8.coursemanager.Business.Course;
-import comp3350group8.coursemanager.Persistence.staticDB;
-import comp3350group8.coursemanager.Presentation.ListOfCourses;
 import comp3350group8.coursemanager.R;
+import comp3350group8.coursemanager.Persistence.staticDB;
 
 /**
  * Created by David on 2016-02-17.

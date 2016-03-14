@@ -4,7 +4,8 @@ package comp3350group8.coursemanager;
  */
 import junit.framework.TestCase;
 
-import comp3350group8.coursemanager.staticDB;
+import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Persistence.staticDB;
 
 public class TestStubDatabase extends TestCase {
     @Test

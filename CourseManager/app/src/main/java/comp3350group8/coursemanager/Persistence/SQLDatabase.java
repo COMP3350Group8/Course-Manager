@@ -7,14 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.IntAtom;
 import comp3350group8.coursemanager.Business.User;
 
-import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
 
 /**

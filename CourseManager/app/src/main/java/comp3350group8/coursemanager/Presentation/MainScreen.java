@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import comp3350group8.coursemanager.Presentation.ListOfCourses;
-import comp3350group8.coursemanager.Presentation.LoginActivity;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Business.User;
@@ -35,7 +33,7 @@ public class MainScreen extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailAddress);
         school = (EditText) findViewById(R.id.school);
 
-        User newUser = new User(name.toString(),password.toString(), Integer.parseInt(studentNum.toString()),
+        User newUser = new User(name.toString(),password.toString(), studentNum.toString(),
                 email.toString(),school.toString());
         db.insertUser(newUser);
         startActivity(new Intent(MainScreen.this, ListOfCourses.class));
