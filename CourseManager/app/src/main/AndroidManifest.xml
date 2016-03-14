@@ -24,6 +24,8 @@
         </activity>
         <activity android:name=".Presentation.AddCourse" />
         <activity android:name=".Presentation.ListOfCourses" />
+        <activity android:name=".Presentation.AddTask"/>
+        <activity android:name=".Presentation.TaskList"/>
         <activity
             android:name=".Presentation.LoginActivity"
             android:label="@string/title_activity_login" />

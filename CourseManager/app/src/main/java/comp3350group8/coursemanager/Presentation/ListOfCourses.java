@@ -48,7 +48,8 @@ public class ListOfCourses extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Object o = lv.getItemAtPosition(position);
-                Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
+                startActivity(new Intent(ListOfCourses.this, AddTask.class));
+               // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
         });
 
