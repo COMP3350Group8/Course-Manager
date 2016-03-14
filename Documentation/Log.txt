@@ -49,6 +49,12 @@ February 26, 2016
 	- implement proper gui for course list - 2 days - High Priority
 - need to have the stub implemented better for testing
 
+March 13, 2016
+- Everything is coming together, SQL database seems to be working as intended.
+- Added Task class and made a few naming changes for buttons. (Graham)
+- Repackaged classes into appropriate levels. (Graham)
+
+
 
 Iteration 1
 -------------
