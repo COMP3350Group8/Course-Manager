@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Presentation;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Persistence.staticDB;
 import comp3350group8.coursemanager.R;
+import comp3350group8.coursemanager.TaskList;
 
 /**
  * Created by Anthony on 2016-03-08.
@@ -33,8 +36,8 @@ public class AddTask extends Activity {
 
         // retrieve the data supplied to the form
         EditText taskName = (EditText) findViewById(R.id.taskName);
-        if(taskNameName.length() ==  0) {
-            taskNameName.setError("Enter task");
+        if(taskName.getText().length() ==  0) {
+            taskName.setError("Enter task");
         }
         else {
             EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);

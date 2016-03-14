@@ -40,6 +40,7 @@ public class Task extends ListItem {
     public Date getDate() {return dueDate;}
     public Time getTime() {return dueTime;}
     public String getTaskCourse() {return name;}
+
     public String toString() {
         return "Task: " + name + " Course: " + course + " Due Date: " + dueDate + " Due Time: " + dueTime;
     }

@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.DatabaseTests;
 
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
