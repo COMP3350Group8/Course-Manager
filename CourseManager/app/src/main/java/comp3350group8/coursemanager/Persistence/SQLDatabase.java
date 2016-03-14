@@ -53,7 +53,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " TaskName TEXT, " +
                 " TaskDate TEXT, " +
-                " TaskTime TEXT,)";
+                " TaskTime TEXT)";
 
         /* String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +

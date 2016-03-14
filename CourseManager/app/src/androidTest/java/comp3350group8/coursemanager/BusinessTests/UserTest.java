@@ -14,7 +14,7 @@ public class UserTest extends TestCase {
     public void testUser() {
         Log.d("DEBUG", "Testing user class");
 
-        User[] users = {new User("Ian", "car", 789, "smithi35", "umanitoba"), new User("David", "password", 123, "dowasi", "umanitoba"), new User("Graham", " ", 456, "gsilver", "umanitoba")};
+        User[] users = {new User("Ian", "car", "1", "smithi35", "umanitoba"), new User("David", "password", "2", "dowasi", "umanitoba"), new User("Graham", " ", "3", "gsilver", "umanitoba")};
         assertNotNull(users[0]);
         assertNotNull(users[1].getEmail());
         assertNotNull(users[2].getName());
