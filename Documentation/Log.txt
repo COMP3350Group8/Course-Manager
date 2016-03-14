@@ -62,6 +62,10 @@ March 13, 2016
 - Removed bug from SQLDatabase's getUser() method, rewrote query to use rawQuery() method (Ian)
 - There seems to be some issues with the Controllers, still uncertain if the database can be accessed everywhere
 
+March 14, 2016
+- We all got together after class to put our code together and do some final testing. During this time we found that the SQLDatabase
+began acting up and it doesn't recognize that we have a UserPassword column in our SQL table. After some research we concluded that the version of the database needed to be increased. We spent some time trying to figure this out, but ran out of time so we changed our code to use the StubDatabase.
+
 Iteration 1
 -------------
 
