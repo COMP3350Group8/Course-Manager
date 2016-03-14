@@ -49,6 +49,18 @@ February 26, 2016
 	- implement proper gui for course list - 2 days - High Priority
 - need to have the stub implemented better for testing
 
+March 11, 2016
+- Created Student class and added code to SQL to handle students. (Graham) 
+- Added a StubDatabase subclass of SQLDatabase (dependency injection) and ran unit tests on it (Ian)
+
+March 13, 2016
+- Apparently my code didn't get pushed so Student class was replaced with User class by David. (Graham)
+- Everything is coming together, SQL database seems to be working as intended.
+- Added Task class and made a few naming changes for buttons. (Graham)
+- Repackaged classes into appropriate levels. (Graham)
+- Wrote unit tests for business classes (Ian)
+- Removed bug from SQLDatabase's getUser() method, rewrote query to use rawQuery() method (Ian)
+- There seems to be some issues with the Controllers, still uncertain if the database can be accessed everywhere
 
 Iteration 1
 -------------
