@@ -75,11 +75,11 @@ public class SQLDatabase  extends SQLiteOpenHelper {
     private static final String TABLE_COURSES = "Courses";
     private static final String TABLE_USERS = "Users";
     private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription"};
-    private static final String[] USER_COLUMNS = {"ID", "UserName", "UserPassword", "UserNum", "UserEmail", "UserSchool"};
+    private static final String[] USER_COLUMNS = {"ID", "UserName", "UserPassword", "UserNum",  "UserEmail", "UserSchool"};
 
-    public void insertUser(User user)
-    {
+    public void insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
+        Log.d("DEBUG", USER_COLUMNS[1]);
 
         ContentValues values = new ContentValues();
         values.put(USER_COLUMNS[1], user.getName());
@@ -87,6 +87,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         values.put(USER_COLUMNS[3], user.getStudentNum());
         values.put(USER_COLUMNS[4], user.getEmail());
         values.put(USER_COLUMNS[5], user.getSchool());
+        Log.d("DEBUG", values.toString());
 
         db.insert(TABLE_USERS, null, values);
         db.close();
@@ -156,7 +157,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             {
                 String name = cursor.getString(1);
                 String pasword = cursor.getString(2);
-                int studentNum = Integer.parseInt(cursor.getString(3));
+                String studentNum = cursor.getString(3);
                 String school= cursor.getString(4);
                 String emailAdd = cursor.getString(5);
                 user = new User(name, pasword, studentNum, school, emailAdd);
