@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Business;
 import comp3350group8.coursemanager.Business.User;
 
 import android.util.Log;
