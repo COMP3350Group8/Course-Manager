@@ -145,7 +145,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             {
                 String name = cursor.getString(0);
                 String pasword = cursor.getString(1);
-                String studentNum = cursor.getString(2);
+                int studentNum = Integer.parseInt(cursor.getString(2));
                 String school= cursor.getString(3);
                 String emailAdd = cursor.getString(4);
                 user = new User(name, pasword, studentNum, school, emailAdd);
