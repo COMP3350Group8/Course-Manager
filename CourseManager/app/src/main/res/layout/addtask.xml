@@ -22,7 +22,11 @@
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
+<<<<<<< HEAD
         android:id="@+id/taskDueTime"
+=======
+        android:id="@+id/taskDueDate-Time"
+>>>>>>> master
         android:hint="Task Due Date - Time" />
 
     <Button
