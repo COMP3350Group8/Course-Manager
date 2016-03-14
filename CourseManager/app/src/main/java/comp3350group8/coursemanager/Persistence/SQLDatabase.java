@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager;
+package comp3350group8.coursemanager.Persistence;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,6 +9,10 @@ import android.util.Log;
 
 import java.io.File;
 import java.util.ArrayList;
+
+import comp3350group8.coursemanager.Course;
+import comp3350group8.coursemanager.IntAtom;
+import comp3350group8.coursemanager.User;
 
 import static android.content.Context.MODE_PRIVATE;
 import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
@@ -152,9 +156,16 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
             if(success)
             {
+<<<<<<< HEAD:CourseManager/app/src/main/java/comp3350group8/coursemanager/SQLDatabase.java
                 String name = cursor.getString(1);
                 String pasword = cursor.getString(2);
                 String studentNum = cursor.getString(3);
+=======
+                String name = cursor.getString(0);
+                String pasword = cursor.getString(1);
+                int studentNum = Integer.parseInt(cursor.getString(2));
+                String school= cursor.getString(3);
+>>>>>>> 037ba165cc10dfe57fe92af8c38b3711cd491a84:CourseManager/app/src/main/java/comp3350group8/coursemanager/Persistence/SQLDatabase.java
                 String emailAdd = cursor.getString(4);
                 String school = cursor.getString(5);
                 user = new User(name, pasword, studentNum, school, emailAdd);
