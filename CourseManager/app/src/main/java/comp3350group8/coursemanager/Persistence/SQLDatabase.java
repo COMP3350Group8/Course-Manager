@@ -154,19 +154,11 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
             if(success)
             {
-<<<<<<< HEAD:CourseManager/app/src/main/java/comp3350group8/coursemanager/Persistence/SQLDatabase.java
                 String name = cursor.getString(1);
                 String pasword = cursor.getString(2);
                 int studentNum = Integer.parseInt(cursor.getString(3));
                 String school= cursor.getString(4);
                 String emailAdd = cursor.getString(5);
-=======
-                String name = cursor.getString(0);
-                String pasword = cursor.getString(1);
-                String studentNum = cursor.getString(2);
-                String school= cursor.getString(3);
-                String emailAdd = cursor.getString(4);
->>>>>>> master:CourseManager/app/src/main/java/comp3350group8/coursemanager/SQLDatabase.java
                 user = new User(name, pasword, studentNum, school, emailAdd);
 
             }
