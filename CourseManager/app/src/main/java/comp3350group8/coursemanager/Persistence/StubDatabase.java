@@ -89,9 +89,18 @@ public class StubDatabase extends SQLDatabase {
         return out;
     }
 
-    public void insertUser(User user){
+    public long insertUser(User user){
         SubTable table = retrieveTable("Users");
+        int size = table.size();
         table.insert(user);
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
     }
 
     public void insertTask(Task task) {

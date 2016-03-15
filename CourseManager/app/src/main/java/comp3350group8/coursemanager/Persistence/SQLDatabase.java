@@ -10,6 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.IntAtom;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
@@ -21,7 +22,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 3;
+    private static int DATABASE_VERSION = 10;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -35,33 +36,34 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " Value INT)";
 
-        String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
-                " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                " CourseName TEXT, " +
-                " CourseLocation TEXT, " +
-                " CourseDescription TEXT" +
-                " UserName TEXT," +
-                " FOREIGN KEY(UserName) References Users(UserEmail))";
 
         String CREATE_USER_TABLE = "CREATE TABLE Users ( "+
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 " UserName TEXT, " +
                 " UserPassword TEXT, " +
-                " UserNum TEXT, " +
-                " UserEmail TEXT, " +
-                " UserSchool TEXT)";
+                " UserNum TEXT UNIQUE, " +
+                " UserEmail TEXT UNIQUE, " +
+                " UserSchool TEXT);";
+
+        String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
+                " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " UserID INTEGER," +
+                " CourseName TEXT, " +
+                " CourseLocation TEXT, " +
+                " CourseDescription TEXT, " +
+                " FOREIGN KEY(UserID) References Users(ID));";
 
         String CREATE_TASK_TABLE = "CREATE TABLE Tasks ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " TaskName TEXT, " +
                 " TaskDate TEXT, " +
-                " TaskTime TEXT)";
+                " TaskTime TEXT);";
 
         /* String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
                 "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "StudentID INTEGER, " +
                 "StudentName TEXT, " +
-                "StudentEmail TEXT)";
+                "StudentEmail TEXT);";
         */
 
         // coluumns are ID and Value for table ints
@@ -87,10 +89,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
     private static final String TABLE_COURSES = "Courses";
     private static final String TABLE_USERS = "Users";
-    private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription", "UserName"};
+    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription"};
     private static final String[] USER_COLUMNS = {"ID", "UserName", "UserPassword", "UserNum",  "UserEmail", "UserSchool"};
 
-    public void insertUser(User user) {
+    public long insertUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         Log.d("DEBUG", USER_COLUMNS[1]);
 
@@ -102,17 +104,20 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         values.put(USER_COLUMNS[5], user.getSchool());
         Log.d("DEBUG", values.toString());
 
-        db.insert(TABLE_USERS, null, values);
+        long success = db.insert(TABLE_USERS, null, values);
         db.close();
+
+        return success;
     }
 
     public void insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COURSE_COLUMNS[1], course.getName());
-        values.put(COURSE_COLUMNS[2], course.getLocation());
-        values.put(COURSE_COLUMNS[3], course.getDescription());
+        values.put(COURSE_COLUMNS[1], CurrentUser.getUser());
+        values.put(COURSE_COLUMNS[2], course.getName());
+        values.put(COURSE_COLUMNS[3], course.getLocation());
+        values.put(COURSE_COLUMNS[4], course.getDescription());
 
         db.insert(TABLE_COURSES, null, values);
         db.close();
@@ -156,26 +161,25 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             //Cursor cursor = db.query(TABLE_USERS, USER_COLUMNS, USER_COLUMNS[4] + " = '" + email + "' AND " + USER_COLUMNS[2] + " = '" + password + "'", new String[]{email, password}, null, null, null, null);
             String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USER_COLUMNS[4] + "=? AND " + USER_COLUMNS[2] + "=?";
             String[] args = new String[] {email, password};
+
             Cursor cursor = db.rawQuery(query, args);
-            if(cursor!=null)
-            {
+            if(cursor!=null) {
                 cursor.moveToFirst();
                 success = true;
-
             }
 
-            if(success)
-            {
-                String name = cursor.getString(1);
-                String pasword = cursor.getString(2);
-                String studentNum = cursor.getString(3);
-                String school= cursor.getString(4);
-                String emailAdd = cursor.getString(5);
-                user = new User(name, pasword, studentNum, school, emailAdd);
+            if(success) {
+                if (cursor.getCount() > 0) {
+                    String name = cursor.getString(0);
+                    String pasword = cursor.getString(1);
+                    String studentNum = cursor.getString(2);
+                    String school = cursor.getString(3);
+                    String emailAdd = cursor.getString(4);
+                    user = new User(name, pasword, studentNum, school, emailAdd);
+                }
 
             }
             cursor.close();
-
         }
         return user;
     }
