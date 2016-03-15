@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 
 /**
@@ -35,6 +37,13 @@ public class SQLiteTest extends AndroidTestCase {
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();
+
+        testTaskInsertion();
+        testTaskRetrieval();
+        testTaskQuery();
+
+        testUserInsertion();
+        testUserQuery();
     }
 
     //@Test
@@ -67,11 +76,11 @@ public class SQLiteTest extends AndroidTestCase {
         Course fourth = new Course("COMP 2160", "Upstairs", "Programming Practices");
         Course fifth = new Course("COMP 2280", "Lab", "Outside");
 
-        db.insertCourse(first);
-        db.insertCourse(second);
-        db.insertCourse(third);
-        db.insertCourse(fourth);
-        db.insertCourse(fifth);
+        Log.d("DEBUG", "first insertion" + db.insertCourse(first));
+        Log.d("DEBUG", "second insertion" + db.insertCourse(second));
+        Log.d("DEBUG", "third insertion" + db.insertCourse(third));
+        Log.d("DEBUG", "fourth insertion" + db.insertCourse(fourth));
+        Log.d("DEBUG", "fifth insertion" + db.insertCourse(fifth));
     }
 
     public void testCourseQuery() {
@@ -89,6 +98,43 @@ public class SQLiteTest extends AndroidTestCase {
         } else {
             Log.d("DEBUG", "Course list was empty.");
         }
+    }
+
+    public void testTaskInsertion() {
+        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am"), new Task("Assignment", "September 2, 2016", "12:00am"), new Task("It do", "", "")};
+
+        for (int i = 0; i < tasks.length; i++) {
+            Log.d("DEBUG", "" + db.insertTask(tasks[i]));
+        }
+    }
+
+    public void testTaskRetrieval() {
+        Log.d("DEBUG", "Attempting total recall of courses");
+        ArrayList<Task> list = db.getTasks();
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                Log.d("DEBUG", "" + list.get(i));
+            }
+        } else {
+            Log.d("DEBUG", "Course list was empty.");
+        }
+    }
+
+    public void testTaskQuery() {
+        Log.d("DEBUG", "Attempting query: " + db.getCourse(1));
+    }
+
+    public void testUserInsertion() {
+        User[] users = {new User("Ian", "car", "1", "smithi35", "umanitoba"), new User("David", "password", "2", "dowasi", "umanitoba"), new User("Graham", " ", "3", "gsilver", "umanitoba")};
+
+        for (int i = 0; i < users.length; i++) {
+            Log.d("DEBUG", "" + db.insertUser(users[i]));
+        }
+    }
+
+    public void testUserQuery() {
+        Log.d("DEBUG", "Attempting query: " + db.getUser("smithi35", "car"));
     }
 
     @Override

@@ -8,13 +8,12 @@ import java.sql.Time;
  */
 public class Task extends ListItem {
 
-    private String name, course;
+    private String name;
     private String dueDate;
     private String dueTime;
 
     public Task() {         //null constructor
         this.name = null;
-        this.course = null;
         this.dueDate = null;
         this.dueTime = null;
     }
@@ -23,7 +22,6 @@ public class Task extends ListItem {
         this.name = name;
         this.dueDate = dueDate;
         this.dueTime = dueTime;
-        this.course = null;
     }
 
     public boolean equals(ListItem otherItem) {
@@ -31,7 +29,7 @@ public class Task extends ListItem {
 
         if (otherItem instanceof Task) {
             Task other = (Task)otherItem;
-            equal = other.course.equals(course);
+            equal = other.name.equals(name);
         }
 
         return equal;

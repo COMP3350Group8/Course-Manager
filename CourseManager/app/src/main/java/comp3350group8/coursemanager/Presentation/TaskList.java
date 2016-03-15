@@ -30,7 +30,7 @@ public class TaskList extends Activity {
     private ListView lv;
 
     protected void onCreate(Bundle savedInstanceState) {
-        db = new StubDatabase(this);
+        db = new SQLDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasklist);
 
@@ -43,6 +43,7 @@ public class TaskList extends Activity {
         // retrieve contents of "Tasks" if any
         //String[] task = staticDB.getTable("Tasks");
         ArrayList<Task> task = db.getTasks();
+        Log.d("DEBUG", "Found " + task.size() + " tasks.");
         /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter); */
         String[] out = getTasks(task);

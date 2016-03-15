@@ -14,10 +14,6 @@ import comp3350group8.coursemanager.Business.User;
 /**
  * Created by Ian Smith on 2016-02-12.
  */
-
-/**
- * Created by David on 2016-02-22.
- */
 public class StubDatabase extends SQLDatabase {
     private static ArrayList<SubTable> db;
 
@@ -31,6 +27,7 @@ public class StubDatabase extends SQLDatabase {
 
         insertCourse(new Course("COMP 1010", "E2-105","None"));
         insertTask(new Task("None", "01/27/93", "12:00am"));
+        insertUser(new User("Guest", " ", "0", "", ""));
     }
 
     //@Override
@@ -53,11 +50,20 @@ public class StubDatabase extends SQLDatabase {
     }
 
     // inserts a Course into the Courses SubTable
-    public void insertCourse(Course course) {
+    public long insertCourse(Course course) {
         Log.d("DEBUG", "Inserting " + course.toString());
         SubTable table = retrieveTable("Courses");
+        int size = table.size();
         table.insert(course);
         Log.d("DEBUG", "table: " + table.toString());
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
     }
 
     // returns the course located in Courses at index id
@@ -92,14 +98,32 @@ public class StubDatabase extends SQLDatabase {
         return out;
     }
 
-    public void insertUser(User user){
+    public long insertUser(User user){
         SubTable table = retrieveTable("Users");
+        int size = table.size();
         table.insert(user);
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
     }
 
-    public void insertTask(Task task) {
+    public long insertTask(Task task) {
         SubTable table = retrieveTable("Tasks");
+        int size = table.size();
         table.insert(task);
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
     }
 
     public ArrayList<Task> getTasks() {

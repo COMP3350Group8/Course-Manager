@@ -7,26 +7,32 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.Business.CurrentUser;
+import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button blogin;
-    EditText email, etPassword;
+    private SQLDatabase db = new SQLDatabase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        email = (EditText) findViewById(R.id.etuserName);
-        etPassword =(EditText) findViewById(R.id.etPassword);
-        blogin =(Button) findViewById(R.id.bLogin);
-        //User user = db.getUser(email, etPassword);
     }
 
     public void buttonOnClick(View v)
     {
+        EditText email, etPassword;
+        email = (EditText) findViewById(R.id.etuserName);
+        etPassword =(EditText) findViewById(R.id.etPassword);
+        blogin =(Button) findViewById(R.id.bLogin);
+
+        User user = db.getUser(email.getText().toString(), etPassword.getText().toString());
+
+        CurrentUser.setUser(email.getText().toString());
         startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
     }
 }
