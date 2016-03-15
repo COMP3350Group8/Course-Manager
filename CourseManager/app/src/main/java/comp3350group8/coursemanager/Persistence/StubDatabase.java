@@ -14,10 +14,6 @@ import comp3350group8.coursemanager.Business.User;
 /**
  * Created by Ian Smith on 2016-02-12.
  */
-
-/**
- * Created by David on 2016-02-22.
- */
 public class StubDatabase extends SQLDatabase {
     private static ArrayList<SubTable> db;
 
@@ -31,6 +27,7 @@ public class StubDatabase extends SQLDatabase {
 
         insertCourse(new Course("COMP 1010", "E2-105","None"));
         insertTask(new Task("None", "01/27/93", "12:00am"));
+        insertUser(new User("Guest", " ", "0", "", ""));
     }
 
     //@Override

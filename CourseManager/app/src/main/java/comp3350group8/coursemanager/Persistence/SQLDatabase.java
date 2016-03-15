@@ -21,7 +21,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 1;
+    private static int DATABASE_VERSION = 3;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -39,7 +39,9 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " CourseName TEXT, " +
                 " CourseLocation TEXT, " +
-                " CourseDescription TEXT)";
+                " CourseDescription TEXT" +
+                " UserName TEXT," +
+                " FOREIGN KEY(UserName) References Users(UserEmail))";
 
         String CREATE_USER_TABLE = "CREATE TABLE Users ( "+
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -71,7 +73,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS Init");
+        db.execSQL("DROP TABLE IF EXISTS ints");
         db.execSQL("DROP TABLE IF EXISTS Courses");
         db.execSQL("DROP TABLE IF EXISTS Users");
         db.execSQL("DROP TABLE IF EXISTS Tasks");
@@ -85,7 +87,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
     private static final String TABLE_COURSES = "Courses";
     private static final String TABLE_USERS = "Users";
-    private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription"};
+    private static final String[] COURSE_COLUMNS = {"ID", "CourseName", "CourseLocation", "CourseDescription", "UserName"};
     private static final String[] USER_COLUMNS = {"ID", "UserName", "UserPassword", "UserNum",  "UserEmail", "UserSchool"};
 
     public void insertUser(User user) {
@@ -93,18 +95,16 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         Log.d("DEBUG", USER_COLUMNS[1]);
 
         ContentValues values = new ContentValues();
-        values.put(USER_COLUMNS[1], user.getName());
         values.put(USER_COLUMNS[2], user.getPassWord());
-        values.put(USER_COLUMNS[3], user.getStudentNum());
         values.put(USER_COLUMNS[4], user.getEmail());
+        values.put(USER_COLUMNS[3], user.getStudentNum());
+        values.put(USER_COLUMNS[1], user.getName());
         values.put(USER_COLUMNS[5], user.getSchool());
-        //Log.d("DEBUG", values.toString());
+        Log.d("DEBUG", values.toString());
 
         db.insert(TABLE_USERS, null, values);
         db.close();
-
     }
-
 
     public void insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -178,6 +178,35 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         }
         return user;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        ArrayList<User> list = new ArrayList<User>();
+
+        String query = "SELECT * FROM " + TABLE_USERS;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        Course course = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                String password = cursor.getString(0);
+                String email = cursor.getString(1);
+                String number = cursor.getString(2);
+                String name = cursor.getString(3);
+                String school = cursor.getString(4);
+
+                User u = new User(name, password, number, email, school);
+
+                Log.d("list", u.toString());
+                list.add(u);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return list;
     }
 
     public ArrayList<Course> getAllCourses() {

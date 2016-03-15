@@ -25,7 +25,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class ListOfCourses extends Activity {
-    private SQLDatabase db = new StubDatabase(this);
+    private SQLDatabase db = new SQLDatabase(this);
     private ListView lv;
     protected void onCreate(Bundle savedInstanceState) {
 

@@ -7,12 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button blogin;
     EditText email, etPassword;
+    private SQLDatabase db = new SQLDatabase(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

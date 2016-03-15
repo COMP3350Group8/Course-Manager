@@ -20,7 +20,7 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
 
-        db = new StubDatabase(this);
+        db = new SQLDatabase(this);
         staticDB.init();
     }
 
