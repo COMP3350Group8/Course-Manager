@@ -89,30 +89,10 @@ March 13, 2016
 March 14, 2016
 - We all got together after class to put our code together and do some final testing. During this time we found that the SQLDatabase
 began acting up and it doesn't recognize that we have a UserPassword column in our SQL table. After some research we concluded that the version of the database needed to be increased. We spent some time trying to figure this out, but ran out of time so we changed our code to use the StubDatabase.
-<<<<<<< HEAD
 - All the classes and activities where broken down into three layers representing business, data access and presentation layers 
 - When we changed back to our StubDatabase we found that our Courses and Tasks were being added to the SubTable but the program was instantly calling a constructor and removing the added items so there is nothing to display in ListOfCourses and TaskList. We hard coded in a Course and Task to show that our code does in fact display these items.
-=======
+
 
 March 14, 2016
 -All the classes and activities where broken down into three layers representing business, data access and presentation layers 
 - Managed to get the database working in the evening (Ian)
-Iteration 1
--------------
-
-Main Screen (4 days)
-- David worked on the GUI for main screen (1 day)
-- David, Anthony and Yusef created main screen code (2 days)
-- Group combined and fixed code for main screen(1 day)
-
-Add Course (4 days)
-- David, Anthony and Yusef created code for Add Course (3 days)
-- Group combined and fixed code (1 day)
-
-Course List (4 days)
-- David, Anthony and Yusef created code for Course List (3 days)
-- Group combined and fixed code (1 day)
-
-Database (5 days)
-- Ian created database (5 days)
->>>>>>> Develop

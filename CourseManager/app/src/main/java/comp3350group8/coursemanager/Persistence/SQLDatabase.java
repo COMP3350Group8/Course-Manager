@@ -380,9 +380,9 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                String name = cursor.getString(0);
-                String date = cursor.getString(1);
-                String time = cursor.getString(2);
+                String name = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
                 Task task = new Task(name, date, time);
                 list.add(task);
 
