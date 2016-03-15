@@ -73,6 +73,7 @@ began acting up and it doesn't recognize that we have a UserPassword column in o
 
 March 14, 2016
 -All the classes and activities where broken down into three layers representing business, data access and presentation layers 
+- Managed to get the database working in the evening (Ian)
 Iteration 1
 -------------
 
