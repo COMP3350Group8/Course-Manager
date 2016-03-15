@@ -50,11 +50,20 @@ public class StubDatabase extends SQLDatabase {
     }
 
     // inserts a Course into the Courses SubTable
-    public void insertCourse(Course course) {
+    public long insertCourse(Course course) {
         Log.d("DEBUG", "Inserting " + course.toString());
         SubTable table = retrieveTable("Courses");
+        int size = table.size();
         table.insert(course);
         Log.d("DEBUG", "table: " + table.toString());
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
     }
 
     // returns the course located in Courses at index id
@@ -103,9 +112,18 @@ public class StubDatabase extends SQLDatabase {
         return success;
     }
 
-    public void insertTask(Task task) {
+    public long insertTask(Task task) {
         SubTable table = retrieveTable("Tasks");
+        int size = table.size();
         table.insert(task);
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
     }
 
     public ArrayList<Task> getTasks() {

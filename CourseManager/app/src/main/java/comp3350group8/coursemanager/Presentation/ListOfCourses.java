@@ -12,6 +12,7 @@ import java.sql.SQLData;
 import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.ListItem;
 import comp3350group8.coursemanager.Business.SubTable;
 import comp3350group8.coursemanager.Persistence.AppDatabase;
@@ -26,6 +27,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  */
 public class ListOfCourses extends Activity {
     private SQLDatabase db = new SQLDatabase(this);
+    private ArrayList<Course> courses;
     private ListView lv;
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -38,7 +40,7 @@ public class ListOfCourses extends Activity {
         //String[] course= {"COMP 1010", "COMP 1020", "COMP 2130","COMP 2140", "COMP 2150"};
 
         // retrieve contents of "Courses" if any
-        ArrayList<Course> courses = db.getAllCourses();
+        courses = db.getAllCourses();
         Log.d("DEBUG", "size = " + courses.size());
         String[] course = getCourses(courses);
         if (course.length > 0) {
@@ -55,6 +57,14 @@ public class ListOfCourses extends Activity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("DEBUG", "Selected course with id: " + id);
+                if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
+                    int index = (int)id;
+                    Course curr = courses.get(index);
+                    CurrentCourse.setCourse(curr.getName());
+
+                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
+                }
                 Object o = lv.getItemAtPosition(position);
                 startActivity(new Intent(ListOfCourses.this, AddTask.class));
                // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
