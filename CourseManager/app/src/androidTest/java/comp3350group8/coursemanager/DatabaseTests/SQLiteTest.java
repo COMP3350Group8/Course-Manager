@@ -24,7 +24,7 @@ public class SQLiteTest extends AndroidTestCase {
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
         db = new SQLDatabase(context);
-        
+        /*
         testIntInsertion();
         testIntRetrieval();
         testIntQuery();
@@ -37,13 +37,19 @@ public class SQLiteTest extends AndroidTestCase {
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();
+        */
 
+        /*
+        testTaskRetrieval();
+        testTaskQuery();
         testTaskInsertion();
         testTaskRetrieval();
         testTaskQuery();
+        */
 
         testUserInsertion();
         testUserQuery();
+
     }
 
     //@Test
@@ -101,7 +107,7 @@ public class SQLiteTest extends AndroidTestCase {
     }
 
     public void testTaskInsertion() {
-        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am"), new Task("Assignment", "September 2, 2016", "12:00am"), new Task("It do", "", "")};
+        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5)};
 
         for (int i = 0; i < tasks.length; i++) {
             Log.d("DEBUG", "" + db.insertTask(tasks[i]));

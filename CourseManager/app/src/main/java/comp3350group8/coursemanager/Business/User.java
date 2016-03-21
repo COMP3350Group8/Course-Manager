@@ -4,6 +4,7 @@ package comp3350group8.coursemanager.Business;
  * Created by David on 2016-03-12.
  */
 public class User extends ListItem {
+    private int _ID = 0;
     private String name, password, email, school;
     private String studentNum;
 
@@ -49,4 +50,7 @@ public class User extends ListItem {
         }
         return false;
     }
+
+    public void setID(int id) {_ID = id;}
+    public int getID() {return _ID;}
 }

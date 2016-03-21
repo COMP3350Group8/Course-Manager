@@ -4,6 +4,7 @@ package comp3350group8.coursemanager.Business;
  * Created by Ian Smith on 2016-02-12.
  */
 public class IntAtom extends ListItem {
+    private int _ID = 0;
     private int item;
 
     public IntAtom(int q) {
@@ -32,7 +33,9 @@ public class IntAtom extends ListItem {
     }
 
     public String getAttributes() {
-        String out = "value INT";
-        return out;
+        return "value INT";
     }
+
+    public int getID() {return _ID;}
+    public void setID(int id) {_ID = id;}
 }

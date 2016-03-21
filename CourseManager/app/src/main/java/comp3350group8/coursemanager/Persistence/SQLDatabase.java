@@ -23,7 +23,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 12;
+    private static int DATABASE_VERSION = 13;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -49,7 +49,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER," +
-                " CourseName TEXT UNIQUE, " +
+                " CourseName TEXT, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
                 " FOREIGN KEY(UserID) References Users(ID));";
@@ -61,14 +61,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 " TaskName TEXT, " +
                 " TaskDate TEXT, " +
                 " TaskTime TEXT," +
+                " TaskWeight NUMBER, " +
+                " TaskScore NUMBER, " +
+                " TaskActualScore Number, " +
                 " FOREIGN KEY(CourseID) References Courses);";
-
-        /* String CREATE_STUDENT_TABLE = "Create TABLE Students ( " +
-                "ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "StudentID INTEGER, " +
-                "StudentName TEXT, " +
-                "StudentEmail TEXT);";
-        */
 
         // coluumns are ID and Value for table ints
         db.execSQL(CREATE_INIT_TABLE);
@@ -154,6 +150,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                     String location = cursor.getString(3);
                     String description = cursor.getString(4);
                     course = new Course(name, location, description);
+                    course.setID(Integer.parseInt(cursor.getString(0)));
                 }
             }
             cursor.close();
@@ -187,6 +184,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                     String school = cursor.getString(4);
                     String emailAdd = cursor.getString(5);
                     user = new User(name, pasword, studentNum, school, emailAdd);
+                    user.setID(Integer.parseInt(cursor.getString(0)));
                 }
 
                 cursor.close();
@@ -202,8 +200,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getReadableDatabase();
             boolean success = false;
 
-            // build query
-            //Cursor cursor = db.query(TABLE_USERS, USER_COLUMNS, USER_COLUMNS[4] + " = '" + email + "' AND " + USER_COLUMNS[2] + " = '" + password + "'", new String[]{email, password}, null, null, null, null);
+            // the user's email address, like their ID, is unique
             String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USER_COLUMNS[4] + "=?";
             String[] args = new String[]{CurrentUser.getUser()};
 
@@ -234,6 +231,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
+                //TODO: this is weird, fix it.
                 String password = cursor.getString(0);
                 String email = cursor.getString(1);
                 String number = cursor.getString(2);
@@ -241,6 +239,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 String school = cursor.getString(4);
 
                 User u = new User(name, password, number, email, school);
+                Log.d("DEBUG", "User = " + password + ", " + email + ", " + number + ", " + name + ", " + school);
 
                 Log.d("list", u.toString());
                 list.add(u);
@@ -268,6 +267,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 String description = cursor.getString(4);
                 course = new Course(name, location, description);
                 Log.d("list", course.toString());
+                course.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(course);
             } while (cursor.moveToNext());
         }
@@ -336,6 +336,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             do {
                 atom = new IntAtom(Integer.parseInt(cursor.getString(1)));
                 Log.d("list", atom.toString());
+                atom.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(atom);
             } while (cursor.moveToNext());
         }
@@ -380,10 +381,13 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
+                String id = cursor.getString(0);
+                // exclude foreign courseID
                 String name = cursor.getString(2);
                 String date = cursor.getString(3);
                 String time = cursor.getString(4);
-                Task task = new Task(name, date, time);
+                Task task = new Task(name, date, time, 0);
+                task.setID(Integer.parseInt(id));
                 list.add(task);
 
             } while (cursor.moveToNext());

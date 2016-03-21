@@ -56,7 +56,7 @@ public class TaskList extends Activity {
         String[] list = new String[tasks.size()];
 
         for (int i = 0; i< tasks.size(); i++) {
-            list[i] = tasks.get(i).toString();
+            list[i] = tasks.get(i).getTaskName();
         }
 
         return list;

@@ -26,7 +26,7 @@ public class StubDatabase extends SQLDatabase {
         Log.d("Constructor", "Called");
 
         insertCourse(new Course("COMP 1010", "E2-105","None"));
-        insertTask(new Task("None", "01/27/93", "12:00am"));
+        insertTask(new Task("None", "01/27/93", "12:00am", 100));
         insertUser(new User("Guest", " ", "0", "", ""));
     }
 

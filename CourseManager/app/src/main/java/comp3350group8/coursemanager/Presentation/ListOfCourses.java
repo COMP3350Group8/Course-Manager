@@ -13,8 +13,6 @@ import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
-import comp3350group8.coursemanager.Business.ListItem;
-import comp3350group8.coursemanager.Business.SubTable;
 import comp3350group8.coursemanager.Persistence.AppDatabase;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
@@ -77,7 +75,7 @@ public class ListOfCourses extends Activity {
         String[] out = new String[list.size()];
 
         for (int i = 0; i < list.size(); i++) {
-            out[i] = list.get(i).toString();
+            out[i] = list.get(i).getName();
         }
 
         return out;

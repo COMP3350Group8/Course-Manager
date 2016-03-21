@@ -44,10 +44,15 @@ public class AddTask extends Activity {
 
             EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
 
+            EditText taskWeight = (EditText) findViewById(R.id.weight);
+            String w = taskWeight.getText().toString();
+            double weight = Double.parseDouble(w);
+
             // create instance of Task and send to the database
             Task newTask = new Task(taskName.getText().toString(),
                     taskduedate.getText().toString(),
-                    taskduetime.getText().toString());
+                    taskduetime.getText().toString(),
+                    weight);
             Log.d("DEBUG", newTask.toString());
             db.insertTask(newTask);
 
