@@ -96,3 +96,11 @@ began acting up and it doesn't recognize that we have a UserPassword column in o
 March 14, 2016
 -All the classes and activities where broken down into three layers representing business, data access and presentation layers 
 - Managed to get the database working in the evening (Ian)
+
+March 21, 2016
+- Working on adding some new activities for refactoring (Ian)
+	- task list will show only the task name
+	- click on that task to see more detail and edit the record of it
+	- then save changes to the database
+	- tasks need to be editable s.t. they can have a score
+	- same for courses

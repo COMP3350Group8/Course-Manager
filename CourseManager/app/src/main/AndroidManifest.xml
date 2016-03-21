@@ -24,11 +24,20 @@
         </activity>
         <activity android:name=".Presentation.AddCourse" />
         <activity android:name=".Presentation.ListOfCourses" />
-        <activity android:name=".Presentation.AddTask"/>
-        <activity android:name=".Presentation.TaskList"/>
+        <activity android:name=".Presentation.AddTask" />
+        <activity android:name=".Presentation.TaskList" />
         <activity
             android:name=".Presentation.LoginActivity"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name=".Presentation.TaskDetail"
+            android:label="@string/title_activity_task_detail"
+            android:parentActivityName=".Presentation.TaskList"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="comp3350group8.coursemanager.Presentation.TaskList" />
+        </activity>
     </application>
 
 </manifest>

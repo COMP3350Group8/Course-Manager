@@ -59,12 +59,14 @@ public class ListOfCourses extends Activity {
                 if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
                     int index = (int)id;
                     Course curr = courses.get(index);
+                    Log.d("DEBUG", "Current course = " + id+1);
                     CurrentCourse.setCourse(curr.getName());
+                    CurrentCourse.setID(id+1);
 
                     Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
                 }
                 Object o = lv.getItemAtPosition(position);
-                startActivity(new Intent(ListOfCourses.this, AddTask.class));
+                startActivity(new Intent(ListOfCourses.this, TaskList.class));
                // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
         });

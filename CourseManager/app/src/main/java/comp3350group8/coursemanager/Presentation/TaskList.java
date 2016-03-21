@@ -1,5 +1,8 @@
 package comp3350group8.coursemanager.Presentation;
 
+import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.CurrentCourse;
+import comp3350group8.coursemanager.Business.CurrentTask;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
@@ -11,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -27,6 +31,7 @@ import comp3350group8.coursemanager.R;
  */
 public class TaskList extends Activity {
     private SQLDatabase db;
+    private ArrayList<Task> tasks;
     private ListView lv;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +41,38 @@ public class TaskList extends Activity {
 
         //Bundle info = getIntent().getExtras();
 
-        lv = (ListView) findViewById(R.id.listView2);
+        lv = (ListView) findViewById(R.id.TaskList);
         //String[] task= {"Do COMP 1020 Assignment", "Study for Database Exam", "Hand in Honesty Declaration"};
 
 
         // retrieve contents of "Tasks" if any
         //String[] task = staticDB.getTable("Tasks");
-        ArrayList<Task> task = db.getTasks();
-        Log.d("DEBUG", "Found " + task.size() + " tasks.");
+        tasks = db.getTasks();
+        Log.d("DEBUG", "Found " + tasks.size() + " tasks.");
         /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter); */
-        String[] out = getTasks(task);
+        String[] out = getTasks(tasks);
         Log.d("DEBUG", "" + out.length);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, out);
         lv.setAdapter(adapter);
+
+        //select a task
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("DEBUG", "Selected course with id: " + id);
+                if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
+                    int index = (int) id;
+                    Task curr = tasks.get(index);
+                    CurrentTask.setTask(curr);
+
+                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
+                }
+                Object o = lv.getItemAtPosition(position);
+                startActivity(new Intent(TaskList.this, TaskDetail.class));
+                // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public String[] getTasks(ArrayList<Task> tasks) {
@@ -62,15 +85,8 @@ public class TaskList extends Activity {
         return list;
     }
 
-    //Back Button
-    public void button3OnClick (View v)
-    {
-        startActivity(new Intent(TaskList.this, ListOfCourses.class));
-
-    }
-
-    //Add Task Button
-    public void button4OnClick (View v)
+    // Add Task Button
+    public void AddTask (View v)
     {
         startActivity(new Intent(TaskList.this, AddTask.class));
     }
