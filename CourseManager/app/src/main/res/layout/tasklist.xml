@@ -6,15 +6,29 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="73dp"
-        android:id="@+id/TaskList"
-        android:layout_weight="0.95" />
+        android:layout_height="400dp"
+        android:id="@+id/TaskList" />
+
+    <TextView
+        android:layout_width="351dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/Remaining" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/CourseGrade" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add new Task"
         android:id="@+id/AddTask"
-        android:onClick="AddTask" />
+        android:onClick="AddTask"
+        android:layout_weight="1.77" />
 
 </LinearLayout>

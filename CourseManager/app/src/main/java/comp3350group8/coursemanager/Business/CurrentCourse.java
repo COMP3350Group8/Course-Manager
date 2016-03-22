@@ -14,4 +14,6 @@ public class CurrentCourse {
     public static void setID(long ID) {id = ID;}
 
     public static long getID() {return id;}
+
+    public static void reset() {coursename = null; id=-1;}
 }

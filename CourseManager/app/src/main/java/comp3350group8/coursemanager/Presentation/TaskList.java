@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ public class TaskList extends Activity {
     private SQLDatabase db;
     private ArrayList<Task> tasks;
     private ListView lv;
-
+    
     protected void onCreate(Bundle savedInstanceState) {
         db = new SQLDatabase(this);
         super.onCreate(savedInstanceState);
@@ -73,6 +74,48 @@ public class TaskList extends Activity {
                 // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
         });
+
+        // TODO: set grade function
+        setGrade();
+
+        // TODO: set remaining weight
+        setRemainingWeight();
+    }
+
+    public void setGrade() {
+        // get total weights and total scores
+        double totalWeight = 0;
+        double totalScore = 0;
+        double loopscore = 0;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task curr = tasks.get(i);
+            totalWeight += curr.getWeight();
+            //totalScore += curr.getScore();
+            totalScore += curr.getActualScore();
+        }
+
+        double actualScore = totalScore / totalWeight;
+        Log.d("DEBUG", "score = " + totalScore);
+        Log.d("DEBUG", "weight = " + totalWeight);
+        String actual = "" + (actualScore * 100) + "%";
+
+        TextView s = (TextView) findViewById(R.id.CourseGrade);
+        s.setText(actual, TextView.BufferType.NORMAL);
+    }
+
+    public void setRemainingWeight() {
+        double totalWeight = 0;
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task curr = tasks.get(i);
+            totalWeight += curr.getWeight();
+        }
+
+        double remains = 1 - totalWeight;
+        String remainsString = "" + remains + " remaining";
+        TextView remaining = (TextView) findViewById(R.id.Remaining);
+        remaining.setText(remainsString, TextView.BufferType.NORMAL);
     }
 
     public String[] getTasks(ArrayList<Task> tasks) {

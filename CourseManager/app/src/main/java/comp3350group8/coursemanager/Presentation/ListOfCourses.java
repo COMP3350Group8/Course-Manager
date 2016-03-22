@@ -27,9 +27,11 @@ public class ListOfCourses extends Activity {
     private SQLDatabase db = new SQLDatabase(this);
     private ArrayList<Course> courses;
     private ListView lv;
+
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        CurrentCourse.reset();
         setContentView(R.layout.listofcourses);
 
         //Bundle info = getIntent().getExtras();
@@ -73,6 +75,11 @@ public class ListOfCourses extends Activity {
 
     }
 
+    protected void onResume() {
+        super.onResume();
+        CurrentCourse.reset();
+    }
+
     public String[] getCourses(ArrayList<Course> list) {
         String[] out = new String[list.size()];
 
@@ -83,14 +90,7 @@ public class ListOfCourses extends Activity {
         return out;
     }
 
-    public void buttonOnClick (View v)
-    {
+    public void buttonOnClick (View v) {
         startActivity(new Intent(ListOfCourses.this, AddCourse.class));
-
-    }
-
-    public void button2OnClick(View v)
-    {
-        startActivity(new Intent (ListOfCourses.this, TaskList.class));
     }
 }
