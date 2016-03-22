@@ -44,6 +44,7 @@ public class SQLiteTest extends AndroidTestCase {
         testCourseQuery();
 
         // test Task functions
+        //TODO: add tests for grade calculator functions and database
         testTaskRetrieval();
         testTaskQuery();
         testTaskInsertion();

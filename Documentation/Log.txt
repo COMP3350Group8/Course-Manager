@@ -104,3 +104,8 @@ March 21, 2016
 	- then save changes to the database
 	- tasks need to be editable s.t. they can have a score
 	- same for courses
+- Added grade calculator functionality for individual courses (Ian)
+	- modified database to find tasks by associated course
+	- added task detail page to edit course details including score
+	- task detail page calculates the grade as a fraction of the weight
+	- 

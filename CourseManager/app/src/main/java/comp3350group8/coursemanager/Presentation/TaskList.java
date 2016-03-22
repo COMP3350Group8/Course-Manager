@@ -34,7 +34,7 @@ public class TaskList extends Activity {
     private SQLDatabase db;
     private ArrayList<Task> tasks;
     private ListView lv;
-    
+
     protected void onCreate(Bundle savedInstanceState) {
         db = new SQLDatabase(this);
         super.onCreate(savedInstanceState);
