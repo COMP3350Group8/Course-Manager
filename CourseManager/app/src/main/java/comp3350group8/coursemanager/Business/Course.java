@@ -44,6 +44,6 @@ public class Course extends ListItem
     }
 
     public String toString() {
-        return "Name: " + course + ", Location: " + location + ", Description: " + description;
+        return "Course Name: " + course + "\nLocation: " + location + "\nDescription: " + description;
     }
 }

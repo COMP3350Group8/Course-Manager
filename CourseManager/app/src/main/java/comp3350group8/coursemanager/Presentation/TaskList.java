@@ -49,6 +49,11 @@ public class TaskList extends Activity {
 
         // retrieve contents of "Tasks" if any
         //String[] task = staticDB.getTable("Tasks");
+        Course curr = db.getCourse((int)CurrentCourse.getID());
+        String description = curr.toString();
+        TextView desc = (TextView)findViewById(R.id.CourseDescription);
+        desc.setText(description, TextView.BufferType.NORMAL);
+
         tasks = db.getTasks();
         Log.d("DEBUG", "Found " + tasks.size() + " tasks.");
         /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);

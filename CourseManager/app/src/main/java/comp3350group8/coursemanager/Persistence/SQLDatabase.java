@@ -195,6 +195,39 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         return user;
     }
 
+    public User getUser(String email) {
+        User user = null;
+
+        if(email!=null)
+        {
+            SQLiteDatabase db = this.getReadableDatabase();
+            boolean success = false;
+
+            // build query
+            //Cursor cursor = db.query(TABLE_USERS, USER_COLUMNS, USER_COLUMNS[4] + " = '" + email + "' AND " + USER_COLUMNS[2] + " = '" + password + "'", new String[]{email, password}, null, null, null, null);
+            String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + USER_COLUMNS[4] + "=?";
+            String[] args = new String[] {email};
+
+            Cursor cursor = db.rawQuery(query, args);
+            if(cursor!=null) {
+                cursor.moveToFirst();
+
+                if (cursor.getCount() > 0) {
+                    String name = cursor.getString(1);
+                    String pasword = cursor.getString(2);
+                    String studentNum = cursor.getString(3);
+                    String school = cursor.getString(4);
+                    String emailAdd = cursor.getString(5);
+                    user = new User(name, pasword, studentNum, school, emailAdd);
+                    user.setID(Integer.parseInt(cursor.getString(0)));
+                }
+
+                cursor.close();
+            }
+        }
+        return user;
+    }
+
     private int getUserID() {
         int user = -1;
 

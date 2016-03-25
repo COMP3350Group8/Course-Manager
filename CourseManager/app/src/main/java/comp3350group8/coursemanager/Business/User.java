@@ -40,7 +40,7 @@ public class User extends ListItem {
     }
 
     public String toString() {
-        return "Name: " + name+ " password: "  + password+" email: " + email;
+        return "Name: " + name+ "\nEmail Address/Username: " + email + "\nSchool: " + school + "\nStudent Number:" + studentNum;
     }
 
     public boolean equals(ListItem otherItem) {

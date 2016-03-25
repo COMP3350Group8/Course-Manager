@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
+import comp3350group8.coursemanager.Business.CurrentUser;
+import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.AppDatabase;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
@@ -38,6 +40,12 @@ public class ListOfCourses extends Activity {
 
         lv = (ListView) findViewById(R.id.listView);
         //String[] course= {"COMP 1010", "COMP 1020", "COMP 2130","COMP 2140", "COMP 2150"};
+
+        String user = CurrentUser.getUser();
+        User curr = db.getUser(user);
+        user = curr.toString();
+        TextView u = (TextView) findViewById(R.id.UserDescription);
+        u.setText(user, TextView.BufferType.NORMAL);
 
         // retrieve contents of "Courses" if any
         courses = db.getAllCourses();
@@ -91,7 +99,7 @@ public class ListOfCourses extends Activity {
         return out;
     }
 
-    public void buttonOnClick (View v) {
+    public void AddNewCourse (View v) {
         startActivity(new Intent(ListOfCourses.this, AddCourse.class));
     }
 }

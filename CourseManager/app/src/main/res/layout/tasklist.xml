@@ -4,10 +4,18 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:id="@+id/CourseDescription"
+        android:layout_weight="0.28" />
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:id="@+id/TaskList" />
+        android:layout_height="252dp"
+        android:id="@+id/TaskList"
+        android:layout_weight="0.8" />
 
     <TextView
         android:layout_width="351dp"
@@ -25,10 +33,9 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Add new Task"
         android:id="@+id/AddTask"
-        android:onClick="AddTask"
-        android:layout_weight="1.77" />
+        android:onClick="AddTask" />
 
 </LinearLayout>
