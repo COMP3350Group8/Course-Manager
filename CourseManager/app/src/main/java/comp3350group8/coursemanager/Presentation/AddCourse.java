@@ -16,7 +16,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class AddCourse extends Activity {
-    private SQLDatabase db = new SQLDatabase(this);
+    private SQLDatabase db = staticDB.getDB();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

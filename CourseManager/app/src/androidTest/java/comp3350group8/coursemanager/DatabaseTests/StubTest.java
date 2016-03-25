@@ -26,9 +26,9 @@ public class StubTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting to create database");
         db = new StubDatabase(context);
 
-        testIntInsertion();
+        /*testIntInsertion();
         testIntRetrieval();
-        testIntQuery();
+        testIntQuery();*/
 
         // should fail but not crash
         testCourseRetrieval();
@@ -66,7 +66,7 @@ public class StubTest extends AndroidTestCase {
     }
 
     public void testIntQuery() {
-        Log.d("DEBUG", "Attempted query: " + db.getInt(1));
+        Log.d("DEBUG", "Attempted query: " + db.getInt(1, new IntAtom()));
     }
 
     public void testCourseInsertion() {

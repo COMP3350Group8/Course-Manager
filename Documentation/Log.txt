@@ -73,6 +73,30 @@ March 8, 2016
 - Made rough layout for the TaskList and AddTask screens (Anthony)
 
 March 11, 2016
+- Ian can’t be the only one making commits
+- David pushed some of his work to develop
+- Graham and Ian will be doing a dependency injection for the stub
+	- Should be able to make what is now called staticDB into a subclass of SQLDatabase and just overwrite the methods in SQLDatabase
+	- An instance will be created at the start rather than a static class
+		- Tables will also be initialized at the start
+- We went through the things we lost marks on last time around
+	- Break down user stories into developer tasks
+	- Log the amount of time spent on each task
+	- Again, Ian can’t be the only one committing more than once
+	- More thorough testing (edge cases)
+	- Need to write integration tests
+		- Can probably start even before everything else is finished
+	- The marker did not appreciate the diagram, it needs to have three layers
+		- We should look at an online example
+		- Course notes for UML diagram
+- Ian wrote a word document containing our plan for the iteration, be sure to go through and add developer tasks and anything else it needs
+- Double check the assignment on d2l
+- Another thing we should do is separate the file themselves from each other
+	- As we add more files the directory is just going to get more and more cluttered
+	- (Pretty sure we lost marks on this)
+
+
+March 11, 2016
 - Created Student class and added code to SQL to handle students. (Graham) 
 - Added a StubDatabase subclass of SQLDatabase (dependency injection) and ran unit tests on it (Ian)
 
@@ -108,4 +132,19 @@ March 21, 2016
 	- modified database to find tasks by associated course
 	- added task detail page to edit course details including score
 	- task detail page calculates the grade as a fraction of the weight
-	- 
+
+March 23, 2016
+- Yusuf is sick
+- Agenda:
+	- Seminar
+	- Iteration 3
+- Might volunteer to do a seminar on Wednesday 
+- User stories:
+	- Graham will do reminders, will concentrate on login functionality though
+	- Anthony will do calendar
+	- Ian will do grade calculator
+- We’ll all chip in on refactoring
+- David will do acceptance testing with our customer
+- Won’t have a video for Monday because of our customer’s holiday plans
+- Anthony will put together a powerpoint for the seminar
+

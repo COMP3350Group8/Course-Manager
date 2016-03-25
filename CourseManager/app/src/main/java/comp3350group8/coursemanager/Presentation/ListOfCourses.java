@@ -24,7 +24,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class ListOfCourses extends Activity {
-    private SQLDatabase db = new SQLDatabase(this);
+    private SQLDatabase db = staticDB.getDB();
     private ArrayList<Course> courses;
     private ListView lv;
 
@@ -80,6 +80,7 @@ public class ListOfCourses extends Activity {
         CurrentCourse.reset();
     }
 
+    //TODO: do this somewhere else
     public String[] getCourses(ArrayList<Course> list) {
         String[] out = new String[list.size()];
 

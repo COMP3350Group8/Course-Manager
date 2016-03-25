@@ -10,12 +10,13 @@ import android.widget.EditText;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.staticDB;
 import comp3350group8.coursemanager.R;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button blogin;
-    private SQLDatabase db = new SQLDatabase(this);
+    private SQLDatabase db = staticDB.getDB();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

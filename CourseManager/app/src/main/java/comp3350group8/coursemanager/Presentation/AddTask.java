@@ -18,9 +18,8 @@ import comp3350group8.coursemanager.R;
  * Created by Anthony on 2016-03-08.
  */
 public class AddTask extends Activity {
-    private SQLDatabase db;
+    private SQLDatabase db = staticDB.getDB();
     protected void onCreate(Bundle savedInstanceState) {
-        db = new SQLDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask);
 

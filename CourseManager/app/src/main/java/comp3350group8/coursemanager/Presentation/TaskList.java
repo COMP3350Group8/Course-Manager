@@ -3,6 +3,7 @@ package comp3350group8.coursemanager.Presentation;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentTask;
+import comp3350group8.coursemanager.Business.Grader;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
@@ -31,14 +32,14 @@ import comp3350group8.coursemanager.R;
  * Created by Anthony on 2016-03-08.
  */
 public class TaskList extends Activity {
-    private SQLDatabase db;
+    private SQLDatabase db = staticDB.getDB();
     private ArrayList<Task> tasks;
     private ListView lv;
 
     protected void onCreate(Bundle savedInstanceState) {
-        db = new SQLDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasklist);
+//        db = new SQLDatabase(this);
 
         //Bundle info = getIntent().getExtras();
 
@@ -57,6 +58,14 @@ public class TaskList extends Activity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, out);
         lv.setAdapter(adapter);
 
+        String grade = Grader.setGrade(tasks);
+        TextView s = (TextView) findViewById(R.id.CourseGrade);
+        s.setText(grade, TextView.BufferType.NORMAL);
+
+        String remaining = Grader.setRemainingWeight(tasks);
+        TextView r = (TextView) findViewById(R.id.Remaining);
+        r.setText(remaining, TextView.BufferType.NORMAL);
+
         //select a task
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -74,49 +83,9 @@ public class TaskList extends Activity {
                 // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
         });
-
-        // TODO: set grade function
-        setGrade();
-
-        // TODO: set remaining weight
-        setRemainingWeight();
     }
 
-    public void setGrade() {
-        // get total weights and total scores
-        double totalWeight = 0;
-        double totalScore = 0;
-        double loopscore = 0;
-
-        for (int i = 0; i < tasks.size(); i++) {
-            Task curr = tasks.get(i);
-            totalWeight += curr.getWeight();
-            //totalScore += curr.getScore();
-            totalScore += curr.getActualScore();
-        }
-
-        double actualScore = totalScore / totalWeight;
-        Log.d("DEBUG", "score = " + totalScore);
-        Log.d("DEBUG", "weight = " + totalWeight);
-        String actual = "" + (actualScore * 100) + "%";
-
-        TextView s = (TextView) findViewById(R.id.CourseGrade);
-        s.setText(actual, TextView.BufferType.NORMAL);
-    }
-
-    public void setRemainingWeight() {
-        double totalWeight = 0;
-
-        for (int i = 0; i < tasks.size(); i++) {
-            Task curr = tasks.get(i);
-            totalWeight += curr.getWeight();
-        }
-
-        double remains = 1 - totalWeight;
-        String remainsString = "" + remains + " remaining";
-        TextView remaining = (TextView) findViewById(R.id.Remaining);
-        remaining.setText(remainsString, TextView.BufferType.NORMAL);
-    }
+    //TODO: move out of controller
 
     public String[] getTasks(ArrayList<Task> tasks) {
         String[] list = new String[tasks.size()];

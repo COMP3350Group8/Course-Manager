@@ -20,12 +20,12 @@ public class MainScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
+        staticDB.init(this);
 
-        db = new SQLDatabase(this);
-        staticDB.init();
+        db = staticDB.getDB();
+
+//        db = new SQLDatabase(this);
     }
-
-
 
     public void buttonOnClick (View v)//when a new account is created
     {
