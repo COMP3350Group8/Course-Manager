@@ -33,10 +33,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String CREATE_INIT_TABLE = "CREATE TABLE ints ( " +
+        /*String CREATE_INIT_TABLE = "CREATE TABLE ints ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                " Value INT)";
-
+                " Value INT)";*/
+        String CREATE_INIT_TABLE = IntAtom.getTableSQL();
 
         String CREATE_USER_TABLE = "CREATE TABLE Users ( "+
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
@@ -83,12 +83,64 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         this.onCreate(db);
     }
 
-    //private static final String TABLE_STUDENTS = "Students";
-    //private static final String[] STUDENT_COLUMNS = {"ID", "StudentID", "StudentName", "StudentEmail"};
+//    private static final String TABLE_INTS = "ints";
+//    private static final String[] INTS_COLUMNS = {"ID", "Value"};
 
-    private static final String TABLE_COURSES = "Courses";
+    public long insertInt(IntAtom item) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = item.getValues();
+
+        long success = db.insert(IntAtom.getTableName(), null, values);
+        db.close();
+
+        return success;
+    }
+
+    public IntAtom getInt(int id, IntAtom atom) {
+        if (id > 0) {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            // build query
+            Cursor cursor =
+                    db.query(IntAtom.getTableName(), IntAtom.getColumns(), " ID = ?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+            boolean successful = cursor.moveToFirst();
+            Log.d("GetInt", "" + successful);
+
+            if (successful) {
+                atom.setItem(Integer.parseInt(cursor.getString(0)));
+            }
+            cursor.close();
+        }
+
+        return atom;
+    }
+
+    public ArrayList<IntAtom> getAllInts() {
+        ArrayList<IntAtom> list = new ArrayList<IntAtom>();
+
+        String query = "SELECT * FROM " + IntAtom.getTableName();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        IntAtom atom = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                atom = new IntAtom(Integer.parseInt(cursor.getString(1)));
+                Log.d("list", atom.toString());
+                atom.setID(Integer.parseInt(cursor.getString(0)));
+                list.add(atom);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return list;
+    }
+
     private static final String TABLE_USERS = "Users";
-    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription"};
     private static final String[] USER_COLUMNS = {"ID", "UserName", "UserPassword", "UserNum",  "UserEmail", "UserSchool"};
 
     public long insertUser(User user) {
@@ -107,55 +159,6 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         db.close();
 
         return success;
-    }
-
-    public long insertCourse(Course course) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        long success = -1;
-
-        ContentValues values = new ContentValues();
-
-        int userid = getUserID();
-
-        if (userid >= 0) {
-            values.put(COURSE_COLUMNS[1], userid);
-            values.put(COURSE_COLUMNS[2], course.getName());
-            values.put(COURSE_COLUMNS[3], course.getLocation());
-            values.put(COURSE_COLUMNS[4], course.getDescription());
-
-            success = db.insert(TABLE_COURSES, null, values);
-        }
-        db.close();
-
-        return success;
-    }
-
-    public Course getCourse(int id) {
-        Course course = null;
-
-        if (id > 0) {
-            SQLiteDatabase db = this.getReadableDatabase();
-
-            // build query
-            Cursor cursor =
-                    db.query(TABLE_COURSES, COURSE_COLUMNS, " id = ?", new String[]{String.valueOf(id)}, null, null, null, null);
-
-            boolean successful = cursor.moveToFirst();
-            Log.d("GetInt", "" + successful);
-
-            if (successful) {
-                if (cursor.getCount() > 0) {
-                    String name = cursor.getString(2);
-                    String location = cursor.getString(3);
-                    String description = cursor.getString(4);
-                    course = new Course(name, location, description);
-                    course.setID(Integer.parseInt(cursor.getString(0)));
-                }
-            }
-            cursor.close();
-        }
-
-        return course;
     }
 
     public User getUser(String email, String password)
@@ -249,6 +252,58 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         return list;
     }
 
+    private static final String TABLE_COURSES = "Courses";
+    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription"};
+
+    public long insertCourse(Course course) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        long success = -1;
+
+        ContentValues values = new ContentValues();
+
+        int userid = getUserID();
+
+        if (userid >= 0) {
+            values.put(COURSE_COLUMNS[1], userid);
+            values.put(COURSE_COLUMNS[2], course.getName());
+            values.put(COURSE_COLUMNS[3], course.getLocation());
+            values.put(COURSE_COLUMNS[4], course.getDescription());
+
+            success = db.insert(TABLE_COURSES, null, values);
+        }
+        db.close();
+
+        return success;
+    }
+
+    public Course getCourse(int id) {
+        Course course = null;
+
+        if (id > 0) {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            // build query
+            Cursor cursor =
+                    db.query(TABLE_COURSES, COURSE_COLUMNS, " id = ?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+            boolean successful = cursor.moveToFirst();
+            Log.d("GetInt", "" + successful);
+
+            if (successful) {
+                if (cursor.getCount() > 0) {
+                    String name = cursor.getString(2);
+                    String location = cursor.getString(3);
+                    String description = cursor.getString(4);
+                    course = new Course(name, location, description);
+                    course.setID(Integer.parseInt(cursor.getString(0)));
+                }
+            }
+            cursor.close();
+        }
+
+        return course;
+    }
+
     public ArrayList<Course> getAllCourses() {
         ArrayList<Course> list = new ArrayList<Course>();
 
@@ -268,75 +323,6 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 Log.d("list", course.toString());
                 course.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(course);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-
-        return list;
-    }
-
-    private static final String TABLE_INTS = "ints";
-    // ints table columns
-    private static final String KEY_ID = "ID";
-    private static final String KEY_VALUE = "Value";
-    private static final String[] COLUMNS = {KEY_ID, KEY_VALUE};
-
-    // CRUD methods
-
-    // insert parameter into the database
-    public long insertInt(IntAtom item) {
-        // get reference to writable db
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        // get content values
-        ContentValues values = new ContentValues();
-        values.put(KEY_VALUE, item.getItem()); // get value
-
-        long success = db.insert(TABLE_INTS, null, values);
-
-        db.close();
-
-        return success;
-    }
-
-    public IntAtom getInt(int id) {
-        IntAtom atom = null;
-
-        if (id > 0) {
-            SQLiteDatabase db = this.getReadableDatabase();
-
-            // build query
-            Cursor cursor =
-                    db.query(TABLE_INTS, COLUMNS, " ID = ?", new String[]{String.valueOf(id)}, null, null, null, null);
-
-            boolean successful = cursor.moveToFirst();
-            Log.d("GetInt", "" + successful);
-
-            if (successful) {
-                atom = new IntAtom(Integer.parseInt(cursor.getString(0)));
-            }
-            cursor.close();
-        }
-
-        return atom;
-    }
-
-    public ArrayList<IntAtom> getAllInts() {
-        ArrayList<IntAtom> list = new ArrayList<IntAtom>();
-
-        String query = "SELECT * FROM " + TABLE_INTS;
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-
-        IntAtom atom = null;
-
-        if (cursor.moveToFirst()) {
-            do {
-                atom = new IntAtom(Integer.parseInt(cursor.getString(1)));
-                Log.d("list", atom.toString());
-                atom.setID(Integer.parseInt(cursor.getString(0)));
-                list.add(atom);
             } while (cursor.moveToNext());
         }
         cursor.close();

@@ -15,10 +15,11 @@ import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentTask;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.staticDB;
 import comp3350group8.coursemanager.R;
 
 public class TaskDetail extends AppCompatActivity {
-    private SQLDatabase db;
+    private SQLDatabase db = staticDB.getDB();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +27,7 @@ public class TaskDetail extends AppCompatActivity {
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
-        db = new SQLDatabase(this);
+//        db = new SQLDatabase(this);
         Task curr = CurrentTask.getTask();
         EditText text = null;
 

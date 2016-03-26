@@ -1,3 +1,5 @@
+//TODO: update to match SQLDatabase methods
+
 package comp3350group8.coursemanager.Persistence;
 
 import android.content.Context;
@@ -6,6 +8,7 @@ import android.util.Log;
 import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Business.IntAtom;
 import comp3350group8.coursemanager.Business.ListItem;
 import comp3350group8.coursemanager.Business.SubTable;
 import comp3350group8.coursemanager.Business.Task;
@@ -20,14 +23,11 @@ public class StubDatabase extends SQLDatabase {
     public StubDatabase(Context context) {
         super(context);
         db = new ArrayList<SubTable>();
+        db.add(new SubTable("ints"));
         db.add(new SubTable("Courses"));
         db.add(new SubTable("Users"));
         db.add(new SubTable("Tasks"));
         Log.d("Constructor", "Called");
-
-        insertCourse(new Course("COMP 1010", "E2-105","None"));
-        insertTask(new Task("None", "01/27/93", "12:00am", 100));
-        insertUser(new User("Guest", " ", "0", "", ""));
     }
 
     //@Override
@@ -43,6 +43,77 @@ public class StubDatabase extends SQLDatabase {
         for (int i = 0; i < db.size() && out == null; i++) {
             if (db.get(i).getName().equals(name)) {
                 out = db.get(i);
+            }
+        }
+
+        return out;
+    }
+
+    public long insertInt(IntAtom item) {
+        Log.d("DEBUG", "Inserting " + item.toString());
+        long success = -1;
+
+        SubTable table = retrieveTable(IntAtom.getTableName());
+        int size = table.size();
+        table.insert(item);
+
+        if (table.size() > size) {
+            success = 1;
+        }
+        return success;
+    }
+
+    public IntAtom getInt(int id, IntAtom atom) {
+        if (id > 0) {
+            SubTable table = retrieveTable(IntAtom.getTableName());
+
+            if (id < table.size()) {
+                atom = (IntAtom) table.get(id - 1);
+            }
+        }
+
+        return atom;
+    }
+
+    public ArrayList<IntAtom> getAllInts() {
+        ArrayList<ListItem> list = retrieveTable(IntAtom.getTableName()).getAll();
+        ArrayList<IntAtom> out = new ArrayList<IntAtom>();
+
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) instanceof IntAtom) {
+                out.add((IntAtom)list.get(i));
+            }
+        }
+
+        return out;
+    }
+
+    public long insertUser(User user){
+        SubTable table = retrieveTable("Users");
+        int size = table.size();
+        table.insert(user);
+
+        long success = -1;
+
+        if (table.size() > size) {
+            success = 1;
+        }
+
+        return success;
+    }
+
+    public User getUser() {
+        return new User("John Smith", "cat", "000", "jsmith1", "umanitoba");
+    }
+
+    public ArrayList<User> getAllUsers() {
+        ArrayList<ListItem> list = retrieveTable("Users").getAll();
+        ArrayList<User> out = new ArrayList<User>();
+
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) instanceof User) {
+                out.add((User)list.get(i));
             }
         }
 
@@ -98,20 +169,6 @@ public class StubDatabase extends SQLDatabase {
         return out;
     }
 
-    public long insertUser(User user){
-        SubTable table = retrieveTable("Users");
-        int size = table.size();
-        table.insert(user);
-
-        long success = -1;
-
-        if (table.size() > size) {
-            success = 1;
-        }
-
-        return success;
-    }
-
     public long insertTask(Task task) {
         SubTable table = retrieveTable("Tasks");
         int size = table.size();
@@ -126,6 +183,17 @@ public class StubDatabase extends SQLDatabase {
         return success;
     }
 
+    public Task getTask(int id) {
+        SubTable table = retrieveTable("Tasks");
+        Task output  = null;
+
+        if (id < table.size()) {
+            output =(Task)table.get(id-1);
+        }
+
+        return output;
+    }
+
     public ArrayList<Task> getTasks() {
         ArrayList<ListItem> tasks = new ArrayList<ListItem>();
         SubTable table = retrieveTable("Tasks");
@@ -137,5 +205,9 @@ public class StubDatabase extends SQLDatabase {
         }
 
         return list;
+    }
+
+    public ArrayList<Task> getAllTasks() {
+        return getTasks();
     }
 }
