@@ -7,7 +7,6 @@ import java.sql.Time;
  * Created by Graham on 3/14/2016.
  */
 public class Task extends ListItem {
-    private int _ID = 0;
     private String name;
     private String dueDate;
     private String dueTime;
@@ -43,9 +42,6 @@ public class Task extends ListItem {
         return equal;
     }
 
-    public void setID(int id) {_ID = id;}
-    public int getID() {return _ID;}
-
     public String getTaskName() {return name;}
     public String getDate() {return dueDate;}
     public String getTime() {return dueTime;}
@@ -57,6 +53,10 @@ public class Task extends ListItem {
    // public String getTaskCourse() {return name;}
 
     public String toString() {
-        return "Task: " + name + " Due Date: " + dueDate + " Due Time: " + dueTime + ", Weight= " + weight + ", Score = " + score;
+        return "Task: " + name
+                + "\nDue Date: " + dueDate
+                + "\nDue Time: " + dueTime
+                + "\nWeight= " + weight
+                + "\nScore = " + score;
     }
 }

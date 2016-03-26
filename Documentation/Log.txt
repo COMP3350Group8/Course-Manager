@@ -148,3 +148,7 @@ March 23, 2016
 - Won’t have a video for Monday because of our customer’s holiday plans
 - Anthony will put together a powerpoint for the seminar
 
+March 25, 2016
+- Working on refactoring the Stub and Database (Ian)
+- used the staticDB class to provide a better means of doing a dependency injection, it is now one line, and one line only to change between the stub and the SQLDatabase (Ian)
+- added a user description to the course list page, and a course description to the task list page (Ian)

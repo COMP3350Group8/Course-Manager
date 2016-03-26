@@ -5,7 +5,6 @@ package comp3350group8.coursemanager.Business;
  */
 public class Course extends ListItem
 {
-    private int _ID = 0;
     private String course;
     private String location;
     private String description;
@@ -22,14 +21,11 @@ public class Course extends ListItem
 
         if (otherItem instanceof Course) {
             Course other = (Course)otherItem;
-            equal = other._ID == _ID && other.course.equals(course) && other.location.equals(location) && other.description.equals(description);
+            equal = other.course.equals(course) && other.location.equals(location) && other.description.equals(description);
         }
 
         return equal;
     }
-
-    public void setID(int id) {_ID = id;}
-    public int getID() {return _ID;}
 
     public String getName() {
         return course;
@@ -44,6 +40,8 @@ public class Course extends ListItem
     }
 
     public String toString() {
-        return "Course Name: " + course + "\nLocation: " + location + "\nDescription: " + description;
+        return "Course Name: " + course
+                + "\nLocation: " + location
+                + "\nDescription: " + description;
     }
 }

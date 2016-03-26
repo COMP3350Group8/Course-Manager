@@ -30,9 +30,6 @@ public class SQLiteTest extends AndroidTestCase {
         testIntInsertion();
         testIntRetrieval();
         testIntQuery();
-
-        // test Task functions
-        //TODO: add tests for grade calculator functions and database
     }
 
     //@Test

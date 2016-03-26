@@ -1,16 +1,12 @@
 package comp3350group8.coursemanager.Business;
 
-import android.util.Log;
-import android.widget.TextView;
-
 import java.util.ArrayList;
-
-import comp3350group8.coursemanager.R;
 
 /**
  * Created by Ian Smith on 2016-03-25.
  */
 public class Grader {
+
     public static String setGrade(ArrayList<Task> tasks) {
         // get total weights and total scores
         double totalWeight = 0;

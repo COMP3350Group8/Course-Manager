@@ -32,7 +32,6 @@ public class TaskIntegrationTest extends AndroidTestCase {
         CurrentCourse.setCourse("COMP 1010");
         CurrentCourse.setID(1);
 
-        //TODO: add tests for grade calculator functions and database
         testTaskRetrieval();
         testTaskQuery();
         testTaskInsertion();
@@ -41,6 +40,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
         testTaskUpdate();
         testTaskRetrieval();
     }
+
     public void testTaskInsertion() {
         Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5)};
         /*Course c = db.getCourse(1);
@@ -69,6 +69,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting task query: " + db.getTask(2));
     }
 
+    // TODO: Add scores for all the tasks in the database, print grade and remaining weight
     public void testTaskUpdate() {
         Task newTask = db.getTask(2);
         Log.d("DEBUG", "Attempting task query: " + db.getTask(2));

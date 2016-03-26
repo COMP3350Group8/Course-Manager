@@ -6,7 +6,6 @@ import android.content.ContentValues;
  * Created by Ian Smith on 2016-02-12.
  */
 public class IntAtom extends ListItem {
-    private int _ID = 0;
     private int item;
 
     public IntAtom() {item = 0;}
@@ -52,7 +51,4 @@ public class IntAtom extends ListItem {
 
         return values;
     }
-
-    public int getID() {return _ID;}
-    public void setID(int id) {_ID = id;}
 }
