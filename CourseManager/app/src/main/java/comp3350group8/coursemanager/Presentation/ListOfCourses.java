@@ -68,6 +68,7 @@ public class ListOfCourses extends Activity {
                     Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
                 }
                 Object o = lv.getItemAtPosition(position);
+
                 startActivity(new Intent(ListOfCourses.this, TaskList.class));
                // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
