@@ -24,6 +24,7 @@ public class CourseIntegrationTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting to create database");
 
         db = new SQLDatabase(context);
+        //db = new StudDatabase(context)
         db.insertUser(new User("Ian", "car", "1", "smithi35", "umanitoba"));
 
         // should fail but not crash
