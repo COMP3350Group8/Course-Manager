@@ -4,7 +4,7 @@ package comp3350group8.coursemanager.Business;
  * Created by Ian Smith on 2016-03-14.
  */
 public class CurrentCourse {
-    private static String coursename;
+    private static String coursename = "";
     private static long id = -1;
 
     public static void setCourse(String course) { coursename = course; }

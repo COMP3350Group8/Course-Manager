@@ -43,12 +43,14 @@ public class ListOfCourses extends Activity {
 
         String user = CurrentUser.getUser();
         User curr = db.getUser(user);
+        Log.d("DEBUG", "Current user = " + curr.toString());
         user = curr.toString();
         TextView u = (TextView) findViewById(R.id.UserDescription);
         u.setText(user, TextView.BufferType.NORMAL);
 
+        //TODO: make sure this is getting the information for the right user
         // retrieve contents of "Courses" if any
-        courses = db.getAllCourses();
+        courses = db.getCourses();
         Log.d("DEBUG", "size = " + courses.size());
         String[] course = getCourses(courses);
         if (course.length > 0) {

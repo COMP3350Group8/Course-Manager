@@ -62,7 +62,7 @@ public class CourseIntegrationTest extends AndroidTestCase {
 
     public void testCourseRetrieval(){
         Log.d("DEBUG", "Attempting total recall of courses");
-        ArrayList<Course> list = db.getAllCourses();
+        ArrayList<Course> list = db.getCourses();
 
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {

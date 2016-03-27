@@ -23,7 +23,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 17;
+    private static int DATABASE_VERSION = 18;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -56,13 +56,14 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         String CREATE_TASK_TABLE = "CREATE TABLE Tasks ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                " UserID INTEGER, " +
                 " CourseID INTEGER, " +
                 " TaskName TEXT, " +
                 " TaskDate TEXT, " +
                 " TaskTime TEXT," +
                 " TaskWeight FLOAT, " +
                 " TaskScore FLOAT, " +
-                " TaskActualScore FLOAT, " +
+                " FOREIGN KEY(UserID) References Users, " +
                 " FOREIGN KEY(CourseID) References Courses);";
 
         // coluumns are ID and Value for table ints
@@ -336,13 +337,15 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         return course;
     }
 
-    public ArrayList<Course> getAllCourses() {
+    public ArrayList<Course> getCourses() {
         ArrayList<Course> list = new ArrayList<Course>();
+        String user = CurrentUser.getUser();
+        User u = getUser(user);
 
-        String query = "SELECT * FROM " + TABLE_COURSES;
+        String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[1] + "=?";
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
+        Cursor cursor = db.rawQuery(query, new String[] {"" + u.getID()});
 
         Course course = null;
 
@@ -362,24 +365,53 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         return list;
     }
 
-    //Adding Tasks
+    public ArrayList<Course> getAllCourses() {
+        ArrayList<Course> list = new ArrayList<Course>();
+
+        String query = "SELECT * FROM " + TABLE_COURSES;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        Course course = null;
+
+        if (cursor.moveToFirst()) {
+            do {
+                String name = cursor.getString(2);
+                String location = cursor.getString(3);
+                String description = cursor.getString(4);
+
+                course = new Course(name, location, description);
+                course.setID(Integer.parseInt(cursor.getString(0)));
+                Log.d("list", course.toString());
+
+                list.add(course);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+
+        return list;
+    }
+
     private static final String TABLE_TASKS = "Tasks";
-    private static final String[] TASK_COLUMNS = {"ID", "CourseID", "TaskName", "TaskDate", "TaskTime", "TaskWeight", "TaskScore", "TaskActualScore"};
+    private static final String[] TASK_COLUMNS = {"ID", "UserID", "CourseID", "TaskName", "TaskDate", "TaskTime", "TaskWeight", "TaskScore"};
 
     public long insertTask(Task task) {
         SQLiteDatabase db = this.getWritableDatabase();
         long success = -1;
         int courseId = getCourseID();
+        int userId = getUserID();
         Log.d("DEBUG", "CourseID = " + courseId);
         Log.d("DEBUG", "task = " + task.toString());
 
         if (courseId >= 0) {
             ContentValues values = new ContentValues();
-            values.put(TASK_COLUMNS[1], courseId);
-            values.put(TASK_COLUMNS[2], task.getName());
-            values.put(TASK_COLUMNS[3], task.getDate());
-            values.put(TASK_COLUMNS[4], task.getTime());
-            values.put(TASK_COLUMNS[5], task.getWeight());
+            values.put(TASK_COLUMNS[1], userId);
+            values.put(TASK_COLUMNS[2], courseId);
+            values.put(TASK_COLUMNS[3], task.getName());
+            values.put(TASK_COLUMNS[4], task.getDate());
+            values.put(TASK_COLUMNS[5], task.getTime());
+            values.put(TASK_COLUMNS[6], task.getWeight());
 
             success = db.insert(TABLE_TASKS, null, values);
             db.close();
@@ -391,20 +423,23 @@ public class SQLDatabase  extends SQLiteOpenHelper {
     public ArrayList<Task> getTasks() {
         ArrayList<Task> list = new ArrayList<Task>();
 
-        String query = "SELECT * FROM " + TABLE_TASKS + " WHERE " + TASK_COLUMNS[1] + "=?";
+        String query = "SELECT * FROM " + TABLE_TASKS + " WHERE " + TASK_COLUMNS[1] + "=?" + " AND " + TASK_COLUMNS[2]+ "=?";
         Log.d("DEBUG", "Task query = " + query);
-        Log.d("DEBUG", "Task parameter = " + CurrentCourse.getID());
+//        Log.d("DEBUG", "Task parameter = " + CurrentCourse.getID());
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, new String[] {"" + CurrentCourse.getID()});
+
+        int cid = getCourseID();
+        int uid = getUserID();
+        Cursor cursor = db.rawQuery(query, new String[] {"" + uid, "" + cid});
 
         if (cursor.moveToFirst()) {
             do {
                 String id = cursor.getString(0);
-                // exclude foreign courseID
-                String name = cursor.getString(2);
-                String date = cursor.getString(3);
-                String time = cursor.getString(4);
-                String weight = cursor.getString(5);
+                // exclude foreign userID, courseID
+                String name = cursor.getString(3);
+                String date = cursor.getString(4);
+                String time = cursor.getString(5);
+                String weight = cursor.getString(6);
                 double w = 0.0;
 
                 if (weight != null) {
@@ -413,7 +448,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 Task task = new Task(name, date, time, w);
                 task.setID(Integer.parseInt(id));
 
-                String score = cursor.getString(6);
+                String score = cursor.getString(7);
                 double s = 0;
                 if (score != null) {
                     s = Double.parseDouble(score);
@@ -440,10 +475,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             do {
                 String id = cursor.getString(0);
                 // exclude foreign courseID
-                String name = cursor.getString(2);
-                String date = cursor.getString(3);
-                String time = cursor.getString(4);
-                String weight = cursor.getString(5);
+                String name = cursor.getString(3);
+                String date = cursor.getString(4);
+                String time = cursor.getString(5);
+                String weight = cursor.getString(6);
                 double w = 0.0;
 
                 if (weight != null) {
@@ -452,7 +487,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 Task task = new Task(name, date, time, w);
                 task.setID(Integer.parseInt(id));
 
-                String score = cursor.getString(6);
+                String score = cursor.getString(7);
                 double s = 0;
                 if (score != null) {
                     s = Double.parseDouble(score);
@@ -478,15 +513,15 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             //"ID", "CourseID", "TaskName", "TaskDate", "TaskTime", "TaskWeight", "TaskScore", "TaskActualScore"
             String iD = cursor.getString(0);
             // exclude foreign courseID
-            String name = cursor.getString(2);
-            String date = cursor.getString(3);
-            String time = cursor.getString(4);
-            String weight = cursor.getString(5);
+            String name = cursor.getString(3);
+            String date = cursor.getString(4);
+            String time = cursor.getString(5);
+            String weight = cursor.getString(6);
 
             t = new Task(name, date, time, Double.parseDouble(weight));
             t.setID(Integer.parseInt(iD));
 
-            String score = cursor.getString(6);
+            String score = cursor.getString(7);
             Log.d("DEBUG", "task = " + t.toString());
 
             if (score != null) {
@@ -503,12 +538,11 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put(TASK_COLUMNS[0], task.getID());
-        args.put(TASK_COLUMNS[2], task.getName());
-        args.put(TASK_COLUMNS[3], task.getDate());
-        args.put(TASK_COLUMNS[4], task.getTime());
-        args.put(TASK_COLUMNS[5], task.getWeight());
-        args.put(TASK_COLUMNS[6], task.getScore());
-        args.put(TASK_COLUMNS[7], task.getScore() * task.getWeight());
+        args.put(TASK_COLUMNS[3], task.getName());
+        args.put(TASK_COLUMNS[4], task.getDate());
+        args.put(TASK_COLUMNS[5], task.getTime());
+        args.put(TASK_COLUMNS[6], task.getWeight());
+        args.put(TASK_COLUMNS[7], task.getScore());
 
         return db.update(TABLE_TASKS, args, "ID = " + task.getID(), null) > 0;
     }
