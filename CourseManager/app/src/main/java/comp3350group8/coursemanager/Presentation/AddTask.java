@@ -2,7 +2,9 @@ package comp3350group8.coursemanager.Presentation;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -17,19 +19,19 @@ import comp3350group8.coursemanager.R;
 /**
  * Created by Anthony on 2016-03-08.
  */
-public class AddTask extends Activity {
-    private SQLDatabase db = staticDB.getDB();
+public class AddTask extends AppCompatActivity {
+    private SQLDatabase db;
     protected void onCreate(Bundle savedInstanceState) {
+        db = new SQLDatabase(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addtask);
-
-
+        setTitle("Add Task");
     }
 
     //Back Button
     public void button5OnClick(View v) {
-        startActivity(new Intent(AddTask.this, TaskList.class));
-
+        //startActivity(new Intent(AddTask.this, TaskList.class));
+        finish();
     }
 
     //Save Task Button
@@ -56,7 +58,6 @@ public class AddTask extends Activity {
             db.insertTask(newTask);
 
             startActivity(new Intent(AddTask.this, TaskList.class));
-
         }
     }
 }

@@ -9,31 +9,36 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Presentation.MainScreen">
+        <activity android:name=".Presentation.MainScreen" android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Presentation.AddCourse" />
+        <activity android:name=".Presentation.AddCourse"
+            android:noHistory="true"/>
         <activity android:name=".Presentation.ListOfCourses" />
-        <activity android:name=".Presentation.AddTask" />
+        <activity android:name=".Presentation.AddTask"
+            android:noHistory="true"/>
         <activity android:name=".Presentation.TaskList" />
         <activity
             android:name=".Presentation.LoginActivity"
+            android:noHistory="true"
             android:label="@string/title_activity_login" />
         <activity
             android:name=".Presentation.TaskDetail"
             android:label="@string/title_activity_task_detail"
             android:parentActivityName=".Presentation.TaskList"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="comp3350group8.coursemanager.Presentation.TaskList" />

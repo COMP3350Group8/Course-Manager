@@ -3,6 +3,7 @@ package comp3350group8.coursemanager.Presentation;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,12 +16,13 @@ import comp3350group8.coursemanager.Persistence.staticDB;
 /**
  * Created by David on 2016-02-17.
  */
-public class AddCourse extends Activity {
-    private SQLDatabase db = staticDB.getDB();
+public class AddCourse extends AppCompatActivity {
+    private SQLDatabase db = new SQLDatabase(this);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcourse);
+        setTitle("Add Course");
     }
     //final Intent newActivity = new Intent(AddCourse.this, ListOfCourses.class);
     public void buttonOnClick (View v)
@@ -46,6 +48,7 @@ public class AddCourse extends Activity {
             //data[0]= courseName.getText().toString();
             //data[1] = courseloc.getText().toString();
             //data[2] = coursedescr.getText().toString();
+
 
             startActivity(new Intent(AddCourse.this, ListOfCourses.class));
         }

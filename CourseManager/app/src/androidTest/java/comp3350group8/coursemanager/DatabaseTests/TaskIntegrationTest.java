@@ -25,6 +25,8 @@ public class TaskIntegrationTest extends AndroidTestCase {
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
         db = new SQLDatabase(context);
+        //db = new StudDatabase(context)
+
         db.insertUser(new User("Ian", "car", "1", "smithi35", "umanitoba"));
         CurrentUser.setUser("smithi35");
         db.insertCourse(new Course("COMP 1010", "Somewhere", "None"));
