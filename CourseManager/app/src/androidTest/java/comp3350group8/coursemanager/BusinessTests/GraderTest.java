@@ -16,6 +16,7 @@ public class GraderTest extends TestCase {
     public void testGrader() {
         ArrayList<Task> tasks = new ArrayList<Task>();
 
+        // should be able to handle task that is irrelevant
         Task first =new Task("Assign1", "", "", 0);
         first.setScore(1);
         Log.d("DEBUG", "first = " + first.getActualScore());

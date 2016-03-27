@@ -4,8 +4,11 @@ import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 import android.util.Log;
 
+import java.util.ArrayList;
+
 import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
 
 /**
  * Created by Ian Smith on 2016-03-25.
@@ -19,10 +22,11 @@ public class UserIntegrationTest extends AndroidTestCase {
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
         db = new SQLDatabase(context);
-        //db = new StudDatabase(context)
+//        db = new StubDatabase(context);
         
         testUserInsertion();
         testUserQuery();
+        printUsers();
     }
 
     public void testUserInsertion() {
@@ -35,6 +39,14 @@ public class UserIntegrationTest extends AndroidTestCase {
 
     public void testUserQuery() {
         Log.d("DEBUG", "Attempting user query: " + db.getUser("smithi35", "car"));
+    }
+
+    public void printUsers() {
+        ArrayList<User> users = db.getAllUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+            Log.d("DEBUG", "user " + i + ": " + users.get(i));
+        }
     }
 
     @Override

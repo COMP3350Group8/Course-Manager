@@ -10,6 +10,7 @@ import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
 
 /**
  * Created by Ian Smith on 2016-03-25.
@@ -24,7 +25,7 @@ public class CourseIntegrationTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting to create database");
 
         db = new SQLDatabase(context);
-        //db = new StudDatabase(context)
+//        db = new StubDatabase(context);
         db.insertUser(new User("Ian", "car", "1", "smithi35", "umanitoba"));
 
         // should fail but not crash
@@ -54,7 +55,9 @@ public class CourseIntegrationTest extends AndroidTestCase {
     }
 
     public void testCourseQuery() {
-        Log.d("DEBUG", "Attempting course query: " + db.getCourse(1));
+        for (int i = 1; i <= 6; i++) {
+            Log.d("DEBUG", "Attempting course query: " + db.getCourse(i));
+        }
     }
 
     public void testCourseRetrieval(){

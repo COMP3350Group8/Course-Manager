@@ -32,7 +32,7 @@ public class TaskDetail extends AppCompatActivity {
         EditText text = null;
 
         // get curr's information
-        String[] output = {curr.getTaskName(), curr.getDate(), curr.getTime(), "" + curr.getWeight(), "unknown"};
+        String[] output = {curr.getName(), curr.getDate(), curr.getTime(), "" + curr.getWeight(), "unknown"};
 
         if (curr.getScore() != 0) {
             output[4] = "" + curr.getScore();

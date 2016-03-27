@@ -12,6 +12,7 @@ import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
+import comp3350group8.coursemanager.Persistence.StubDatabase;
 
 /**
  * Created by Ian Smith on 2016-03-25.
@@ -24,8 +25,8 @@ public class TaskIntegrationTest extends AndroidTestCase {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
-        db = new SQLDatabase(context);
-        //db = new StudDatabase(context)
+//        db = new SQLDatabase(context);
+        db = new StubDatabase(context);
 
         db.insertUser(new User("Ian", "car", "1", "smithi35", "umanitoba"));
         CurrentUser.setUser("smithi35");
@@ -36,6 +37,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
 
         testTaskRetrieval();
         testTaskQuery();
+
         testTaskInsertion();
         testTaskRetrieval();
         testTaskQuery();
@@ -71,7 +73,6 @@ public class TaskIntegrationTest extends AndroidTestCase {
         Log.d("DEBUG", "Attempting task query: " + db.getTask(2));
     }
 
-    // TODO: Add scores for all the tasks in the database, print grade and remaining weight
     public void testTaskUpdate() {
         Task newTask = db.getTask(2);
         Log.d("DEBUG", "Attempting task query: " + db.getTask(2));

@@ -17,12 +17,16 @@ public class TaskTest extends TestCase {
         assertTrue(tasks[2].equals(tasks[2]));
         assertFalse(tasks[2].equals(new Course("Name", "Location", "Description")));
         assertNotNull(tasks[1].getDate());
-        assertNotNull(tasks[0].getTaskName());
+        assertNotNull(tasks[0].getName());
         assertNotNull(tasks[0].getTime());
+        assertTrue(tasks[0].getWeight() <= 1);
+        assertFalse(tasks[1].getWeight() > 1);
+
 
         tasks[0].setScore(0.5); // 50%
         tasks[1].setScore(1.0);
         tasks[2].setScore(0.85);
+        assertEquals(tasks[1].getScore(), 1.0);
 
         Log.d("DEBUG", "" + tasks[0].getActualScore());
         assertEquals(0.05, tasks[0].getActualScore());

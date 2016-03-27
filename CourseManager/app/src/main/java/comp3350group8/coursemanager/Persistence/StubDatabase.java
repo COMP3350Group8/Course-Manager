@@ -1,5 +1,3 @@
-//TODO: update to match SQLDatabase methods
-
 package comp3350group8.coursemanager.Persistence;
 
 import android.content.Context;
@@ -103,7 +101,7 @@ public class StubDatabase extends SQLDatabase {
         return success;
     }
 
-    public User getUser() {
+    public User getUser(String email, String password) {
         return new User("John Smith", "cat", "000", "jsmith1", "umanitoba");
     }
 

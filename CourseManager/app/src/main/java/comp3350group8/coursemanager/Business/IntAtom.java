@@ -34,6 +34,7 @@ public class IntAtom extends ListItem {
     public String toString() {
         return "" + item;
     }
+    public String getName() {return toString();}
 
     private static final String[] INTS_COLUMNS = {"ID", "Value"};
     private static final String Table_SQL = "CREATE TABLE ints ( " +

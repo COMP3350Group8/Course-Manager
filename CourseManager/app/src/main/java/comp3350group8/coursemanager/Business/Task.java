@@ -42,7 +42,7 @@ public class Task extends ListItem {
         return equal;
     }
 
-    public String getTaskName() {return name;}
+    public String getName() {return name;}
     public String getDate() {return dueDate;}
     public String getTime() {return dueTime;}
     public double getWeight() {return weight;}

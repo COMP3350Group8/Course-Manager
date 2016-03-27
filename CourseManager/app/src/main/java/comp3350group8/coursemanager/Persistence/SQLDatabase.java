@@ -148,10 +148,10 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         Log.d("DEBUG", USER_COLUMNS[1]);
 
         ContentValues values = new ContentValues();
-        values.put(USER_COLUMNS[2], user.getPassWord());
-        values.put(USER_COLUMNS[4], user.getEmail());
-        values.put(USER_COLUMNS[3], user.getStudentNum());
         values.put(USER_COLUMNS[1], user.getName());
+        values.put(USER_COLUMNS[2], user.getPassWord());
+        values.put(USER_COLUMNS[3], user.getStudentNum());
+        values.put(USER_COLUMNS[4], user.getEmail());
         values.put(USER_COLUMNS[5], user.getSchool());
         Log.d("DEBUG", values.toString());
 
@@ -266,7 +266,6 @@ public class SQLDatabase  extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                //TODO: this is weird, fix it.
                 String password = cursor.getString(0);
                 String email = cursor.getString(1);
                 String number = cursor.getString(2);
@@ -377,7 +376,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         if (courseId >= 0) {
             ContentValues values = new ContentValues();
             values.put(TASK_COLUMNS[1], courseId);
-            values.put(TASK_COLUMNS[2], task.getTaskName());
+            values.put(TASK_COLUMNS[2], task.getName());
             values.put(TASK_COLUMNS[3], task.getDate());
             values.put(TASK_COLUMNS[4], task.getTime());
             values.put(TASK_COLUMNS[5], task.getWeight());
@@ -504,7 +503,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues args = new ContentValues();
         args.put(TASK_COLUMNS[0], task.getID());
-        args.put(TASK_COLUMNS[2], task.getTaskName());
+        args.put(TASK_COLUMNS[2], task.getName());
         args.put(TASK_COLUMNS[3], task.getDate());
         args.put(TASK_COLUMNS[4], task.getTime());
         args.put(TASK_COLUMNS[5], task.getWeight());

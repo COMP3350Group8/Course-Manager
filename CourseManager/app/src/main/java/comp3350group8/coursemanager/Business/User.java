@@ -34,18 +34,18 @@ public class User extends ListItem {
         return school;
     }
 
-    public String toString() {
-        return "Name: " + name
-                + "\nEmail Address/Username: " + email
-                + "\nSchool: " + school
-                + "\nStudent Number:" + studentNum;
-    }
-
     public boolean equals(ListItem otherItem) {
         if (otherItem instanceof User) {
             User other = (User)otherItem;
             return other.name.equals(name) && other.studentNum .equals (studentNum) && other.email.equals(email);
         }
         return false;
+    }
+
+    public String toString() {
+        return "Name: " + name
+                + "\nEmail Address/Username: " + email
+                + "\nSchool: " + school
+                + "\nStudent Number:" + studentNum;
     }
 }

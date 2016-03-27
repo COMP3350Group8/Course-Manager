@@ -91,12 +91,11 @@ public class TaskList extends Activity {
     }
 
     //TODO: move out of controller
-
     public String[] getTasks(ArrayList<Task> tasks) {
         String[] list = new String[tasks.size()];
 
         for (int i = 0; i< tasks.size(); i++) {
-            list[i] = tasks.get(i).getTaskName();
+            list[i] = tasks.get(i).getName();
         }
 
         return list;

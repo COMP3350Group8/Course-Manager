@@ -6,9 +6,9 @@ package comp3350group8.coursemanager.Business;
 public abstract class ListItem {
     private int _ID;
 
+    public abstract String getName();
+    public  void setID(int id) {_ID = id;}
     public abstract boolean equals(ListItem otherItem);
     public abstract String toString();
-
-    public  void setID(int id) {_ID = id;}
     public  int getID() {return _ID;}
 }
