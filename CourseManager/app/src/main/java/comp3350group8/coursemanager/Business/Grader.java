@@ -1,5 +1,7 @@
 package comp3350group8.coursemanager.Business;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -38,8 +40,14 @@ public class Grader {
             totalWeight += curr.getWeight();
         }
 
-        double remains = 1 - totalWeight;
+        double remains = 1.0 - totalWeight;
+        Log.d("DEBUG", "remains = " + remains);
 
-        return remains + " remaining";
+        double round = remains * 1000;
+        round = Math.round(round);
+        round = round / 1000;
+        Log.d("DEBUG", "round = " + round);
+
+        return round + " remaining";
     }
 }
