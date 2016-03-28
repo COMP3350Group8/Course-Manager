@@ -156,4 +156,11 @@ March 25, 2016
 March 26, 2016
 - Added a Grader class to return Strings containing the grade for each course and the remaining weight, so that the user doesn't exceed 1 (Ian)
 - Modified the Task table to include a foreign UserID for each task (Ian)
+
+March 28, 2016
+- Created the ArrayConverter class to handle converting ArrayLists of ListItems to arrays of strings to be displayed in an Activity (Ian)
+	- Strategy Pattern
+- Noticed that the Add New Task button is not visible on the TaskList page and hopefully fixed the problem (Ian)
+- Added additional scaffolding so Candidate Keys in the Database are never left empty (Ian)
+- 
 - 

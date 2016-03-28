@@ -11,6 +11,7 @@ import android.widget.ListAdapter;
 import java.sql.SQLData;
 import java.util.ArrayList;
 
+import comp3350group8.coursemanager.Business.ArrayConverter;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
@@ -53,7 +54,8 @@ public class ListOfCourses extends Activity {
         // retrieve contents of "Courses" if any
         courses = db.getCourses();
         Log.d("DEBUG", "size = " + courses.size());
-        String[] course = getCourses(courses);
+        String[] course = ArrayConverter.convertCourses(courses);
+
         if (course.length > 0) {
             Log.d("DEBUGG", course[0]);
         }
@@ -91,17 +93,6 @@ public class ListOfCourses extends Activity {
     protected void onResume() {
         super.onResume();
         CurrentCourse.reset();
-    }
-
-    //TODO: do this somewhere else
-    public String[] getCourses(ArrayList<Course> list) {
-        String[] out = new String[list.size()];
-
-        for (int i = 0; i < list.size(); i++) {
-            out[i] = list.get(i).getName();
-        }
-
-        return out;
     }
 
     public void AddNewCourse (View v) {

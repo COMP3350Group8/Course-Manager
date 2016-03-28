@@ -1,5 +1,6 @@
 package comp3350group8.coursemanager.Presentation;
 
+import comp3350group8.coursemanager.Business.ArrayConverter;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentTask;
@@ -59,7 +60,8 @@ public class TaskList extends Activity {
         Log.d("DEBUG", "Found " + tasks.size() + " tasks.");
         /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter); */
-        String[] out = getTasks(tasks);
+
+        String[] out = ArrayConverter.convertTasks(tasks);
         Log.d("DEBUG", "" + out.length);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, out);
         lv.setAdapter(adapter);
@@ -89,17 +91,6 @@ public class TaskList extends Activity {
                 // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
             }
         });
-    }
-
-    //TODO: move out of controller
-    public String[] getTasks(ArrayList<Task> tasks) {
-        String[] list = new String[tasks.size()];
-
-        for (int i = 0; i< tasks.size(); i++) {
-            list[i] = tasks.get(i).getName();
-        }
-
-        return list;
     }
 
     // Add Task Button
