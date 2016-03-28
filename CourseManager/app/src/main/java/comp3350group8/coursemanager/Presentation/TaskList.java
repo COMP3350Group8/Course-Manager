@@ -46,6 +46,7 @@ public class TaskList extends Activity {
         lv = (ListView) findViewById(R.id.TaskList);
         //String[] task= {"Do COMP 1020 Assignment", "Study for Database Exam", "Hand in Honesty Declaration"};
 
+        Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
 
         // retrieve contents of "Tasks" if any
         //String[] task = staticDB.getTable("Tasks");

@@ -11,8 +11,8 @@ public class User extends ListItem {
     {
         this.name= name;
         this.password= password;
-        this.studentNum = studentNum;
-        this.email= email;
+        this.studentNum = getString(studentNum);
+        this.email= getString(email);
         this.school = school;
     }
 

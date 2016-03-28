@@ -69,13 +69,14 @@ public class ListOfCourses extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("DEBUG", "Selected course with id: " + id);
                 if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
+                    //TODO: make sure this is getting the right course from the database, array index != ID
                     int index = (int)id;
                     Course curr = courses.get(index);
                     Log.d("DEBUG", "Current course = " + id+1);
                     CurrentCourse.setCourse(curr.getName());
-                    CurrentCourse.setID(id+1);
+                    CurrentCourse.setID(curr.getID());
 
-                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
+                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
                 }
                 Object o = lv.getItemAtPosition(position);
 

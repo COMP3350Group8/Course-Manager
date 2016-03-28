@@ -11,7 +11,7 @@ public class Course extends ListItem
 
     public Course(String course, String location, String description)
     {
-        this.course= course;
+        this.course= getString(course);
         this.location= location;
         this.description = description;
     }

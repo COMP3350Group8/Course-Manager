@@ -38,14 +38,21 @@ public class AddTask extends AppCompatActivity {
     public void button6OnClick(View v) {
         // retrieve the data supplied to the form
         EditText taskName = (EditText) findViewById(R.id.taskName);
-        if (taskName.getText().length() == 0) {
-            taskName.setError("Enter task");
+        EditText taskWeight = (EditText) findViewById(R.id.weight);
+
+        boolean hasWeight =  taskWeight.length() > 0;
+        boolean hasName = taskName.length() > 0;
+
+        if (!hasWeight || !hasName) {
+            if (hasWeight) {
+                taskName.setError("Enter task");
+            } else {
+                taskWeight.setError("Enter weight");
+            }
         } else {
             EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
 
             EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
-
-            EditText taskWeight = (EditText) findViewById(R.id.weight);
             String w = taskWeight.getText().toString();
             double weight = Double.parseDouble(w);
 

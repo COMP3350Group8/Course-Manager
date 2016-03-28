@@ -23,8 +23,7 @@ public class Task extends ListItem {
 
     public Task(String name, String dueDate, String dueTime, double weight){
         if (weight <= 1) {
-            this.name = name;
-            this.dueDate = dueDate;
+            this.name = getString(name);
             this.dueTime = dueTime;
             this.weight = weight;
             this.score = 0.0;

@@ -37,23 +37,33 @@ public class MainScreen extends AppCompatActivity {
         email = (EditText) findViewById(R.id.emailAddress);
         school = (EditText) findViewById(R.id.school);
 
-        //String name, String password, String studentNum, String email, String school
-        User newUser = new User(name.getText().toString(), password.getText().toString(), studentNum.getText().toString()
-                , email.getText().toString(), school.getText().toString());
-        CurrentUser.setUser(email.getText().toString());
-        Log.d("DEBUG", newUser.toString());
-        long success = db.insertUser(newUser);
+        boolean hasEmail = email.length() > 0;
+        boolean hasStudentNum = studentNum.length() > 0;
 
-        if (success > 0) {
-            startActivity(new Intent(MainScreen.this, ListOfCourses.class));
+        if (hasEmail && hasStudentNum) {
+            //String name, String password, String studentNum, String email, String school
+            User newUser = new User(name.getText().toString(), password.getText().toString(), studentNum.getText().toString()
+                    , email.getText().toString(), school.getText().toString());
+            CurrentUser.setUser(email.getText().toString());
+            Log.d("DEBUG", newUser.toString());
+            long success = db.insertUser(newUser);
+
+            if (success > 0) {
+                startActivity(new Intent(MainScreen.this, ListOfCourses.class));
+            } else {
+                startActivity(new Intent(MainScreen.this, MainScreen.class));
+            }
         } else {
-            startActivity(new Intent(MainScreen.this, MainScreen.class));
+            if (hasEmail) {
+                studentNum.setError("Enter Student Number");
+            } else {
+                email.setError("Enter Email Address");
+            }
         }
     }
 
     public void buttonOnClick2 (View v)//code when user decides to log in
     {
         startActivity(new Intent(MainScreen.this, LoginActivity.class));
-
     }
 }

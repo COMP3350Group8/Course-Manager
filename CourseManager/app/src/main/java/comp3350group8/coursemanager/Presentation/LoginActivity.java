@@ -3,6 +3,7 @@ package comp3350group8.coursemanager.Presentation;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,8 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         blogin =(Button) findViewById(R.id.bLogin);
 
         User user = db.getUser(email.getText().toString(), etPassword.getText().toString());
+        Log.d("DEBUG", "" + (user == null));
 
-        CurrentUser.setUser(email.getText().toString());
-        startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
+        if (user != null) {
+            CurrentUser.setUser(email.getText().toString());
+            startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
+        }
     }
 }

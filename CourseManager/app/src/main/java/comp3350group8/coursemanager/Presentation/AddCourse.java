@@ -17,7 +17,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class AddCourse extends AppCompatActivity {
-    private SQLDatabase db = new SQLDatabase(this);
+    private SQLDatabase db = staticDB.getDB();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +33,7 @@ public class AddCourse extends AppCompatActivity {
         EditText courseName = (EditText) findViewById(R.id.courseName);
         if(courseName.length() ==  0) {
             courseName.setError("Enter course");
-        }
-        else {
+        } else {
             EditText courseloc = (EditText) findViewById(R.id.location);
 
             EditText coursedescr = (EditText) findViewById(R.id.description);

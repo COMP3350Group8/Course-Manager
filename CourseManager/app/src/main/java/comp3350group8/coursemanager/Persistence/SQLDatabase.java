@@ -23,7 +23,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper {
-    private static int DATABASE_VERSION = 18;
+    private static int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -42,14 +42,14 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, "+
                 " UserName TEXT, " +
                 " UserPassword TEXT, " +
-                " UserNum TEXT UNIQUE, " +
-                " UserEmail TEXT UNIQUE, " +
+                " UserNum TEXT UNIQUE NOT NULL, " +
+                " UserEmail TEXT UNIQUE NOT NULL, " +
                 " UserSchool TEXT);";
 
         String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER," +
-                " CourseName TEXT, " +
+                " CourseName TEXT NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
                 " FOREIGN KEY(UserID) References Users(ID));";
@@ -58,7 +58,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER, " +
                 " CourseID INTEGER, " +
-                " TaskName TEXT, " +
+                " TaskName TEXT NOT NULL, " +
                 " TaskDate TEXT, " +
                 " TaskTime TEXT," +
                 " TaskWeight FLOAT, " +
