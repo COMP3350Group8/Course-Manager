@@ -30,7 +30,7 @@ public class UserIntegrationTest extends AndroidTestCase {
     }
 
     public void testUserInsertion() {
-        User[] users = {new User("Ian", "car", "1", "smithi35", "umanitoba"), new User("David", "password", "2", "dowasi", "umanitoba"), new User("Graham", " ", "3", "gsilver", "umanitoba")};
+        User[] users = {new User("Ian", "car", "1", "smithi35", "umanitoba"), new User("David", "password", "2", "dowasi", "umanitoba"), new User("Graham", " ", "3", "gsilver", "umanitoba"), new User("", "", "", "", "")};
 
         for (int i = 0; i < users.length; i++) {
             Log.d("DEBUG", "" + db.insertUser(users[i]));

@@ -4,18 +4,26 @@
     android:layout_height="match_parent"
     android:weightSum="1">
 
-    <TextView
-        android:layout_width="match_parent"
+    <Button
+        android:layout_width="197dp"
         android:layout_height="wrap_content"
+        android:text="Course List"
+        android:id="@+id/CourseList"
+        android:layout_gravity="right"
+        android:onClick="CourseList"/>
+
+    <TextView
+        android:layout_width="302dp"
+        android:layout_height="70dp"
         android:text=""
         android:id="@+id/CourseDescription"
-        android:layout_weight="0.28" />
+        android:layout_weight="0.08" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:id="@+id/TaskList"
-        android:layout_weight="0.65" />
+        android:layout_weight="0.8" />
 
     <TextView
         android:layout_width="match_parent"

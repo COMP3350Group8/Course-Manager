@@ -26,7 +26,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class ListOfCourses extends Activity {
-    private SQLDatabase db = staticDB.getDB();
+    private SQLDatabase db;
     private ArrayList<Course> courses;
     private ListView lv;
 
@@ -35,6 +35,7 @@ public class ListOfCourses extends Activity {
         super.onCreate(savedInstanceState);
         CurrentCourse.reset();
         setContentView(R.layout.listofcourses);
+        db = staticDB.getDB();
 
         //Bundle info = getIntent().getExtras();
 
@@ -45,10 +46,10 @@ public class ListOfCourses extends Activity {
         User curr = db.getUser(user);
         Log.d("DEBUG", "Current user = " + curr.toString());
         user = curr.toString();
+
         TextView u = (TextView) findViewById(R.id.UserDescription);
         u.setText(user, TextView.BufferType.NORMAL);
 
-        //TODO: make sure this is getting the information for the right user
         // retrieve contents of "Courses" if any
         courses = db.getCourses();
         Log.d("DEBUG", "size = " + courses.size());

@@ -12,11 +12,14 @@ import comp3350group8.coursemanager.Business.SubTable;
  */
 public class staticDB {
     private static SQLDatabase db;
+
     public static void init(Context c) {
         db = new SQLDatabase(c);
 //        db = new StubDatabase(c);
     }
 
-    public static SQLDatabase getDB() {return db;}
+    public static SQLDatabase getDB() {
+        return db;
+    }
 
 }

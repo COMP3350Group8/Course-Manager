@@ -26,7 +26,9 @@ public class CourseIntegrationTest extends AndroidTestCase {
 
         db = new SQLDatabase(context);
 //        db = new StubDatabase(context);
+
         db.insertUser(new User("Ian", "car", "1", "smithi35", "umanitoba"));
+        CurrentUser.setUser("smithi35");
 
         // should fail but not crash
         testCourseRetrieval();
@@ -36,6 +38,9 @@ public class CourseIntegrationTest extends AndroidTestCase {
         testCourseInsertion();
         testCourseRetrieval();
         testCourseQuery();
+
+        testGarbageInsertions();
+        testUserCourses();
     }
 
     public void testCourseInsertion() {
@@ -54,15 +59,29 @@ public class CourseIntegrationTest extends AndroidTestCase {
         Log.d("DEBUG", "fifth insertion" + db.insertCourse(fifth));
     }
 
+    public void testGarbageInsertions() {
+        Course badCourse = new Course("", "", "");
+        Log.d("DEBUG", "garbage insertion: " + db.insertCourse(badCourse));
+    }
+
     public void testCourseQuery() {
         for (int i = 1; i <= 6; i++) {
             Log.d("DEBUG", "Attempting course query: " + db.getCourse(i));
         }
     }
 
+    public void testUserCourses() {
+        ArrayList<Course> courses;
+        courses = db.getCourses();
+
+        for (int i = 0; i < courses.size(); i++) {
+            Log.d("DEBUG", "course" + i + ": " + courses.get(i));
+        }
+    }
+
     public void testCourseRetrieval(){
         Log.d("DEBUG", "Attempting total recall of courses");
-        ArrayList<Course> list = db.getCourses();
+        ArrayList<Course> list = db.getAllCourses();
 
         if (list.size() > 0) {
             for (int i = 0; i < list.size(); i++) {

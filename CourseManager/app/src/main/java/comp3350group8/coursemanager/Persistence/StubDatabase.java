@@ -105,6 +105,10 @@ public class StubDatabase extends SQLDatabase {
         return new User("John Smith", "cat", "000", "jsmith1", "umanitoba");
     }
 
+    public User getUser(String email) {
+        return getUser(null, null);
+    }
+
     public ArrayList<User> getAllUsers() {
         ArrayList<ListItem> list = retrieveTable("Users").getAll();
         ArrayList<User> out = new ArrayList<User>();
@@ -147,7 +151,15 @@ public class StubDatabase extends SQLDatabase {
             }
         }
 
+        if (course == null) {
+            course = new Course("COMP 1010", "", "");
+        }
+
         return course;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return getAllCourses();
     }
 
     // returns an arraylist of all the courses in the SubTable

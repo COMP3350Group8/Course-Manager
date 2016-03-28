@@ -25,15 +25,18 @@ public class TaskIntegrationTest extends AndroidTestCase {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
-//        db = new SQLDatabase(context);
-        db = new StubDatabase(context);
+        db = new SQLDatabase(context);
+//        db = new StubDatabase(context);
 
-        db.insertUser(new User("Ian", "car", "1", "smithi35", "umanitoba"));
-        CurrentUser.setUser("smithi35");
-        db.insertCourse(new Course("COMP 1010", "Somewhere", "None"));
+        User first = new User("Ian", "car", "1", "smithi35", "umanitoba");
+        db.insertUser(first);
+        CurrentUser.setUser(first.getEmail());
 
-        CurrentCourse.setCourse("COMP 1010");
-        CurrentCourse.setID(1);
+        Course c = new Course("COMP 1010", "Somewhere", "None");
+        db.insertCourse(c);
+        ArrayList<Course> courses = db.getCourses();
+        CurrentCourse.setCourse(courses.get(0).getName());
+        CurrentCourse.setID(courses.get(0).getID());
 
         testTaskRetrieval();
         testTaskQuery();
@@ -46,13 +49,14 @@ public class TaskIntegrationTest extends AndroidTestCase {
     }
 
     public void testTaskInsertion() {
-        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5)};
+        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5), new Task("", "", "", 0)};
         /*Course c = db.getCourse(1);
         CurrentCourse.setCourse(c.getName());
         CurrentCourse.setID((long)c.getID());*/
 
         for (int i = 0; i < tasks.length; i++) {
-            Log.d("DEBUG", "task insertion = " + db.insertTask(tasks[i]));
+            long insertion = db.insertTask(tasks[i]);
+            Log.d("DEBUG", "task insertion = " + insertion);
         }
     }
 

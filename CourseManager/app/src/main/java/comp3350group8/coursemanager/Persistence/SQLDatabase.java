@@ -199,7 +199,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
     public User getUser(String email) {
         User user = null;
 
-        if(email!=null)
+        if(email != null)
         {
             SQLiteDatabase db = this.getReadableDatabase();
             boolean success = false;
@@ -210,6 +210,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
             String[] args = new String[] {email};
 
             Cursor cursor = db.rawQuery(query, args);
+
             if(cursor!=null) {
                 cursor.moveToFirst();
 
@@ -220,6 +221,8 @@ public class SQLDatabase  extends SQLiteOpenHelper {
                     String school = cursor.getString(4);
                     String emailAdd = cursor.getString(5);
                     user = new User(name, pasword, studentNum, school, emailAdd);
+
+                    Log.d("getUser", "user = " + user.toString());
                     user.setID(Integer.parseInt(cursor.getString(0)));
                 }
 
@@ -341,6 +344,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         ArrayList<Course> list = new ArrayList<Course>();
         String user = CurrentUser.getUser();
         User u = getUser(user);
+        Log.d("DEBUG", "Current user = " + u.toString());
 
         String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[1] + "=?";
 
