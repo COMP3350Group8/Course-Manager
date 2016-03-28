@@ -25,6 +25,7 @@ public class Task extends ListItem {
         if (weight <= 1) {
             this.name = getString(name);
             this.dueTime = dueTime;
+            this.dueDate = dueDate;
             this.weight = weight;
             this.score = 0.0;
         }

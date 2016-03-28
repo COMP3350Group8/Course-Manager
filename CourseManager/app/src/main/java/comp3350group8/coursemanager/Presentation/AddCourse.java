@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350group8.coursemanager.Business.Course;
+import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.R;
@@ -17,7 +18,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class AddCourse extends AppCompatActivity {
-    private SQLDatabase db = staticDB.getDB();
+    private Database db = staticDB.getDB();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

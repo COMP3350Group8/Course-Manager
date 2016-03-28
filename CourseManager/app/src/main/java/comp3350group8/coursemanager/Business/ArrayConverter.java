@@ -28,7 +28,7 @@ public class ArrayConverter {
         return convertListItems(list);
     }
 
-    public static String[] convertListItems(ArrayList<ListItem> list) {
+    private static String[] convertListItems(ArrayList<ListItem> list) {
         String[] output = new String[list.size()];
 
         for (int i = 0; i < list.size(); i++) {

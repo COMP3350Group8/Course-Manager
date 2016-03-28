@@ -11,6 +11,7 @@ import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
 
@@ -18,15 +19,15 @@ import comp3350group8.coursemanager.Persistence.StubDatabase;
  * Created by Ian Smith on 2016-03-25.
  */
 public class TaskIntegrationTest extends AndroidTestCase {
-    private SQLDatabase db;
+    private Database db;
 
     @Override
     public void setUp() throws Exception {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
         Log.d("DEBUG", "Attempting to create database");
-        db = new SQLDatabase(context);
-//        db = new StubDatabase(context);
+//        db = new SQLDatabase(context);
+        db = new StubDatabase(context);
 
         User first = new User("Ian", "car", "1", "smithi35", "umanitoba");
         db.insertUser(first);

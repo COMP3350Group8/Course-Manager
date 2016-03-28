@@ -15,7 +15,7 @@ import comp3350group8.coursemanager.Business.User;
 /**
  * Created by Ian Smith on 2016-02-12.
  */
-public class StubDatabase extends SQLDatabase {
+public class StubDatabase extends SQLDatabase implements Database {
     private static ArrayList<SubTable> db;
 
     public StubDatabase(Context context) {
@@ -62,11 +62,11 @@ public class StubDatabase extends SQLDatabase {
     }
 
     public IntAtom getInt(int id, IntAtom atom) {
-        if (id > 0) {
+        if (id >= 0) {
             SubTable table = retrieveTable(IntAtom.getTableName());
 
             if (id < table.size()) {
-                atom = (IntAtom) table.get(id - 1);
+                atom = (IntAtom) table.get(id);
             }
         }
 
@@ -193,17 +193,6 @@ public class StubDatabase extends SQLDatabase {
         return success;
     }
 
-    public Task getTask(int id) {
-        SubTable table = retrieveTable("Tasks");
-        Task output  = null;
-
-        if (id < table.size()) {
-            output =(Task)table.get(id-1);
-        }
-
-        return output;
-    }
-
     public ArrayList<Task> getTasks() {
         ArrayList<ListItem> tasks = new ArrayList<ListItem>();
         SubTable table = retrieveTable("Tasks");
@@ -220,4 +209,25 @@ public class StubDatabase extends SQLDatabase {
     public ArrayList<Task> getAllTasks() {
         return getTasks();
     }
+
+    public Task getTask(int id) {
+        SubTable table = retrieveTable("Tasks");
+        Task output  = null;
+
+        if (id < table.size()) {
+            output =(Task)table.get(id);
+        }
+
+        return output;
+    }
+
+    public boolean updateTask(Task task) {
+        SubTable table = retrieveTable("Tasks");
+        Task item = (Task) table.getItem(task);
+        table.replace(item, item.getID());
+
+        return true;
+    }
+
+    public void close() {}
 }

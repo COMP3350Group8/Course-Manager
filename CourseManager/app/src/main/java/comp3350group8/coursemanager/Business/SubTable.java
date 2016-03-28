@@ -33,6 +33,7 @@ public class SubTable {
     public ListItem getItem(ListItem item) {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals(item))
+                item.setID(i+1);
                 return item;
         }
 
@@ -52,6 +53,7 @@ public class SubTable {
 
     // places item in at list[id]
     public void replace(ListItem item, int id) {
+        id = id-1;
         for (int i = 0; i < list.size(); i++) {
             if (i == id) {
                 list.add(id, item);

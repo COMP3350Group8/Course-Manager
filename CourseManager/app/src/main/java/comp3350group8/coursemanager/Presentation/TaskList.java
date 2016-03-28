@@ -6,6 +6,7 @@ import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentTask;
 import comp3350group8.coursemanager.Business.Grader;
 import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.Persistence.staticDB;
@@ -33,7 +34,7 @@ import comp3350group8.coursemanager.R;
  * Created by Anthony on 2016-03-08.
  */
 public class TaskList extends Activity {
-    private SQLDatabase db = staticDB.getDB();
+    private Database db = staticDB.getDB();
     private ArrayList<Task> tasks;
     private ListView lv;
 

@@ -17,6 +17,7 @@ import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.AppDatabase;
+import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.R;
@@ -27,7 +28,7 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  * Created by David on 2016-02-17.
  */
 public class ListOfCourses extends Activity {
-    private SQLDatabase db;
+    private Database db;
     private ArrayList<Course> courses;
     private ListView lv;
 

@@ -22,7 +22,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * Created by Ian Smith on 2016-02-17.
  * needs to implement a database
  */
-public class SQLDatabase  extends SQLiteOpenHelper {
+public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     private static int DATABASE_VERSION = 21;
     private static final String DATABASE_NAME = "Course Manager";
 
@@ -551,7 +551,7 @@ public class SQLDatabase  extends SQLiteOpenHelper {
         return db.update(TABLE_TASKS, args, "ID = " + task.getID(), null) > 0;
     }
 
-    public int getCourseID() {
+    private int getCourseID() {
         int course = -1;
         Log.d("DEBUG", "current course: " + CurrentCourse.getCourseName());
 

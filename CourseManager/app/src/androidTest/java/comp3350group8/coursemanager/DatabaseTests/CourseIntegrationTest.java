@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
 
@@ -16,7 +17,7 @@ import comp3350group8.coursemanager.Persistence.StubDatabase;
  * Created by Ian Smith on 2016-03-25.
  */
 public class CourseIntegrationTest extends AndroidTestCase {
-    private SQLDatabase db;
+    private Database db;
 
     @Override
     public void setUp() throws Exception {

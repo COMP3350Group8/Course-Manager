@@ -8,11 +8,9 @@ public class CurrentCourse {
     private static long id = -1;
 
     public static void setCourse(String course) { coursename = course; }
-
     public static String getCourseName() {return coursename;}
 
     public static void setID(long ID) {id = ID;}
-
     public static long getID() {return id;}
 
     public static void reset() {coursename = null; id=-1;}

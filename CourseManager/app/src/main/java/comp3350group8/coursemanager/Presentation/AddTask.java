@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import comp3350group8.coursemanager.Business.Task;
+import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
 import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.Persistence.staticDB;
@@ -20,7 +21,7 @@ import comp3350group8.coursemanager.R;
  * Created by Anthony on 2016-03-08.
  */
 public class AddTask extends AppCompatActivity {
-    private SQLDatabase db = staticDB.getDB();
+    private Database db = staticDB.getDB();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
