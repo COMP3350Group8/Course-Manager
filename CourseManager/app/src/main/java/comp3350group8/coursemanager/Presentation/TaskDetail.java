@@ -90,4 +90,9 @@ public class TaskDetail extends AppCompatActivity {
         startActivity(new Intent(TaskDetail.this, TaskList.class));
     }
 
+    public void buttonOnClick2 (View v)
+    {
+        startActivity(new Intent(TaskDetail.this, ListOfCourses.class));
+    }
+
 }

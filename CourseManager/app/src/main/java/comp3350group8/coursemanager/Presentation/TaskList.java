@@ -95,5 +95,9 @@ public class TaskList extends Activity {
         startActivity(new Intent(TaskList.this, AddTask.class));
     }
 
+    public void buttonOnClick2 (View v) //add grades
+    {
+        startActivity(new Intent(TaskList.this, MainScreen.class));
+    }
     public void CourseList (View v) {startActivity(new Intent(TaskList.this, ListOfCourses.class));}
 }
