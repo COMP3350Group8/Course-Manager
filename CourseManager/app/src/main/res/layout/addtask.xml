@@ -25,13 +25,43 @@
         android:id="@+id/taskDueTime"
         android:hint="Due Time" />
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/mark"
+            android:hint="Mark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="/"
+            android:id="@+id/textView2" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/total"
+            android:layout_weight="1"
+            android:text="100" />
+    </LinearLayout>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/weight"
-        android:hint="weight / 1" />
+        android:hint="weight %" />
 
     <Button
         android:layout_width="match_parent"
