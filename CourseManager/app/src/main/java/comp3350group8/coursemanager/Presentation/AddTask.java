@@ -54,8 +54,12 @@ public class AddTask extends AppCompatActivity {
             EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
 
             EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
-            String w = taskWeight.getText().toString();
-            double weight = Double.parseDouble(w);
+            EditText mark = (EditText) findViewById(R.id.mark);
+            EditText total = (EditText) findViewById(R.id.total);
+            int m = Integer.parseInt(mark.getText().toString());
+            int t = Integer.parseInt(total.getText().toString());
+            double w = Double.parseDouble(taskWeight.getText().toString());
+            double weight = (double)(m/t) * w ;
 
             // create instance of Task and send to the database
             Task newTask = new Task(taskName.getText().toString(),
