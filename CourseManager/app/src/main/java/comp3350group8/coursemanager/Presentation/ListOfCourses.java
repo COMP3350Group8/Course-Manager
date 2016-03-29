@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import android.widget.ListAdapter;
 
-import java.sql.SQLData;
 import java.util.ArrayList;
 
 import comp3350group8.coursemanager.Business.ArrayConverter;
@@ -16,10 +14,7 @@ import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.User;
-import comp3350group8.coursemanager.Persistence.AppDatabase;
 import comp3350group8.coursemanager.Persistence.Database;
-import comp3350group8.coursemanager.Persistence.SQLDatabase;
-import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.staticDB;
 
