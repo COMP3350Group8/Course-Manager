@@ -41,4 +41,9 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
         }
     }
+
+    public void buttonOnClick2 (View v)
+    {
+        startActivity(new Intent(LoginActivity.this, MainScreen.class));
+    }
 }
