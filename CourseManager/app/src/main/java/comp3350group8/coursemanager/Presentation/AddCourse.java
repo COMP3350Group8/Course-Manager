@@ -26,7 +26,7 @@ public class AddCourse extends AppCompatActivity {
         setTitle("Add Course");
     }
     //final Intent newActivity = new Intent(AddCourse.this, ListOfCourses.class);
-    public void buttonOnClick (View v)
+    public void AddCourse (View v)
     {
         // String []data = new String[3];
 

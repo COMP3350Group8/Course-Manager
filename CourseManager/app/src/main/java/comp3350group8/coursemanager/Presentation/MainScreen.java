@@ -22,13 +22,11 @@ public class MainScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         staticDB.init(this);
-
+        CurrentUser.reset();
         db = staticDB.getDB();
-
-//        db = new SQLDatabase(this);
     }
 
-    public void buttonOnClick (View v)//when a new account is created
+    public void createAccount(View v)//when a new account is created
     {
         //SQLDatabase db = new SQLDatabase(this);
         EditText name, password, studentNum, email, school;
@@ -63,8 +61,12 @@ public class MainScreen extends AppCompatActivity {
         }
     }
 
-    public void buttonOnClick2 (View v)//code when user decides to log in
-    {
+    public void login(View v) {
         startActivity(new Intent(MainScreen.this, LoginActivity.class));
+    }
+
+    protected void onResume() {
+        super.onResume();
+        CurrentUser.reset();
     }
 }

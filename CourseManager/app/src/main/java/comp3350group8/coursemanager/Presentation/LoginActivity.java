@@ -24,9 +24,10 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        CurrentUser.reset();
     }
 
-    public void buttonOnClick(View v)
+    public void login(View v)
     {
         EditText email, etPassword;
         email = (EditText) findViewById(R.id.etuserName);
@@ -42,7 +43,12 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    public void buttonOnClick2 (View v)
+    protected void onResume() {
+        super.onResume();
+        CurrentUser.reset();
+    }
+
+    public void home (View v)
     {
         startActivity(new Intent(LoginActivity.this, MainScreen.class));
     }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,49 +7,55 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:text=""
+        android:layout_height="wrap_content"
         android:id="@+id/CourseDescription"
-        android:layout_weight="0.08" />
-
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="480dp"
-        android:id="@+id/TaskList"
-        android:layout_weight="0.80" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/Remaining" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add new Task"
-        android:id="@+id/AddTask"
-        android:onClick="AddTask" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Grades"
-        android:id="@+id/button6"
-        android:onClick="buttonOnClick2" />
+        android:layout_alignParentTop="true" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Course List"
         android:id="@+id/CourseList"
-        android:onClick="CourseList" />
+        android:onClick="CourseList"
+        android:layout_alignParentBottom="true"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add new Task"
+        android:id="@+id/AddTask"
+        android:onClick="AddTask"
+        android:layout_above="@+id/CourseList"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Grades"
+        android:id="@+id/button6"
+        android:onClick="AddGrades"
+        android:layout_above="@+id/AddTask"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/CourseGrade" />
+        android:text=""
+        android:id="@+id/Remaining"
+        android:layout_above="@+id/button6"/>
 
-</LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text = ""
+        android:id="@+id/CourseGrade"
+        android:layout_above="@+id/Remaining"/>
+
+    <ListView
+        android:layout_height="wrap_content"
+        android:id="@+id/TaskList"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/CourseDescription"
+        android:layout_above="@+id/CourseGrade"/>
+
+</RelativeLayout>
