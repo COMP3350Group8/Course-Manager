@@ -50,7 +50,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
     }
 
     public void testTaskInsertion() {
-        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5), new Task("", "", "", 0)};
+        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5), new Task("", "", "", -1)};
         /*Course c = db.getCourse(1);
         CurrentCourse.setCourse(c.getName());
         CurrentCourse.setID((long)c.getID());*/

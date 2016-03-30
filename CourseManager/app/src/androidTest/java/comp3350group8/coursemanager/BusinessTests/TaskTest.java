@@ -12,8 +12,9 @@ import comp3350group8.coursemanager.Business.Task;
  */
 public class TaskTest extends TestCase {
     public void testTask() {
-        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 0.1), new Task("Assignment", "September 2, 2016", "12:00am", 0.2), new Task("It do", "", "", 0.3)};
+        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 0.1), new Task("Assignment", "September 2, 2016", "12:00am", 0.2), new Task("It do", "", "", 0.3), new Task("", "", "", -1)};
 
+        assertFalse(tasks[3].equals(tasks[2]));
         assertTrue(tasks[2].equals(tasks[2]));
         assertFalse(tasks[2].equals(new Course("Name", "Location", "Description")));
         assertNotNull(tasks[1].getDate());

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/taskName"
-        android:hint="Task Name" />
+        android:hint="Task Name"
+        android:layout_alignParentTop="true"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -15,7 +16,8 @@
         android:inputType="date"
         android:ems="10"
         android:id="@+id/taskDueDate"
-        android:hint="Due Date" />
+        android:hint="Due Date"
+        android:layout_below="@+id/taskName"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -23,37 +25,8 @@
         android:inputType="time"
         android:ems="10"
         android:id="@+id/taskDueTime"
-        android:hint="Due Time" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:layout_width="154dp"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/mark"
-            android:hint="Mark" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="/"
-            android:id="@+id/textView2" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/total"
-            android:layout_weight="1"
-            android:text="100" />
-    </LinearLayout>
+        android:hint="Due Time"
+        android:layout_below="@+id/taskDueDate"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -61,20 +34,23 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/weight"
-        android:hint="weight %" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Task"
-        android:id="@+id/saveTask"
-        android:onClick="button6OnClick" />
+        android:hint="weight"
+        android:layout_below="@+id/taskDueTime"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back"
         android:id="@+id/backButton"
-        android:onClick="button5OnClick" />
+        android:onClick="Back"
+        android:layout_alignParentBottom="true"/>
 
-</LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Save Task"
+        android:id="@+id/saveTask"
+        android:onClick="SaveTask"
+        android:layout_above="@+id/backButton"/>
+
+</RelativeLayout>

@@ -87,7 +87,7 @@
         android:layout_height="wrap_content"
         android:text="Save Task"
         android:id="@+id/SaveTaskDetail"
-        android:onClick="saveTaskOnClick"
+        android:onClick="saveTask"
         android:layout_above="@+id/button7"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -104,6 +104,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/SaveTaskDetail"
         android:layout_alignEnd="@+id/SaveTaskDetail"
-        android:onClick="buttonOnClick2" />
+        android:onClick="ReturnToCourseList" />
 
 </RelativeLayout>

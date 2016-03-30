@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import comp3350group8.coursemanager.Business.Grader;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.Persistence.SQLDatabase;
@@ -29,14 +30,13 @@ public class AddTask extends AppCompatActivity {
         setTitle("Add Task");
     }
 
-    //Back Button
-    public void button5OnClick(View v) {
+    public void Back(View v) {
         //startActivity(new Intent(AddTask.this, TaskList.class));
         finish();
     }
 
-    //Save Task Button
-    public void button6OnClick(View v) {
+    public void SaveTask(View v) {
+        double remainingWeight = Grader.getRemainingWeight();
         // retrieve the data supplied to the form
         EditText taskName = (EditText) findViewById(R.id.taskName);
         EditText taskWeight = (EditText) findViewById(R.id.weight);
@@ -51,25 +51,34 @@ public class AddTask extends AppCompatActivity {
                 taskWeight.setError("Enter weight");
             }
         } else {
-            EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
+            String w = taskWeight.getText().toString();
+            try {
+                double weight = Double.valueOf(w);
 
-            EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
-            EditText mark = (EditText) findViewById(R.id.mark);
-            EditText total = (EditText) findViewById(R.id.total);
-            int m = Integer.parseInt(mark.getText().toString());
-            int t = Integer.parseInt(total.getText().toString());
-            double w = Double.parseDouble(taskWeight.getText().toString());
-            double weight = (double)(m/t) * w ;
+                if (weight <= 1 && weight >= 0) {
+                    boolean exceedsRemainingWeight = remainingWeight - weight < 0;
 
-            // create instance of Task and send to the database
-            Task newTask = new Task(taskName.getText().toString(),
-                    taskduedate.getText().toString(),
-                    taskduetime.getText().toString(),
-                    weight);
-            Log.d("DEBUG", newTask.toString());
-            db.insertTask(newTask);
+                    if (!exceedsRemainingWeight) {
+                        EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
+                        EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
 
-            startActivity(new Intent(AddTask.this, TaskList.class));
+                        // create instance of Task and send to the database
+                        Task newTask = new Task(taskName.getText().toString(),
+                                taskduedate.getText().toString(),
+                                taskduetime.getText().toString(),
+                                weight);
+                        Log.d("DEBUG", newTask.toString());
+                        db.insertTask(newTask);
+                        startActivity(new Intent(AddTask.this, TaskList.class));
+                    } else {
+                        taskWeight.setError("The weight of this task cannot exceed " + remainingWeight);
+                    }
+                } else {
+                    taskWeight.setError("Enter a Task Weight between 0 and 1");
+                }
+            } catch (NumberFormatException e) {
+                taskWeight.setError("Must be valid decimal number");
+            }
         }
     }
 }

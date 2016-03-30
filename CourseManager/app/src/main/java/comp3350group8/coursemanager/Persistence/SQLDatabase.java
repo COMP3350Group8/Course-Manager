@@ -23,7 +23,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 21;
+    private static int DATABASE_VERSION = 22;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -346,7 +346,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
         User u = getUser(user);
         Log.d("DEBUG", "Current user = " + u.toString());
 
-        String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[1] + "=?";
+        String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[1] + "=? ORDER BY " + COURSE_COLUMNS[2] + " ASC";
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, new String[] {"" + u.getID()});
@@ -427,7 +427,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     public ArrayList<Task> getTasks() {
         ArrayList<Task> list = new ArrayList<Task>();
 
-        String query = "SELECT * FROM " + TABLE_TASKS + " WHERE " + TASK_COLUMNS[1] + "=?" + " AND " + TASK_COLUMNS[2]+ "=?";
+        String query = "SELECT * FROM " + TABLE_TASKS + " WHERE " + TASK_COLUMNS[1] + "=?" + " AND " + TASK_COLUMNS[2]+ "=? ORDER BY " + TASK_COLUMNS[3] + " ASC";
         Log.d("DEBUG", "Task query = " + query);
 //        Log.d("DEBUG", "Task parameter = " + CurrentCourse.getID());
         SQLiteDatabase db = this.getReadableDatabase();

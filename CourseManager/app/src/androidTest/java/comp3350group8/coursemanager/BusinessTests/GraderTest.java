@@ -24,8 +24,8 @@ public class GraderTest extends TestCase {
 
         String g = Grader.setGrade(tasks);
         assertNotNull(g);
-        String w = Grader.setRemainingWeight(tasks);
-        assertNotNull(w);
+        double w = Grader.setRemainingWeight(tasks);
+        assertTrue(w >= 0);
 
         Log.d("DEBUG", "score = " + g + "\nweight remaining = " + w);
 
@@ -34,7 +34,9 @@ public class GraderTest extends TestCase {
         tasks.add(second);
 
         g = Grader.setGrade(tasks);
+        assertNotNull(g);
         w = Grader.setRemainingWeight(tasks);
+        assertTrue(w >= 0);
 
         Log.d("DEBUG", "score = " + g + "\nweight remaining = " + w);
 
@@ -43,7 +45,9 @@ public class GraderTest extends TestCase {
         tasks.add(third);
 
         g = Grader.setGrade(tasks);
+        assertNotNull(g);
         w = Grader.setRemainingWeight(tasks);
+        assertTrue(w >= 0);
 
         Log.d("DEBUG", "score = " + g + "\nweight remaining = " + w);
     }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by Ian Smith on 2016-03-25.
  */
 public class Grader {
+    private static double remainingWeight = 1;
 
     public static String setGrade(ArrayList<Task> tasks) {
         // get total weights and total scores
@@ -32,7 +33,7 @@ public class Grader {
         return actual;
     }
 
-    public static String setRemainingWeight(ArrayList<Task> tasks) {
+    public static double setRemainingWeight(ArrayList<Task> tasks) {
         double totalWeight = 0;
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -48,6 +49,9 @@ public class Grader {
         round = round / 1000;
         Log.d("DEBUG", "round = " + round);
 
-        return round + " remaining";
+        remainingWeight = round;
+        return round;
     }
+
+    public static double getRemainingWeight() {return remainingWeight;}
 }

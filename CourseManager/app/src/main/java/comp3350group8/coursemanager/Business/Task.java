@@ -22,11 +22,17 @@ public class Task extends ListItem {
     }
 
     public Task(String name, String dueDate, String dueTime, double weight){
-        if (weight <= 1) {
+        if (weight <= 1 && weight >= 0 && name.length() > 0) {
             this.name = getString(name);
             this.dueTime = dueTime;
             this.dueDate = dueDate;
             this.weight = weight;
+            this.score = 0.0;
+        } else {
+            this.name = null;
+            this.dueDate = null;
+            this.dueTime = null;
+            this.weight = 0.0;
             this.score = 0.0;
         }
     }
@@ -47,10 +53,9 @@ public class Task extends ListItem {
     public String getTime() {return dueTime;}
     public double getWeight() {return weight;}
     public double getScore() {return score;}
-    public double getActualScore(){return score * weight;}
+    public double getActualScore() {return score * weight;}
 
     public void setScore(double score) {this.score = score;}
-   // public String getTaskCourse() {return name;}
 
     public String toString() {
         return "Task: " + name

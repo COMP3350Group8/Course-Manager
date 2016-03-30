@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,7 +37,6 @@ public class TaskList extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasklist);
-//        db = new SQLDatabase(this);
 
         //Bundle info = getIntent().getExtras();
 
@@ -45,8 +45,6 @@ public class TaskList extends Activity {
 
         Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
 
-        // retrieve contents of "Tasks" if any
-        //String[] task = staticDB.getTable("Tasks");
         Course curr = db.getCourse((int)CurrentCourse.getID());
         String description = curr.toString();
         TextView desc = (TextView)findViewById(R.id.CourseDescription);
@@ -54,8 +52,6 @@ public class TaskList extends Activity {
 
         tasks = db.getTasks();
         Log.d("DEBUG", "Found " + tasks.size() + " tasks.");
-        /* ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
-        lv.setAdapter(adapter); */
 
         String[] out = ArrayConverter.convertTasks(tasks);
         Log.d("DEBUG", "" + out.length);
@@ -66,9 +62,15 @@ public class TaskList extends Activity {
         TextView s = (TextView) findViewById(R.id.CourseGrade);
         s.setText(grade, TextView.BufferType.NORMAL);
 
-        String remaining = Grader.setRemainingWeight(tasks);
+        double remainingDouble = Grader.setRemainingWeight(tasks);
+        String remaining = "" + remainingDouble + " remaining";
         TextView r = (TextView) findViewById(R.id.Remaining);
         r.setText(remaining, TextView.BufferType.NORMAL);
+
+        if (remainingDouble <= 0) {
+            Button taskAdd = (Button)findViewById(R.id.AddTask);
+            taskAdd.setEnabled(false);
+        }
 
         //select a task
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -89,15 +91,16 @@ public class TaskList extends Activity {
         });
     }
 
-    // Add Task Button
-    public void AddTask (View v)
-    {
+    public void AddTask (View v) {
+
         startActivity(new Intent(TaskList.this, AddTask.class));
     }
 
-    public void buttonOnClick2 (View v) //add grades
-    {
+    public void AddGrades (View v) {
         startActivity(new Intent(TaskList.this, MainScreen.class));
     }
-    public void CourseList (View v) {startActivity(new Intent(TaskList.this, ListOfCourses.class));}
+
+    public void CourseList (View v) {
+        startActivity(new Intent(TaskList.this, ListOfCourses.class));
+    }
 }
