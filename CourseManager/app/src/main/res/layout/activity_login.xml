@@ -35,21 +35,20 @@
         android:layout_below="@+id/password" />
 
     <Button
-        android:id="@+id/bLogin"
-        android:text="Login"
-        android:layout_marginBottom="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:onClick="login" />
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Home"
         android:id="@+id/home"
         android:onClick="home"
-        android:layout_above="@+id/bLogin" />
+        android:layout_alignParentBottom="true" />
 
+    <Button
+        android:id="@+id/bLogin"
+        android:text="Login"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/home"
+        android:onClick="login" />
 
 </RelativeLayout>

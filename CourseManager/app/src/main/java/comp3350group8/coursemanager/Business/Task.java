@@ -56,7 +56,6 @@ public class Task extends ListItem {
     public double getActualScore() {return score * weight;}
 
     public void setScore(double score) {this.score = score;}
-   // public String getTaskCourse() {return name;}
 
     public String toString() {
         return "Task: " + name

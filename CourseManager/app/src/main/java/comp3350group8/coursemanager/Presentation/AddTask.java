@@ -52,28 +52,32 @@ public class AddTask extends AppCompatActivity {
             }
         } else {
             String w = taskWeight.getText().toString();
-            double weight = Double.parseDouble(w);
+            try {
+                double weight = Double.valueOf(w);
 
-            if (weight <= 1 && weight >= 0) {
-                boolean exceedsRemainingWeight = remainingWeight - weight < 0;
+                if (weight <= 1 && weight >= 0) {
+                    boolean exceedsRemainingWeight = remainingWeight - weight < 0;
 
-                if (!exceedsRemainingWeight) {
-                    EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
-                    EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
+                    if (!exceedsRemainingWeight) {
+                        EditText taskduedate = (EditText) findViewById(R.id.taskDueDate);
+                        EditText taskduetime = (EditText) findViewById(R.id.taskDueTime);
 
-                    // create instance of Task and send to the database
-                    Task newTask = new Task(taskName.getText().toString(),
-                            taskduedate.getText().toString(),
-                            taskduetime.getText().toString(),
-                            weight);
-                    Log.d("DEBUG", newTask.toString());
-                    db.insertTask(newTask);
-                    startActivity(new Intent(AddTask.this, TaskList.class));
+                        // create instance of Task and send to the database
+                        Task newTask = new Task(taskName.getText().toString(),
+                                taskduedate.getText().toString(),
+                                taskduetime.getText().toString(),
+                                weight);
+                        Log.d("DEBUG", newTask.toString());
+                        db.insertTask(newTask);
+                        startActivity(new Intent(AddTask.this, TaskList.class));
+                    } else {
+                        taskWeight.setError("The weight of this task cannot exceed " + remainingWeight);
+                    }
                 } else {
-                    taskWeight.setError("The weight of this task cannot exceed " + remainingWeight);
+                    taskWeight.setError("Enter a Task Weight between 0 and 1");
                 }
-            } else {
-                taskWeight.setError("Enter a Task Weight between 0 and 1");
+            } catch (NumberFormatException e) {
+                taskWeight.setError("Must be valid decimal number");
             }
         }
     }
