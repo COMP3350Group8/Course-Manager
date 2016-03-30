@@ -94,4 +94,8 @@ public class ListOfCourses extends Activity {
     public void AddNewCourse (View v) {
         startActivity(new Intent(ListOfCourses.this, AddCourse.class));
     }
+
+    public void logout(View v) {
+        startActivity(new Intent(ListOfCourses.this, LoginActivity.class));
+    }
 }
