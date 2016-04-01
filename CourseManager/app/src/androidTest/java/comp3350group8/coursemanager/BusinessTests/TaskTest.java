@@ -16,7 +16,7 @@ public class TaskTest extends TestCase {
 
         assertFalse(tasks[3].equals(tasks[2]));
         assertTrue(tasks[2].equals(tasks[2]));
-        assertFalse(tasks[2].equals(new Course("Name", "Location", "Description")));
+        assertFalse(tasks[2].equals(new Course("Name", "Location", "Description", 0)));
         assertNotNull(tasks[1].getDate());
         assertNotNull(tasks[0].getName());
         assertNotNull(tasks[0].getTime());

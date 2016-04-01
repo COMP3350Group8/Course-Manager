@@ -70,8 +70,11 @@ public class TaskList extends Activity {
         if (remainingDouble <= 0) {
             Button taskAdd = (Button)findViewById(R.id.AddTask);
             taskAdd.setEnabled(false);
+
+            //TODO: replace with add final grade button (could be different for different courses)
         }
 
+        //TODO: maybe use a function pointer for this?
         //select a task
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -92,7 +95,6 @@ public class TaskList extends Activity {
     }
 
     public void AddTask (View v) {
-
         startActivity(new Intent(TaskList.this, AddTask.class));
     }
 
