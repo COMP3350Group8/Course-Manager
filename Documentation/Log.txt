@@ -163,4 +163,9 @@ March 28, 2016
 - Noticed that the Add New Task button is not visible on the TaskList page and hopefully fixed the problem (Ian)
 - Added additional scaffolding so Candidate Keys in the Database are never left empty (Ian)
 - 
-- 
+
+March 29, 2016
+- Spent some time working on input sanitization, parsing Doubles is done inside a try-catch block and there is now a good deal of scaffoling surrounding the Task forms to ensure grades are handled properly (Ian)
+
+April 1, 2016
+- I'm going to start working on GPA Calculation, it'll involve adding a credit hours item to the Courses table, and the functionality to take that and the final grade in the course (when remaining weight = 0) and spit out a letter grade (Ian)
