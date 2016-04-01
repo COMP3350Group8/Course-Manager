@@ -38,6 +38,9 @@ public class TaskList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasklist);
 
+        Button addGrade = (Button) findViewById(R.id.AddGrade);
+        addGrade.setVisibility(View.INVISIBLE);
+
         //Bundle info = getIntent().getExtras();
 
         lv = (ListView) findViewById(R.id.TaskList);
@@ -69,9 +72,11 @@ public class TaskList extends Activity {
 
         if (remainingDouble <= 0) {
             Button taskAdd = (Button)findViewById(R.id.AddTask);
-            taskAdd.setEnabled(false);
+            //taskAdd.setEnabled(false);
+            taskAdd.setVisibility(View.INVISIBLE);
 
             //TODO: replace with add final grade button (could be different for different courses)
+            addGrade.setVisibility(View.VISIBLE);
         }
 
         //TODO: maybe use a function pointer for this?
@@ -104,5 +109,9 @@ public class TaskList extends Activity {
 
     public void CourseList (View v) {
         startActivity(new Intent(TaskList.this, ListOfCourses.class));
+    }
+
+    public void addGrade(View v) {
+        startActivity(new Intent(TaskList.this, AddGrade.class));
     }
 }

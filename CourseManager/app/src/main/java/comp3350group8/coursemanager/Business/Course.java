@@ -9,6 +9,7 @@ public class Course extends ListItem
     private String location;
     private String description;
     private int creditHours;
+    private LetterGrade grade;
 
     public Course(String course, String location, String description, int credits) {
         this.course= getString(course);
@@ -37,10 +38,19 @@ public class Course extends ListItem
     }
     public int getCreditHours() {return creditHours; }
 
+    public void setGrade(LetterGrade g) {grade = g;}
+    public LetterGrade getGrade() {return grade;}
+
     public String toString() {
-        return "Course Name: " + course
+        String output = "Course Name: " + course
                 + "\nLocation: " + location
                 + "\nDescription: " + description
                 + "\nCredit Hours: " + creditHours;
+
+        if (grade != null) {
+            output = output + "\n" + grade.toString();
+        }
+
+        return output;
     }
 }

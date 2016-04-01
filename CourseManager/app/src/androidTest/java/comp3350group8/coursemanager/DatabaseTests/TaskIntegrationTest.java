@@ -33,7 +33,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
         db.insertUser(first);
         CurrentUser.setUser(first.getEmail());
 
-        Course c = new Course("COMP 1010", "Somewhere", "None");
+        Course c = new Course("COMP 1010", "Somewhere", "None", 3);
         db.insertCourse(c);
         ArrayList<Course> courses = db.getCourses();
         CurrentCourse.setCourse(courses.get(0).getName());

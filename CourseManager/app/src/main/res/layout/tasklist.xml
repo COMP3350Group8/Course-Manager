@@ -27,6 +27,14 @@
         android:onClick="AddTask"
         android:layout_above="@+id/CourseList"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Grade"
+        android:id="@+id/AddGrade"
+        android:onClick="addGrade"
+        android:layout_above="@+id/CourseList"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
