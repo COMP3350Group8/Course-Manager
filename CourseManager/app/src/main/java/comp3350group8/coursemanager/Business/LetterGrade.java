@@ -39,6 +39,10 @@ public class LetterGrade {
         this.points = points;
     }
 
+    public LetterGrade() {
+        grade = "";
+    }
+
     public boolean equals(LetterGrade other) {
         boolean equals = false;
 
@@ -48,6 +52,9 @@ public class LetterGrade {
 
         return equals;
     }
+
+    public String getGrade() {return grade;}
+    public double getPoints() {return points;}
 
     public String toString() {
         return "Grade = " + grade

@@ -13,6 +13,7 @@ import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Business.LetterGrade;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
 
@@ -52,6 +53,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 " CourseName TEXT NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
+                " CourseGrade TEXT, " +
                 " CourseCreditHours INTEGER, " +
                 " FOREIGN KEY(UserID) References Users(ID));";
 
@@ -290,7 +292,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     }
 
     private static final String TABLE_COURSES = "Courses";
-    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseCreditHours"};
+    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseGrade", "CourseCreditHours"};
 
     public long insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -305,7 +307,8 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
             values.put(COURSE_COLUMNS[2], course.getName());
             values.put(COURSE_COLUMNS[3], course.getLocation());
             values.put(COURSE_COLUMNS[4], course.getDescription());
-            values.put(COURSE_COLUMNS[5], course.getCreditHours());
+            values.put(COURSE_COLUMNS[5], course.getGrade().getGrade());
+            values.put(COURSE_COLUMNS[6], course.getCreditHours());
 
             success = db.insert(TABLE_COURSES, null, values);
         }
@@ -332,8 +335,11 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                     String name = cursor.getString(2);
                     String location = cursor.getString(3);
                     String description = cursor.getString(4);
-                    int credit = Integer.parseInt(cursor.getString(5));
+                    int credit = Integer.parseInt(cursor.getString(6));
                     course = new Course(name, location, description, credit);
+
+                    LetterGrade g = new LetterGrade(cursor.getString(5));
+                    course.setGrade(g);
                     course.setID(Integer.parseInt(cursor.getString(0)));
                 }
             }
@@ -361,9 +367,11 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String name = cursor.getString(2);
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
-                int credit = Integer.parseInt(cursor.getString(5));
+                int credit = Integer.parseInt(cursor.getString(6));
                 course = new Course(name, location, description, credit);
-                Log.d("list", course.toString());
+
+                LetterGrade g = new LetterGrade(cursor.getString(5));
+                course.setGrade(g);
                 course.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(course);
             } while (cursor.moveToNext());
@@ -388,10 +396,12 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String name = cursor.getString(2);
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
-                int credit = Integer.parseInt(cursor.getString(5));
+                int credit = Integer.parseInt(cursor.getString(6));
                 course = new Course(name, location, description, credit);
+
+                LetterGrade g = new LetterGrade(cursor.getString(5));
+                course.setGrade(g);
                 course.setID(Integer.parseInt(cursor.getString(0)));
-                Log.d("list", course.toString());
 
                 list.add(course);
             } while (cursor.moveToNext());

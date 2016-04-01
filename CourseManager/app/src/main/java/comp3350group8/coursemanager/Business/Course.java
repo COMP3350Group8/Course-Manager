@@ -16,6 +16,7 @@ public class Course extends ListItem
         this.location= location;
         this.description = description;
         creditHours = credits;
+        grade = new LetterGrade();
     }
 
     public boolean equals(ListItem otherItem) {
@@ -30,12 +31,8 @@ public class Course extends ListItem
     }
 
     public String getName() {return course; }
-    public String getLocation() {
-        return location;
-    }
-    public String getDescription() {
-        return description;
-    }
+    public String getLocation() {return location;}
+    public String getDescription() {return description;}
     public int getCreditHours() {return creditHours; }
 
     public void setGrade(LetterGrade g) {grade = g;}
