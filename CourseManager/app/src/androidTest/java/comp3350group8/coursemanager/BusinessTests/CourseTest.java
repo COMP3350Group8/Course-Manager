@@ -11,7 +11,7 @@ import junit.framework.TestCase;
  */
 public class CourseTest extends TestCase {
     public void testCourse() {
-        Course[] courses = {new Course("COMP 1010", "elsewhere", "Intro"), new Course("COMP 1020", "basement", "Outro"), new Course("COMP 2140", "downstairs", "Data Structures")};
+        Course[] courses = {new Course("COMP 1010", "elsewhere", "Intro", 0), new Course("COMP 1020", "basement", "Outro", 3), new Course("COMP 2140", "downstairs", "Data Structures", 6)};
 
         for (int i = 0; i < courses.length; i++ ) {
             Log.d("DEBUG", courses[i].toString());

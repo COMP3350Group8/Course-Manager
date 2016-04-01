@@ -152,7 +152,7 @@ public class StubDatabase extends SQLDatabase implements Database {
         }
 
         if (course == null) {
-            course = new Course("COMP 1010", "", "");
+            course = new Course("COMP 1010", "", "", 0);
         }
 
         return course;

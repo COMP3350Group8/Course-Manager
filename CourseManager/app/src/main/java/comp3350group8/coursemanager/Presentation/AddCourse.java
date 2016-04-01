@@ -36,21 +36,31 @@ public class AddCourse extends AppCompatActivity {
             courseName.setError("Enter course");
         } else {
             EditText courseloc = (EditText) findViewById(R.id.location);
-
             EditText coursedescr = (EditText) findViewById(R.id.description);
+            EditText courseCredits = (EditText) findViewById(R.id.credits);
+            String credits = courseCredits.getText().toString();
 
-            // create instance of Course and send to the database
-            Course newCourse = new Course(courseName.getText().toString(),
-                    courseloc.getText().toString(),
-                    coursedescr.getText().toString());
-            db.insertCourse(newCourse);
-
-            //data[0]= courseName.getText().toString();
-            //data[1] = courseloc.getText().toString();
-            //data[2] = coursedescr.getText().toString();
+            try {
+                int c = Integer.valueOf(credits);
 
 
-            startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+                if (c >= 0) {
+                    // create instance of Course and send to the database
+                    Course newCourse = new Course(courseName.getText().toString(),
+                            courseloc.getText().toString(),
+                            coursedescr.getText().toString(),
+                            c);
+
+                    //TODO: What if insertion fails?
+                    db.insertCourse(newCourse);
+
+                    startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+                } else {
+                    courseCredits.setError("Credit Hours must be represented as a positive number");
+                }
+            } catch (NumberFormatException e) {
+                courseCredits.setError("Credit Hours must be represented as a number");
+            }
         }
 
     }
