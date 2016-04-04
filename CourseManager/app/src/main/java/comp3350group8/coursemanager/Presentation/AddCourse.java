@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 import comp3350group8.coursemanager.Business.Course;
@@ -28,6 +29,9 @@ public class AddCourse extends AppCompatActivity {
     //final Intent newActivity = new Intent(AddCourse.this, ListOfCourses.class);
     public void AddCourse (View v)
     {
+        CheckBox ch1 = (CheckBox)findViewById(R.id.checkBoxMWF);
+        CheckBox ch2 = (CheckBox)findViewById(R.id.checkBoxTTh);
+        String courseDate = "";
         // String []data = new String[3];
 
         // retrieve the data supplied to the form
@@ -39,10 +43,22 @@ public class AddCourse extends AppCompatActivity {
 
             EditText coursedescr = (EditText) findViewById(R.id.description);
 
+            if (ch1.isChecked()){
+                //If checked, course is on MWF
+                courseDate = "MWF";
+            }
+
+            if (ch2.isChecked()){
+                //If checked, course is on T/Th
+                courseDate = "TTh";
+            }
+
+
+
             // create instance of Course and send to the database
             Course newCourse = new Course(courseName.getText().toString(),
                     courseloc.getText().toString(),
-                    coursedescr.getText().toString());
+                    coursedescr.getText().toString(), courseDate);
             db.insertCourse(newCourse);
 
             //data[0]= courseName.getText().toString();
