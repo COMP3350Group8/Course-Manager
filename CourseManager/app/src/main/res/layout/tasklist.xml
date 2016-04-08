@@ -27,7 +27,6 @@
         android:onClick="AddTask"
         android:layout_above="@+id/CourseList"/>
 
-<<<<<<< HEAD
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,8 +35,6 @@
         android:onClick="addGrade"
         android:layout_above="@+id/CourseList"/>
 
-=======
->>>>>>> Develop
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

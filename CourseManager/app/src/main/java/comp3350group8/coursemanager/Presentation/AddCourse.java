@@ -44,11 +44,6 @@ public class AddCourse extends AppCompatActivity {
             EditText courseCredits = (EditText) findViewById(R.id.credits);
             String credits = courseCredits.getText().toString();
 
-            try {
-                int c = Integer.valueOf(credits);
-
-<<<<<<< HEAD
-=======
             if (ch1.isChecked()){
                 //If checked, course is on MWF
                 courseDate = "MWF";
@@ -59,20 +54,14 @@ public class AddCourse extends AppCompatActivity {
                 courseDate = "TTh";
             }
 
-
-
-            // create instance of Course and send to the database
-            Course newCourse = new Course(courseName.getText().toString(),
-                    courseloc.getText().toString(),
-                    coursedescr.getText().toString(), courseDate);
-            db.insertCourse(newCourse);
->>>>>>> Develop
-
+            try {
+                int c = Integer.valueOf(credits);
                 if (c >= 0) {
                     // create instance of Course and send to the database
                     Course newCourse = new Course(courseName.getText().toString(),
                             courseloc.getText().toString(),
                             coursedescr.getText().toString(),
+                            courseDate,
                             c);
 
                     //TODO: What if insertion fails?

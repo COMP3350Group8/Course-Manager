@@ -24,11 +24,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-<<<<<<< HEAD
-    private static int DATABASE_VERSION = 23;
-=======
-    private static int DATABASE_VERSION = 27;
->>>>>>> Develop
+    private static int DATABASE_VERSION = 28;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -57,12 +53,9 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 " CourseName TEXT UNIQUE NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
-<<<<<<< HEAD
-                " CourseGrade TEXT, " +
+                " CourseDate TEXT, " +
                 " CourseCreditHours INTEGER, " +
-=======
-                " CourseDate TEXT," +
->>>>>>> Develop
+                " CourseGrade TEXT," +
                 " FOREIGN KEY(UserID) References Users(ID));";
 
         String CREATE_TASK_TABLE = "CREATE TABLE Tasks ( " +
@@ -300,11 +293,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     }
 
     private static final String TABLE_COURSES = "Courses";
-<<<<<<< HEAD
-    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseGrade", "CourseCreditHours"};
-=======
-    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseDate"};
->>>>>>> Develop
+    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseDate", "CourseCreditHours", "CourseGrade"};
 
     public long insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -319,12 +308,9 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
             values.put(COURSE_COLUMNS[2], course.getName());
             values.put(COURSE_COLUMNS[3], course.getLocation());
             values.put(COURSE_COLUMNS[4], course.getDescription());
-<<<<<<< HEAD
-            values.put(COURSE_COLUMNS[5], course.getGrade().getGrade());
-            values.put(COURSE_COLUMNS[6], course.getCreditHours());
-=======
             values.put(COURSE_COLUMNS[5], course.getDate());
->>>>>>> Develop
+            values.put(COURSE_COLUMNS[6], course.getCreditHours());
+            values.put(COURSE_COLUMNS[5], course.getGrade().getGrade());
 
             success = db.insert(TABLE_COURSES, null, values);
         }
@@ -351,16 +337,14 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                     String name = cursor.getString(2);
                     String location = cursor.getString(3);
                     String description = cursor.getString(4);
-<<<<<<< HEAD
-                    int credit = Integer.parseInt(cursor.getString(6));
-                    course = new Course(name, location, description, credit);
-
-                    LetterGrade g = new LetterGrade(cursor.getString(5));
-                    course.setGrade(g);
-=======
                     String date = cursor.getString(5);
-                    course = new Course(name, location, description, date);
->>>>>>> Develop
+                    int credit = Integer.parseInt(cursor.getString(6));
+
+                    course = new Course(name, location, description, date, credit);
+
+                    LetterGrade g = new LetterGrade(cursor.getString(7));
+                    course.setGrade(g);
+
                     course.setID(Integer.parseInt(cursor.getString(0)));
                 }
             }
@@ -388,17 +372,14 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String name = cursor.getString(2);
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
-<<<<<<< HEAD
-                int credit = Integer.parseInt(cursor.getString(6));
-                course = new Course(name, location, description, credit);
-
-                LetterGrade g = new LetterGrade(cursor.getString(5));
-                course.setGrade(g);
-=======
                 String date = cursor.getString(5);
-                course = new Course(name, location, description, date);
-                Log.d("list", course.toString());
->>>>>>> Develop
+                int credit = Integer.parseInt(cursor.getString(6));
+
+                course = new Course(name, location, description, date, credit);
+
+                LetterGrade g = new LetterGrade(cursor.getString(7));
+                course.setGrade(g);
+
                 course.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(course);
             } while (cursor.moveToNext());
@@ -423,17 +404,14 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String name = cursor.getString(2);
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
-<<<<<<< HEAD
-                int credit = Integer.parseInt(cursor.getString(6));
-                course = new Course(name, location, description, credit);
-
-                LetterGrade g = new LetterGrade(cursor.getString(5));
-                course.setGrade(g);
-=======
                 String date = cursor.getString(5);
+                int credit = Integer.parseInt(cursor.getString(6));
 
-                course = new Course(name, location, description, date);
->>>>>>> Develop
+                course = new Course(name, location, description, date, credit);
+
+                LetterGrade g = new LetterGrade(cursor.getString(7));
+                course.setGrade(g);
+
                 course.setID(Integer.parseInt(cursor.getString(0)));
 
                 list.add(course);

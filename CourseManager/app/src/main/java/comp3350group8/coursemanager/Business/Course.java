@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package comp3350group8.coursemanager.Business;
 
 /**
@@ -9,15 +8,17 @@ public class Course extends ListItem
     private String course;
     private String location;
     private String description;
+    private String date;
     private int creditHours;
     private LetterGrade grade;
 
-    public Course(String course, String location, String description, int credits) {
+    public Course(String course, String location, String description, String date, int credits) {
         this.course= getString(course);
         this.location= location;
         this.description = description;
         creditHours = credits;
         grade = new LetterGrade();
+        this.date = date;
     }
 
     public boolean equals(ListItem otherItem) {
@@ -34,6 +35,7 @@ public class Course extends ListItem
     public String getName() {return course; }
     public String getLocation() {return location;}
     public String getDescription() {return description;}
+    public String getDate() {return date;}
     public int getCreditHours() {return creditHours; }
 
     public void setGrade(LetterGrade g) {grade = g;}
@@ -43,6 +45,7 @@ public class Course extends ListItem
         String output = "Course Name: " + course
                 + "\nLocation: " + location
                 + "\nDescription: " + description
+                + "\nDate: " + date
                 + "\nCredit Hours: " + creditHours;
 
         if (grade != null) {
@@ -52,6 +55,3 @@ public class Course extends ListItem
         return output;
     }
 }
-=======
-package comp3350group8.coursemanager.Business;/** * Created by David on 2016-02-22. */public class Course extends ListItem{    private String course;    private String location;    private String description;    private String date;    public Course(String course, String location, String description, String date)    {        this.course= getString(course);        this.location= location;        this.description = description;        this.date = date;    }    public boolean equals(ListItem otherItem) {        boolean equal = false;        if (otherItem instanceof Course) {            Course other = (Course)otherItem;            equal = other.course.equals(course) && other.location.equals(location) && other.description.equals(description) && other.date.equals(date);        }        return equal;    }    public String getName() {        return course;    }    public String getLocation() {        return location;    }    public String getDescription() {        return description;    }    public String getDate() {return date;}    public String toString() {        return "Course Name: " + course                + "\nLocation: " + location                + "\nDescription: " + description                + "\nDate: " + date;    }}
->>>>>>> Develop
