@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/AddGradeButton"
+        android:text="Add Course Grade"
         android:onClick="addGrade"
         android:layout_alignParentBottom="true"/>
 </RelativeLayout>

@@ -21,6 +21,7 @@ public interface Database {
     ArrayList<User> getAllUsers();
 
     long insertCourse(Course course);
+    boolean updateCourse(Course course);
     Course getCourse(int id);
     ArrayList<Course> getCourses();
     ArrayList<Course> getAllCourses();

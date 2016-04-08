@@ -310,13 +310,39 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
             values.put(COURSE_COLUMNS[4], course.getDescription());
             values.put(COURSE_COLUMNS[5], course.getDate());
             values.put(COURSE_COLUMNS[6], course.getCreditHours());
-            values.put(COURSE_COLUMNS[5], course.getGrade().getGrade());
 
             success = db.insert(TABLE_COURSES, null, values);
         }
         db.close();
 
         return success;
+    }
+
+    public boolean updateCourse(Course course) {
+        int oldID = course.getID();
+        Course old = getCourse(oldID);
+        Log.d("DEBUG", "old course = " + old);
+        Log.d("DEBUG", "new course = " + course);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        long success = -1;
+        int userid = getUserID();
+
+        ContentValues values = new ContentValues();
+
+        if (userid >= 0) {
+            values.put(COURSE_COLUMNS[1], userid);
+            values.put(COURSE_COLUMNS[2], course.getName());
+            values.put(COURSE_COLUMNS[3], course.getLocation());
+            values.put(COURSE_COLUMNS[4], course.getDescription());
+            values.put(COURSE_COLUMNS[5], course.getDate());
+            values.put(COURSE_COLUMNS[6], course.getCreditHours());
+            values.put(COURSE_COLUMNS[7], course.getGrade().getGrade());
+
+            success = db.update(TABLE_COURSES, values, "ID = " + course.getID(), null);
+        }
+
+        return success > 0;
     }
 
     public Course getCourse(int id) {
@@ -342,8 +368,11 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
 
                     course = new Course(name, location, description, date, credit);
 
-                    LetterGrade g = new LetterGrade(cursor.getString(7));
+                    String grade = cursor.getString(7);
+                    Log.d("Grade", "grade = " + grade);
+                    LetterGrade g = new LetterGrade(grade);
                     course.setGrade(g);
+                    Log.d("DEBUG", "Course from database = " + course);
 
                     course.setID(Integer.parseInt(cursor.getString(0)));
                 }

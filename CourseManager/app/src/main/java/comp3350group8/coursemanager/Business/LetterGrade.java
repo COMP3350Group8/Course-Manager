@@ -1,11 +1,14 @@
 package comp3350group8.coursemanager.Business;
 
+import android.util.Log;
+
 /**
  * Created by Ian Smith on 2016-04-01.
  */
 public class LetterGrade {
     private double points;
     private String grade;
+    private static String defaultMessage = "Not calculated yet";
 
     private static LetterGrade[] possibilities = {
             new LetterGrade("A+", 13.5),
@@ -18,19 +21,24 @@ public class LetterGrade {
             new LetterGrade("F", 0)};
 
     public LetterGrade(String grade) {
-        this.grade = grade;
-        boolean stop = false;
-        for (int i = 0; i < possibilities.length && !stop; i++) {
-            if (equals(possibilities[i])) {
-                stop = true;
-                this.points = possibilities[i].points;
-                this.grade = possibilities[i].grade;
-            }
-        }
+        if (grade != null) {
+            Log.d("LetterGrade", "Grade = " + grade + ", length = " + grade.length());
 
-        if (!stop) {
-            points = 0;
-            this.grade = "F";
+            if (grade.length() == 1 || grade.length() == 2) {
+                boolean stop = false;
+                for (int i = 0; i < possibilities.length && !stop; i++) {
+                    if (stringEquals(grade, possibilities[i])) {
+                        stop = true;
+                        this.points = possibilities[i].points;
+                        this.grade = possibilities[i].grade;
+                    }
+                }
+
+                Log.d("LEtterGrade", "grade = " + this.grade);
+            }
+        } else {
+            this.grade = defaultMessage;
+            //points = 0;
         }
     }
 
@@ -40,7 +48,7 @@ public class LetterGrade {
     }
 
     public LetterGrade() {
-        grade = "";
+        grade = defaultMessage;
     }
 
     public boolean equals(LetterGrade other) {
@@ -53,8 +61,20 @@ public class LetterGrade {
         return equals;
     }
 
+    private boolean stringEquals(String g, LetterGrade other) {
+        boolean equal = false;
+
+        if (g.equals(other.grade)) {
+            equal = true;
+        }
+
+        return equal;
+    }
+
     public String getGrade() {return grade;}
     public double getPoints() {return points;}
+    public static String getDefaultMessage() {return defaultMessage;}
+    public boolean isDefault() {return grade.equals(defaultMessage);}
 
     public String toString() {
         return "Grade = " + grade

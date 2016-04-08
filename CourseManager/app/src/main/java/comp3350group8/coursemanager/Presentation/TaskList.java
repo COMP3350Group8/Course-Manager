@@ -50,6 +50,7 @@ public class TaskList extends Activity {
 
         Course curr = db.getCourse((int)CurrentCourse.getID());
         String description = curr.toString();
+        Log.d("DEBUG", "Description = " + description);
         TextView desc = (TextView)findViewById(R.id.CourseDescription);
         desc.setText(description, TextView.BufferType.NORMAL);
 
@@ -75,7 +76,6 @@ public class TaskList extends Activity {
             //taskAdd.setEnabled(false);
             taskAdd.setVisibility(View.INVISIBLE);
 
-            //TODO: replace with add final grade button (could be different for different courses)
             addGrade.setVisibility(View.VISIBLE);
         }
 

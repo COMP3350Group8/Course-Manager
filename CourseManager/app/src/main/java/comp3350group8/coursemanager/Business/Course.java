@@ -1,5 +1,7 @@
 package comp3350group8.coursemanager.Business;
 
+import android.util.Log;
+
 /**
  * Created by David on 2016-02-22.
  */
@@ -38,7 +40,10 @@ public class Course extends ListItem
     public String getDate() {return date;}
     public int getCreditHours() {return creditHours; }
 
-    public void setGrade(LetterGrade g) {grade = g;}
+    public void setGrade(LetterGrade g) {
+        Log.d("DEBUG", "setGrade(" + g.toString() + ")");
+        grade = g;
+    }
     public LetterGrade getGrade() {return grade;}
 
     public String toString() {
@@ -48,7 +53,9 @@ public class Course extends ListItem
                 + "\nDate: " + date
                 + "\nCredit Hours: " + creditHours;
 
-        if (grade != null) {
+        if (!grade.isDefault()) {
+            Log.d("Grade", "GRade = " + grade);
+            Log.d("Grade", "Default = " + LetterGrade.getDefaultMessage());
             output = output + "\n" + grade.toString();
         }
 

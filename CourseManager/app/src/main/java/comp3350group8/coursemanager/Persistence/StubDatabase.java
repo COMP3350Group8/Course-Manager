@@ -179,6 +179,14 @@ public class StubDatabase extends SQLDatabase implements Database {
         return out;
     }
 
+    public boolean updateCourse(Course course) {
+        SubTable table = retrieveTable("Tasks");
+        Course item = (Course) table.getItem(course);
+        table.replace(course, item.getID());
+
+        return true;
+    }
+
     public long insertTask(Task task) {
         SubTable table = retrieveTable("Tasks");
         int size = table.size();
@@ -224,7 +232,7 @@ public class StubDatabase extends SQLDatabase implements Database {
     public boolean updateTask(Task task) {
         SubTable table = retrieveTable("Tasks");
         Task item = (Task) table.getItem(task);
-        table.replace(item, item.getID());
+        table.replace(task, item.getID());
 
         return true;
     }
