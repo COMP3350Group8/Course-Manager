@@ -20,7 +20,8 @@ public class LetterGradeTest extends TestCase {
         }
 
         assertTrue(actualGrades[3].equals(actualGrades[4]));
-        assertTrue(actualGrades[2].equals(actualGrades[3]));
+        assertFalse(actualGrades[2].equals(actualGrades[3]));
         assertFalse(actualGrades[0].equals(actualGrades[1]));
+        assertTrue(actualGrades[3].isDefault());
     }
 }

@@ -15,6 +15,8 @@ public class GPACalculator {
     public static double getGPA() {
         double totalPoints = 0;
         double totalCredits = 0;
+        double result = 0;
+        
         for (int i = 0; i < courseList.size(); i++) {
             Course curr = courseList.get(i);
 
@@ -24,6 +26,10 @@ public class GPACalculator {
             }
         }
 
-        return totalPoints / totalCredits;
+        if (totalCredits > 0) {
+            result = totalPoints / totalCredits;
+        }
+
+        return result;
     }
 }
