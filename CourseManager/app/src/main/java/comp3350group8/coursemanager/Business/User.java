@@ -6,6 +6,7 @@ package comp3350group8.coursemanager.Business;
 public class User extends ListItem {
     private String name, password, email, school;
     private String studentNum;
+    private double gpa;
 
     public User(String name, String password, String studentNum, String email, String school)
     {
@@ -33,6 +34,9 @@ public class User extends ListItem {
     {
         return school;
     }
+    public double getGPA() {return gpa;}
+
+    public void setGPA(double g) {gpa = g;}
 
     public boolean equals(ListItem otherItem) {
         if (otherItem instanceof User) {
@@ -43,9 +47,15 @@ public class User extends ListItem {
     }
 
     public String toString() {
-        return "Name: " + name
+        String toString = "Name: " + name
                 + "\nEmail Address/Username: " + email
                 + "\nSchool: " + school
                 + "\nStudent Number:" + studentNum;
+
+        if (gpa > 0) {
+            toString = toString + "\nGPA: " + gpa;
+        }
+
+        return toString;
     }
 }

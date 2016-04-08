@@ -24,7 +24,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 28;
+    private static int DATABASE_VERSION = 29;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -50,7 +50,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
         String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER," +
-                " CourseName TEXT UNIQUE NOT NULL, " +
+                " CourseName TEXT NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
                 " CourseDate TEXT, " +
@@ -62,7 +62,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER, " +
                 " CourseID INTEGER, " +
-                " TaskName TEXT UNIQUE NOT NULL, " +
+                " TaskName TEXT NOT NULL, " +
                 " TaskDate TEXT, " +
                 " TaskTime TEXT," +
                 " TaskWeight FLOAT, " +

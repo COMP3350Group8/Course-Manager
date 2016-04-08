@@ -13,6 +13,7 @@ import comp3350group8.coursemanager.Business.ArrayConverter;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
+import comp3350group8.coursemanager.Business.GPACalculator;
 import comp3350group8.coursemanager.Business.User;
 import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.R;
@@ -41,6 +42,10 @@ public class ListOfCourses extends Activity {
 
         String user = CurrentUser.getUser();
         User curr = db.getUser(user);
+        courses = db.getCourses();
+        GPACalculator.init(courses);
+        double gpa = GPACalculator.getGPA();
+        curr.setGPA(gpa);
         Log.d("DEBUG", "Current user = " + curr.toString());
         user = curr.toString();
 
@@ -48,8 +53,14 @@ public class ListOfCourses extends Activity {
         u.setText(user, TextView.BufferType.NORMAL);
 
         // retrieve contents of "Courses" if any
-        courses = db.getCourses();
+
         Log.d("DEBUG", "size = " + courses.size());
+
+        if (courses.size() > 0) {
+            Log.d("DEBUG", "First course = " + courses.get(0));
+        }
+
+        Log.d("DEBUG", "GPA = " + gpa);
         String[] course = ArrayConverter.convertCourses(courses);
 
         if (course.length > 0) {
@@ -68,7 +79,6 @@ public class ListOfCourses extends Activity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("DEBUG", "Selected course with id: " + id);
                 if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
-                    //TODO: make sure this is getting the right course from the database, array index != ID
                     int index = (int)id;
                     Course curr = courses.get(index);
                     Log.d("DEBUG", "Current course = " + id+1);

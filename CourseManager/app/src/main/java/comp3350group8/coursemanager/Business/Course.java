@@ -13,6 +13,7 @@ public class Course extends ListItem
     private String date;
     private int creditHours;
     private LetterGrade grade;
+    private boolean finished;
 
     public Course(String course, String location, String description, String date, int credits) {
         this.course= getString(course);
@@ -20,6 +21,7 @@ public class Course extends ListItem
         this.description = description;
         creditHours = credits;
         grade = new LetterGrade();
+        finished = false;
         this.date = date;
     }
 
@@ -43,7 +45,15 @@ public class Course extends ListItem
     public void setGrade(LetterGrade g) {
         Log.d("DEBUG", "setGrade(" + g.toString() + ")");
         grade = g;
+
+        if (!g.isDefault()) {
+            Log.d("DEBUG", "g = " + g);
+            finished = true;
+        }
     }
+
+    public boolean isFinished() {return finished;}
+
     public LetterGrade getGrade() {return grade;}
 
     public String toString() {
