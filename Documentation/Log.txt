@@ -174,3 +174,4 @@ April 8, 2016
 - Finished writing the GPA Calculation functions, and some associated tests (Ian)
 - Now once there is no more room for assignments the Add Grade button appears, allowing the student to add their final letter grade. This grade, for each finished course, is used to calculate the student's GPA (Ian)
 - Noticed and fixed a problem where Students retake the same course (Ian)
+- Wrote and ran a Robotium TEst using the Android Studio plugin (Ian)
