@@ -23,7 +23,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 22;
+    private static int DATABASE_VERSION = 27;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -49,7 +49,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
         String CREATE_COURSES_TABLE = "CREATE TABLE Courses ( " +
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER," +
-                " CourseName TEXT NOT NULL, " +
+                " CourseName TEXT UNIQUE NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
                 " CourseDate TEXT," +
@@ -59,7 +59,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 " ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 " UserID INTEGER, " +
                 " CourseID INTEGER, " +
-                " TaskName TEXT NOT NULL, " +
+                " TaskName TEXT UNIQUE NOT NULL, " +
                 " TaskDate TEXT, " +
                 " TaskTime TEXT," +
                 " TaskWeight FLOAT, " +
@@ -290,7 +290,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     }
 
     private static final String TABLE_COURSES = "Courses";
-    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription"};
+    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseDate"};
 
     public long insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
