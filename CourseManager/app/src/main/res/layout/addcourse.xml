@@ -53,4 +53,49 @@
         android:layout_alignParentEnd="true"
         android:onClick="AddCourse" />
 
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="M W F"
+        android:id="@+id/checkBoxMWF"
+        android:layout_below="@+id/description"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="56dp"
+        android:checked="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="T Th"
+        android:id="@+id/checkBoxTTh"
+        android:checked="false"
+        android:layout_alignTop="@+id/checkBoxMWF"
+        android:layout_toRightOf="@+id/checkBoxMWF"
+        android:layout_marginLeft="105dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Course Date"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/checkBoxTTh"
+        android:layout_alignParentLeft="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Course Time"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/checkBoxMWF"
+        android:layout_alignParentLeft="true" />
+
+    <TimePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePicker"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true" />
+
 </RelativeLayout>

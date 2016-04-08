@@ -52,6 +52,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 " CourseName TEXT NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
+                " CourseDate TEXT," +
                 " FOREIGN KEY(UserID) References Users(ID));";
 
         String CREATE_TASK_TABLE = "CREATE TABLE Tasks ( " +
@@ -304,6 +305,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
             values.put(COURSE_COLUMNS[2], course.getName());
             values.put(COURSE_COLUMNS[3], course.getLocation());
             values.put(COURSE_COLUMNS[4], course.getDescription());
+            values.put(COURSE_COLUMNS[5], course.getDate());
 
             success = db.insert(TABLE_COURSES, null, values);
         }
@@ -330,7 +332,8 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                     String name = cursor.getString(2);
                     String location = cursor.getString(3);
                     String description = cursor.getString(4);
-                    course = new Course(name, location, description);
+                    String date = cursor.getString(5);
+                    course = new Course(name, location, description, date);
                     course.setID(Integer.parseInt(cursor.getString(0)));
                 }
             }
@@ -358,7 +361,8 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String name = cursor.getString(2);
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
-                course = new Course(name, location, description);
+                String date = cursor.getString(5);
+                course = new Course(name, location, description, date);
                 Log.d("list", course.toString());
                 course.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(course);
@@ -384,8 +388,9 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String name = cursor.getString(2);
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
+                String date = cursor.getString(5);
 
-                course = new Course(name, location, description);
+                course = new Course(name, location, description, date);
                 course.setID(Integer.parseInt(cursor.getString(0)));
                 Log.d("list", course.toString());
 
