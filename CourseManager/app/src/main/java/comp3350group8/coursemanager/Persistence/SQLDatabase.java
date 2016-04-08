@@ -24,7 +24,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 29;
+    private static int DATABASE_VERSION = 31;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -303,6 +303,11 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
 
         int userid = getUserID();
 
+        int count = checkForDuplicates(course);
+        if (count > 0) {
+            course.setName(course.getName() + "(" + (count+1) + ")");
+        }
+
         if (userid >= 0) {
             values.put(COURSE_COLUMNS[1], userid);
             values.put(COURSE_COLUMNS[2], course.getName());
@@ -316,6 +321,21 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
         db.close();
 
         return success;
+    }
+
+    private int checkForDuplicates(Course checking) {
+        ArrayList<Course> courses = getCourses();
+
+        int count = 0;
+        for (int i = 0; i < courses.size(); i++) {
+            Course curr = courses.get(i);
+
+            if (curr.getName().equals(checking.getName())) {
+                count++;
+            }
+        }
+
+        return count;
     }
 
     public boolean updateCourse(Course course) {
@@ -459,6 +479,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
         long success = -1;
         int courseId = getCourseID();
         int userId = getUserID();
+
         Log.d("DEBUG", "CourseID = " + courseId);
         Log.d("DEBUG", "task = " + task.toString());
 
@@ -607,27 +628,29 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
 
     private int getCourseID() {
         int course = -1;
-        Log.d("DEBUG", "current course: " + CurrentCourse.getCourseName());
+        Log.d("DEBUG", "current course: " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
 
         // we know the user and an array index
         if(CurrentCourse.getCourseName() != null) {
+            Log.d("DEBUG", "getName = " + CurrentCourse.getCourseName());
             SQLiteDatabase db = this.getReadableDatabase();
 
-            String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[2] + "=?";
-            String[] args = new String[]{CurrentCourse.getCourseName()};
+            String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[1] + "=? AND " + COURSE_COLUMNS[2] + "=?";
+            String[] args = new String[]{"" + getUserID(), CurrentCourse.getCourseName()};
 
             Cursor cursor = db.rawQuery(query, args);
             if (cursor != null) {
+                Log.d("DEBUG", "There were results");
                 cursor.moveToFirst();
 
                 if (cursor.getCount() == 1) {
                     String id = cursor.getString(0);
                     course = Integer.parseInt(id);
                 }
-
                 cursor.close();
             }
         }
+
         return course;
     }
 

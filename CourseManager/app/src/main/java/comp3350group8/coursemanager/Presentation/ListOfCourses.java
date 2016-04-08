@@ -78,16 +78,18 @@ public class ListOfCourses extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("DEBUG", "Selected course with id: " + id);
+
                 if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
                     int index = (int)id;
                     Course curr = courses.get(index);
-                    Log.d("DEBUG", "Current course = " + id+1);
+                    Log.d("DEBUG", "Current course = " + curr.getID());
+
                     CurrentCourse.setCourse(curr.getName());
                     CurrentCourse.setID(curr.getID());
 
                     Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
                 }
-                Object o = lv.getItemAtPosition(position);
+                //Object o = lv.getItemAtPosition(position);
 
                 startActivity(new Intent(ListOfCourses.this, TaskList.class));
                // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();

@@ -155,7 +155,6 @@ public class AddTask extends AppCompatActivity {
 
                     if (!exceedsRemainingWeight) {
 
-
                         Button taskduedate = (Button) findViewById(R.id.dateBtn);
                         Button taskduetime  = (Button) findViewById(R.id.timeBtn);
 
@@ -164,9 +163,14 @@ public class AddTask extends AppCompatActivity {
                                 taskduedate.getText().toString(),
                                 taskduetime.getText().toString(),
                                 weight);
+
                         Log.d("DEBUG", newTask.toString());
-                        db.insertTask(newTask);
-                        startActivity(new Intent(AddTask.this, TaskList.class));
+                        long insert = db.insertTask(newTask);;
+                        Log.d("DEBUG", "insertion is successful if > 0: " + insert);
+
+                        if (insert > 0) {
+                            startActivity(new Intent(AddTask.this, TaskList.class));
+                        }
                     } else {
                         taskWeight.setError("The weight of this task cannot exceed " + remainingWeight);
                     }

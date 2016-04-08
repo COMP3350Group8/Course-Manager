@@ -37,6 +37,11 @@ public class Course extends ListItem
     }
 
     public String getName() {return course; }
+
+    public void setName(String name) {
+        course = name;
+    }
+
     public String getLocation() {return location;}
     public String getDescription() {return description;}
     public String getDate() {return date;}
