@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package comp3350group8.coursemanager.Business;
 
 /**
@@ -51,3 +52,6 @@ public class Course extends ListItem
         return output;
     }
 }
+=======
+package comp3350group8.coursemanager.Business;/** * Created by David on 2016-02-22. */public class Course extends ListItem{    private String course;    private String location;    private String description;    private String date;    public Course(String course, String location, String description, String date)    {        this.course= getString(course);        this.location= location;        this.description = description;        this.date = date;    }    public boolean equals(ListItem otherItem) {        boolean equal = false;        if (otherItem instanceof Course) {            Course other = (Course)otherItem;            equal = other.course.equals(course) && other.location.equals(location) && other.description.equals(description) && other.date.equals(date);        }        return equal;    }    public String getName() {        return course;    }    public String getLocation() {        return location;    }    public String getDescription() {        return description;    }    public String getDate() {return date;}    public String toString() {        return "Course Name: " + course                + "\nLocation: " + location                + "\nDescription: " + description                + "\nDate: " + date;    }}
+>>>>>>> Develop

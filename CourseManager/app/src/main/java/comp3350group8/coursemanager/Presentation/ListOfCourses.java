@@ -55,12 +55,12 @@ public class ListOfCourses extends Activity {
         if (course.length > 0) {
             Log.d("DEBUGG", course[0]);
         }
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
-        lv.setAdapter(adapter);
+       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
+       // lv.setAdapter(adapter);
 
         //SubTable table = staticDB.searchTable("Courses");
         //ArrayList<ListItem> items = table.getAll();
-        //lv.setAdapter(new myListAdapter(ListOfCourses.this, items));
+        lv.setAdapter(new myListAdapter(ListOfCourses.this, courses));
 
         //select a course
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,5 +97,6 @@ public class ListOfCourses extends Activity {
 
     public void logout(View v) {
         startActivity(new Intent(ListOfCourses.this, LoginActivity.class));
+        finish();
     }
 }
