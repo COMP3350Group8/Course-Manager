@@ -13,7 +13,7 @@ import comp3350group8.coursemanager.Business.Task;
  */
 public class ArrayConverterTest extends TestCase {
     public void testArrayConverterCourse() {
-        Course[] array = {new Course("COMP 1010", "", "", 3), new Course("COMP 1020", "", "", 3), new Course("COMP 2140", "", "", 0), new Course("COMP 2150", "", "", 6), new Course("COMP 2160", "", "", 6)};
+        Course[] array = {new Course("COMP 1010", "", "", "", 3), new Course("COMP 1020", "", "", "", 3), new Course("COMP 2140", "", "", "", 0), new Course("COMP 2150", "", "", "", 6), new Course("COMP 2160", "", "", "", 6)};
         ArrayList<Course> courses = new ArrayList<Course>();
 
         for (int i = 0; i < array.length; i++) {

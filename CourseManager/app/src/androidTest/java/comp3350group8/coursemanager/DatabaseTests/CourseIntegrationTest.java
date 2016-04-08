@@ -47,11 +47,11 @@ public class CourseIntegrationTest extends AndroidTestCase {
     public void testCourseInsertion() {
         CurrentUser.setUser(db.getUser("smithi35", "car").getEmail());
         Log.d("DEBUG", "Attempting to insert courses");
-        Course first = new Course("COMP 1010", "Somewhere", "None", 0);
-        Course second = new Course("COMP 1020", "Elsewhere", "None", 3);
-        Course third = new Course("COMP 2140", "Basement", "Data Structures and Algorithmsd", 3);
-        Course fourth = new Course("COMP 2160", "Upstairs", "Programming Practices", 6);
-        Course fifth = new Course("COMP 2280", "Lab", "Outside", 6);
+        Course first = new Course("COMP 1010", "Somewhere", "None", "", 0);
+        Course second = new Course("COMP 1020", "Elsewhere", "None", "", 3);
+        Course third = new Course("COMP 2140", "Basement", "Data Structures and Algorithmsd", "", 3);
+        Course fourth = new Course("COMP 2160", "Upstairs", "Programming Practices", "", 6);
+        Course fifth = new Course("COMP 2280", "Lab", "Outside", "", 6);
 
         Log.d("DEBUG", "first insertion" + db.insertCourse(first));
         Log.d("DEBUG", "second insertion" + db.insertCourse(second));
@@ -61,7 +61,7 @@ public class CourseIntegrationTest extends AndroidTestCase {
     }
 
     public void testGarbageInsertions() {
-        Course badCourse = new Course("", "", "", 0);
+        Course badCourse = new Course("", "", "", "", 0);
         Log.d("DEBUG", "garbage insertion: " + db.insertCourse(badCourse));
     }
 

@@ -34,7 +34,9 @@ public class LetterGrade {
                     }
                 }
 
-                Log.d("LEtterGrade", "grade = " + this.grade);
+                Log.d("LetterGrade", "grade = " + this.grade);
+            } else {
+                this.grade = defaultMessage;
             }
         } else {
             this.grade = defaultMessage;
