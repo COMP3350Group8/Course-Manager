@@ -169,3 +169,7 @@ March 29, 2016
 
 April 1, 2016
 - I'm going to start working on GPA Calculation, it'll involve adding a credit hours item to the Courses table, and the functionality to take that and the final grade in the course (when remaining weight = 0) and spit out a letter grade (Ian)
+
+April 8, 2016
+- Finished writing the GPA Calculation functions, and some associated tests (Ian)
+- Now once there is no more room for assignments the Add Grade button appears, allowing the student to add their final letter grade. This grade, for each finished course, is used to calculate the student's GPA (Ian)
