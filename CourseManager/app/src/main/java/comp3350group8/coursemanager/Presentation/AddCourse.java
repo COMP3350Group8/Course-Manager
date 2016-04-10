@@ -114,6 +114,7 @@ public class AddCourse extends AppCompatActivity {
 
             try {
                 int c = Integer.valueOf(credits);
+
                 if (c >= 0) {
                     // create instance of Course and send to the database
                     Course newCourse = new Course(courseName.getText().toString(),

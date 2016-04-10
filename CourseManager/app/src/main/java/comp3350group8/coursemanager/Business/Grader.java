@@ -25,6 +25,8 @@ public class Grader {
         String actual = "";
         if (totalWeight > 0) {
             double actualScore = totalScore / totalWeight;
+            RoundNumber score = new RoundNumber(actualScore);
+            actualScore = score.roundTo(10000);
             actual = (actualScore * 100) + "%";
         } else {
             actual = "0%";
@@ -44,13 +46,11 @@ public class Grader {
         double remains = 1.0 - totalWeight;
         Log.d("DEBUG", "remains = " + remains);
 
-        double round = remains * 1000;
-        round = Math.round(round);
-        round = round / 1000;
+        RoundNumber round = new RoundNumber(remains);
+        remains = round.roundTo(1000);
         Log.d("DEBUG", "round = " + round);
 
-        remainingWeight = round;
-        return round;
+        return remains;
     }
 
     public static double getRemainingWeight() {return remainingWeight;}

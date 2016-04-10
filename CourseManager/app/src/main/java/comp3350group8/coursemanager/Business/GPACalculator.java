@@ -30,9 +30,8 @@ public class GPACalculator {
 
         if (totalCredits > 0) {
             result = totalPoints / totalCredits;
-            result = result * 100;
-            result = Math.round(result);
-            result = result / 100;
+            RoundNumber rounder = new RoundNumber(result);
+            result = rounder.roundTo(100);
         }
 
         return result;
