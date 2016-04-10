@@ -51,7 +51,7 @@ public class ListOfCourses extends Activity {
         user = curr.toString();
 
         TextView u = (TextView) findViewById(R.id.UserDescription);
-        //u.setText(user, TextView.BufferType.NORMAL);
+        u.setText(user, TextView.BufferType.NORMAL);
 
         Log.d("DEBUG", "size = " + courses.size());
         if (courses.size() > 0) {
