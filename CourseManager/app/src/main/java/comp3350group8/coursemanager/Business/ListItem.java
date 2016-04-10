@@ -27,6 +27,4 @@ public abstract class ListItem {
     public abstract String getName();
     public abstract boolean equals(ListItem otherItem);
     public abstract String toString();
-
-    //TODO: Add boolean: deleted
 }

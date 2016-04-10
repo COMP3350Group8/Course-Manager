@@ -20,25 +20,43 @@ public class UserIntegrationTest extends AndroidTestCase {
     public void setUp() throws Exception {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
+
+        Log.d("DEBUG", "Beginning integration test with User class");
         Log.d("DEBUG", "Attempting to create database");
         db = new SQLDatabase(context);
 //        db = new StubDatabase(context);
-        
+
+        // should fail but not crash
+        testUserQuery();
+        printUsers();
+
+        // actual test
         testUserInsertion();
         testUserQuery();
         printUsers();
     }
 
     public void testUserInsertion() {
-        User[] users = {new User("Ian", "car", "1", "smithi35", "umanitoba"), new User("David", "password", "2", "dowasi", "umanitoba"), new User("Graham", " ", "3", "gsilver", "umanitoba"), new User("", "", "", "", "")};
+        User[] users = {
+                new User("Ian", "car", "1", "smithi35", "umanitoba"),
+                new User("David", "password", "2", "dowasi", "umanitoba"),
+                new User("Graham", " ", "3", "gsilver", "umanitoba"),
+                new User("", "", "", "", ""),
+                new User("Ian", "car", "!", "smithi35", "umanitoba"),
+                new User("David", "car", "1", "d", "umanitoba")};
 
         for (int i = 0; i < users.length; i++) {
-            Log.d("DEBUG", "" + db.insertUser(users[i]));
+            long insert = db.insertUser(users[i]);
+
+            if (insert < 0) {
+                Log.d("DEBUG", "Failed to insert user at index: " + i + ", value: " + users[i]);
+            }
         }
     }
 
     public void testUserQuery() {
         Log.d("DEBUG", "Attempting user query: " + db.getUser("smithi35", "car"));
+        Log.d("DEBUG", "Attempting user query: " + db.getUser("dowasi"));
     }
 
     public void printUsers() {

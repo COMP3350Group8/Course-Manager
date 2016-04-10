@@ -1,4 +1,4 @@
-package comp3350group8.coursemanager.Presentation;
+package comp3350group8.coursemanager.Business;
 
 import android.content.Context;
 import android.view.LayoutInflater;

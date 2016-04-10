@@ -15,6 +15,7 @@ import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.GPACalculator;
 import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Business.myListAdapter;
 import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.staticDB;
@@ -52,10 +53,7 @@ public class ListOfCourses extends Activity {
         TextView u = (TextView) findViewById(R.id.UserDescription);
         //u.setText(user, TextView.BufferType.NORMAL);
 
-        // retrieve contents of "Courses" if any
-
         Log.d("DEBUG", "size = " + courses.size());
-
         if (courses.size() > 0) {
             Log.d("DEBUG", "First course = " + courses.get(0));
         }
@@ -66,12 +64,10 @@ public class ListOfCourses extends Activity {
         if (course.length > 0) {
             Log.d("DEBUG", course[0]);
         }
-       // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
-       // lv.setAdapter(adapter);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
+        lv.setAdapter(adapter);
 
-        //SubTable table = staticDB.searchTable("Courses");
-        //ArrayList<ListItem> items = table.getAll();
-        lv.setAdapter(new myListAdapter(ListOfCourses.this, courses));
+//        lv.setAdapter(new myListAdapter(ListOfCourses.this, courses));
 
         //select a course
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

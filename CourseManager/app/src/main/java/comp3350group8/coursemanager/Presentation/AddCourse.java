@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -64,10 +65,13 @@ public class AddCourse extends AppCompatActivity {
                             courseDate,
                             c);
 
-                    //TODO: What if insertion fails?
-                    db.insertCourse(newCourse);
+                    long insert = db.insertCourse(newCourse);
 
-                    startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+                    if (insert > 0) {
+                        startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+                    } else {
+                        Log.d("DEBUG", "Insertion of course: " + newCourse + "\n failed");
+                    }
                 } else {
                     courseCredits.setError("Credit Hours must be represented as a positive number");
                 }

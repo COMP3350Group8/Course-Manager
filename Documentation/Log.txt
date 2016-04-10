@@ -152,26 +152,40 @@ March 25, 2016
 - Working on refactoring the Stub and Database (Ian)
 - used the staticDB class to provide a better means of doing a dependency injection, it is now one line, and one line only to change between the stub and the SQLDatabase (Ian)
 - added a user description to the course list page, and a course description to the task list page (Ian)
+- spent around 4 hours total on these (Ian)
 
 March 26, 2016
 - Added a Grader class to return Strings containing the grade for each course and the remaining weight, so that the user doesn't exceed 1 (Ian)
 - Modified the Task table to include a foreign UserID for each task (Ian)
+- Combined took 2 hours or so (Ian)
 
 March 28, 2016
 - Created the ArrayConverter class to handle converting ArrayLists of ListItems to arrays of strings to be displayed in an Activity (Ian)
 	- Strategy Pattern
+	- took less than a half hour
 - Noticed that the Add New Task button is not visible on the TaskList page and hopefully fixed the problem (Ian)
+	- changed to relative-layout
+	- took less than a half hour
 - Added additional scaffolding so Candidate Keys in the Database are never left empty (Ian)
-- 
+	- took less than a half hour
 
 March 29, 2016
 - Spent some time working on input sanitization, parsing Doubles is done inside a try-catch block and there is now a good deal of scaffoling surrounding the Task forms to ensure grades are handled properly (Ian)
+	- took a couple hours
+	- used the setError function
 
 April 1, 2016
 - I'm going to start working on GPA Calculation, it'll involve adding a credit hours item to the Courses table, and the functionality to take that and the final grade in the course (when remaining weight = 0) and spit out a letter grade (Ian)
+	- took most of the day, didn't finish
 
 April 8, 2016
 - Finished writing the GPA Calculation functions, and some associated tests (Ian)
+	- took most of the day
 - Now once there is no more room for assignments the Add Grade button appears, allowing the student to add their final letter grade. This grade, for each finished course, is used to calculate the student's GPA (Ian)
+	- took less than a half hour
 - Noticed and fixed a problem where Students retake the same course (Ian)
+	- took about an hour
+	- most of which was figuring out the source of the problem
 - Wrote and ran a Robotium TEst using the Android Studio plugin (Ian)
+	- took an hour or so
+	- 

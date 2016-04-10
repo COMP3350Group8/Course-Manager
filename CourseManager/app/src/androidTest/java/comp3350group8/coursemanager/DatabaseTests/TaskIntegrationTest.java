@@ -25,9 +25,11 @@ public class TaskIntegrationTest extends AndroidTestCase {
     public void setUp() throws Exception {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
+        Log.d("DEBUG", "Starting Task integration test");
+
         Log.d("DEBUG", "Attempting to create database");
-//        db = new SQLDatabase(context);
-        db = new StubDatabase(context);
+        db = new SQLDatabase(context);
+//        db = new StubDatabase(context);
 
         User first = new User("Ian", "car", "1", "smithi35", "umanitoba");
         db.insertUser(first);
@@ -36,6 +38,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
         Course c = new Course("COMP 1010", "Somewhere", "None", "", 3);
         db.insertCourse(c);
         ArrayList<Course> courses = db.getCourses();
+
         CurrentCourse.setCourse(courses.get(0).getName());
         CurrentCourse.setID(courses.get(0).getID());
 
@@ -50,14 +53,21 @@ public class TaskIntegrationTest extends AndroidTestCase {
     }
 
     public void testTaskInsertion() {
-        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1), new Task("Assignment", "September 2, 2016", "12:00am", 0.5), new Task("It do", "", "", 0.5), new Task("", "", "", -1)};
+        Task[] tasks = {new Task("Do it", "September 1, 2016", "12:00am", 1),
+                new Task("Assignment", "September 2, 2016", "12:00am", 0.5),
+                new Task("It do", "", "", 0.5),
+                new Task("", "", "", -1),
+                new Task("Do it", "", "", 0)};
         /*Course c = db.getCourse(1);
         CurrentCourse.setCourse(c.getName());
         CurrentCourse.setID((long)c.getID());*/
 
         for (int i = 0; i < tasks.length; i++) {
             long insertion = db.insertTask(tasks[i]);
-            Log.d("DEBUG", "task insertion = " + insertion);
+
+            if (insertion > 0) {
+                Log.d("DEBUG", "task insertion failed for task: " + tasks[i] + ", index is " + i);
+            }
         }
     }
 
@@ -76,6 +86,7 @@ public class TaskIntegrationTest extends AndroidTestCase {
 
     public void testTaskQuery() {
         Log.d("DEBUG", "Attempting task query: " + db.getTask(2));
+        Log.d("DEBUG", "Attempting task query: " + db.getTask(1));
     }
 
     public void testTaskUpdate() {

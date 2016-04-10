@@ -23,8 +23,9 @@ public class CourseIntegrationTest extends AndroidTestCase {
     public void setUp() throws Exception {
         super.setUp();
         RenamingDelegatingContext context = new RenamingDelegatingContext(getContext(), "test_");
-        Log.d("DEBUG", "Attempting to create database");
+        Log.d("DEBUG", "Starting Course Integration Test");
 
+        Log.d("DEBUG", "Attempting to create database");
         db = new SQLDatabase(context);
 //        db = new StubDatabase(context);
 
@@ -47,17 +48,22 @@ public class CourseIntegrationTest extends AndroidTestCase {
     public void testCourseInsertion() {
         CurrentUser.setUser(db.getUser("smithi35", "car").getEmail());
         Log.d("DEBUG", "Attempting to insert courses");
-        Course first = new Course("COMP 1010", "Somewhere", "None", "", 0);
-        Course second = new Course("COMP 1020", "Elsewhere", "None", "", 3);
-        Course third = new Course("COMP 2140", "Basement", "Data Structures and Algorithmsd", "", 3);
-        Course fourth = new Course("COMP 2160", "Upstairs", "Programming Practices", "", 6);
-        Course fifth = new Course("COMP 2280", "Lab", "Outside", "", 6);
 
-        Log.d("DEBUG", "first insertion" + db.insertCourse(first));
-        Log.d("DEBUG", "second insertion" + db.insertCourse(second));
-        Log.d("DEBUG", "third insertion" + db.insertCourse(third));
-        Log.d("DEBUG", "fourth insertion" + db.insertCourse(fourth));
-        Log.d("DEBUG", "fifth insertion" + db.insertCourse(fifth));
+        Course[] courses = {new Course("COMP 1010", "Somewhere", "None", "Now", 0),
+                new Course("COMP 1020", "Elsewhere", "None", "", 3),
+                new Course("COMP 2140", "Basement", "Data Structures and Algorithmsd", "Jan. 28, 2016", 3),
+                new Course("COMP 2160", "Upstairs", "Programming Practices", "", 6),
+                new Course("COMP 2280", "Lab", "Outside", "", 6),
+                new Course("COMP 1010", "E2-105", "Intro to CS", "Sept. 11, 1963", 3),
+                new Course("COMP 1010", "", "", "", 3)};
+
+        for (int i = 0; i < courses.length; i++) {
+            long insert = db.insertCourse(courses[i]);
+
+            if (insert < 0) {
+                Log.d("DEBUG", "Failed to insert course: " + courses[i] + ", index is " + i);
+            }
+        }
     }
 
     public void testGarbageInsertions() {
