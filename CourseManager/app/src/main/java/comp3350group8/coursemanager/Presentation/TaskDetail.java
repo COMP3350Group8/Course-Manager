@@ -34,7 +34,7 @@ public class TaskDetail extends AppCompatActivity {
         Task curr = CurrentTask.getTask();
         EditText text = null;
 
-        String[] output = {curr.getName(), curr.getDate(), curr.getTime(), "" + curr.getWeight(), "unknown"};
+        String[] output = {curr.getName(), curr.getDate(), curr.getTime(), "" + curr.getWeight(), ""};
         oldWeight = curr.getWeight();
 
         if (curr.getScore() != 0) {
@@ -54,7 +54,6 @@ public class TaskDetail extends AppCompatActivity {
             t.setText(percentage, TextView.BufferType.NORMAL);
         }
 
-        // render curr to page
         text = (EditText)findViewById(R.id.taskName);
         text.setText(output[0], TextView.BufferType.EDITABLE);
 
@@ -65,7 +64,7 @@ public class TaskDetail extends AppCompatActivity {
         text.setText(output[2], TextView.BufferType.EDITABLE);
         Log.d("DEBUG", "weight " + output[3]);
         text = (EditText)findViewById(R.id.taskWeight);
-            text.setText("/" + Double.parseDouble(output[3])*100, TextView.BufferType.EDITABLE);
+        text.setText("/" + Double.parseDouble(output[3])*100, TextView.BufferType.EDITABLE);
     }
 
     public void saveTask(View v) {

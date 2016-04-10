@@ -1,5 +1,7 @@
 package comp3350group8.coursemanager.Business;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -28,6 +30,9 @@ public class GPACalculator {
 
         if (totalCredits > 0) {
             result = totalPoints / totalCredits;
+            result = result * 100;
+            result = Math.round(result);
+            result = result / 100;
         }
 
         return result;

@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
@@ -25,6 +26,15 @@ public class AddGrade extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addgrade);
         setTitle("Add Letter Grade");
+
+        long courseID = CurrentCourse.getID();
+        Course curr = db.getCourse((int) courseID);
+        LetterGrade courseGrade = curr.getGrade();
+
+        if (!courseGrade.isDefault()) {
+            EditText currentGrade = (EditText) findViewById(R.id.AddGrade);
+            currentGrade.setText(courseGrade.getGrade(), TextView.BufferType.EDITABLE);
+        }
     }
 
     public void addGrade(View v) {
