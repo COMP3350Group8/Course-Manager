@@ -29,61 +29,64 @@ import comp3350group8.coursemanager.Persistence.staticDB;
  */
 public class AddCourse extends AppCompatActivity {
     private Database db = staticDB.getDB();
+    private Button courseTime;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.addcourse);
         setTitle("Add Course");
 
-        final Button courseTime = (Button) findViewById(R.id.timeBtn);
-        courseTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final TimePicker tm = new TimePicker(AddCourse.this);
-                AlertDialog.Builder adb = new AlertDialog.Builder(AddCourse.this);
-
-                adb.setTitle("Set Time")
-                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int id) {
-                                int hour = tm.getCurrentHour();
-                                int min = tm.getCurrentMinute();
-                                String AM_PM;
-
-                                if (hour < 12) {
-                                    AM_PM = "AM";
-                                } else {
-                                    AM_PM = "PM";
-                                    hour = (hour == 0) ? 12 : hour - 12;
-                                }
-                                if (min < 10)
-                                    courseTime.setText(hour + ":0" + min + " " + AM_PM);
-                                else
-                                    courseTime.setText(hour + ":" + min + " " + AM_PM);
-                            }
-                        })
-                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
-                            }
-                        });
-                // Create the AlertDialog object and r
-                LayoutInflater inflater = AddCourse.this.getLayoutInflater();
-                LinearLayout layout;
-                //time = new TimePicker(add_info.this);
-                ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                        ViewGroup.LayoutParams.MATCH_PARENT);
-                layout = new LinearLayout(AddCourse.this);
-                //View view = new View(add_info.this);
-                layout.setOrientation(LinearLayout.VERTICAL);
-                layout.addView(tm, params);
-                adb.setView(layout);
-                Dialog d = adb.create();
-                d.show();
-                tm.clearFocus();
-            }
-        });
+        courseTime = (Button) findViewById(R.id.timeBtn);
+        courseTime.setOnClickListener(listener);
     }
+
+    private View.OnClickListener listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            final TimePicker tm = new TimePicker(AddCourse.this);
+            AlertDialog.Builder adb = new AlertDialog.Builder(AddCourse.this);
+
+            adb.setTitle("Set Time")
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            int hour = tm.getCurrentHour();
+                            int min = tm.getCurrentMinute();
+                            String AM_PM;
+
+                            if (hour < 12) {
+                                AM_PM = "AM";
+                            } else {
+                                AM_PM = "PM";
+                                hour = (hour == 0) ? 12 : hour - 12;
+                            }
+                            if (min < 10)
+                                courseTime.setText(hour + ":0" + min + " " + AM_PM);
+                            else
+                                courseTime.setText(hour + ":" + min + " " + AM_PM);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+            // Create the AlertDialog object and r
+            LayoutInflater inflater = AddCourse.this.getLayoutInflater();
+            LinearLayout layout;
+            //time = new TimePicker(add_info.this);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT);
+            layout = new LinearLayout(AddCourse.this);
+            //View view = new View(add_info.this);
+            layout.setOrientation(LinearLayout.VERTICAL);
+            layout.addView(tm, params);
+            adb.setView(layout);
+            Dialog d = adb.create();
+            d.show();
+            tm.clearFocus();
+        }
+    };
 
     public void AddCourse (View v) {
         CheckBox ch1 = (CheckBox)findViewById(R.id.checkBoxMWF);
@@ -117,7 +120,6 @@ public class AddCourse extends AppCompatActivity {
                 if (c >= 0) {
                     // create instance of Course and send to the database
                     insertCourseIntoDatabase(name, location, description, courseDate, c);
-
                 } else {
                     courseCredits.setError("Credit Hours must be represented as a positive number");
                 }

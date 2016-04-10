@@ -192,3 +192,13 @@ April 8, 2016
 April 9, 2016
 - Did some Robotium test to examine the functionality of add courses, add task, log out and log in
 - Regarding acceptance testing, functionality worked according to how customer wants it to for now
+
+April 10, 2016
+- TaskDetail now shows the score as a proportion of the weight and as a percentage (Ian)
+	- took a couple hours
+- Did some refactoring for a few hours
+	- moved the listeners for ListOfCourses and TaskList out of onCreate, now instance variables of appropriate type
+	- moved functionality for calculating score as percentage and proportion of weight to Grader
+	- wrote RoundNumber class to take care of rounding doubles to a specified decimal place
+	- tested RoundNumber class 
+	- updated scaffolding for multiple Presentation classes, since weight is now expressed as a portion of 100, rather than 1
