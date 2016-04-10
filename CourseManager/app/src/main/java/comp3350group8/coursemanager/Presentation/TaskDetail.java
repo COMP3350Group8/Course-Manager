@@ -38,15 +38,20 @@ public class TaskDetail extends AppCompatActivity {
         oldWeight = curr.getWeight();
 
         if (curr.getScore() != 0) {
-            output[4] = "" + curr.getScore()*curr.getWeight()*100;
-            double actual = curr.getScore() * curr.getWeight()*100;
+            Log.d("DEBUG", "score = " + curr.getScore() + ", weight = " + curr.getWeight());
+            double score = curr.getScore() * curr.getWeight() * 100;
+            output[4] = "" + score;
+
+            String percentage = "" + (score / curr.getWeight()) + "%";
+//            double actual = curr.getScore() * curr.getWeight()*100;
+            Log.d("DEBUG", "score = " + curr.getScore() + ", result = " + output[4] + ", weight = " + curr.getWeight());
 
             text = (EditText)findViewById(R.id.taskScore);
             text.setText(output[4], TextView.BufferType.EDITABLE);
 
             TextView t = (TextView)findViewById(R.id.PercentageGrade);
-            String actualString = "" + actual + "%";
-            t.setText(actualString, TextView.BufferType.NORMAL);
+//            String actualString = "" + actual + "%";
+            t.setText(percentage, TextView.BufferType.NORMAL);
         }
 
         // render curr to page
@@ -77,7 +82,8 @@ public class TaskDetail extends AppCompatActivity {
             String w = taskWeight.getText().toString().replaceAll("[/%]","");
             Log.d("WEIGHT", "123weight = " + w);
             try {
-                double weight = Double.valueOf(w)/100;
+                double weight = Double.valueOf(w);
+                weight = weight / 100;
                 Log.d("WEIGHT", "weight = " + weight);
 
                 if (weight >= 0 && weight <= 1) {

@@ -143,10 +143,11 @@ public class AddTask extends AppCompatActivity {
         boolean hasName = taskName.length() > 0;
 
         if (!hasWeight || !hasName) {
-            if (hasWeight) {
-                taskName.setError("Enter task");
-            } else {
+            if (!hasWeight) {
                 taskWeight.setError("Enter weight");
+            }
+            if (!hasName){
+                taskName.setError("Enter task");
             }
         } else {
             String w = taskWeight.getText().toString();
@@ -176,13 +177,13 @@ public class AddTask extends AppCompatActivity {
                             startActivity(new Intent(AddTask.this, TaskList.class));
                         }
                     } else {
-                        taskWeight.setError("The weight of this task cannot exceed " + remainingWeight);
+                        taskWeight.setError("The weight of this task cannot exceed " + (remainingWeight * 100));
                     }
                 } else {
-                    taskWeight.setError("Enter a Task Weight between 0 and 1");
+                    taskWeight.setError("Enter a Task Weight between 0 and 100");
                 }
             } catch (NumberFormatException e) {
-                taskWeight.setError("Must be valid decimal number");
+                taskWeight.setError("Must be valid percentage");
             }
         }
     }

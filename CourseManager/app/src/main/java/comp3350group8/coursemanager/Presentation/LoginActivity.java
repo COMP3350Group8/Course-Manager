@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         CurrentUser.reset();
     }
 
+
     public void login(View v)
     {
         EditText email, etPassword;
@@ -40,9 +41,9 @@ public class LoginActivity extends AppCompatActivity {
         if (user != null) {
             CurrentUser.setUser(email.getText().toString().trim());
             startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
-        }
-        else
+        } else {
             email.setError("Email or Password is incorrect.");
+        }
 
     }
 
