@@ -97,13 +97,17 @@
         android:text="Course Time"
         android:id="@+id/textView3"
         android:layout_below="@+id/checkBoxMWF"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:nestedScrollingEnabled="false"
+        android:layout_alignParentBottom="false" />
 
     <TimePicker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/timePicker"
         android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:nestedScrollingEnabled="false"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>
