@@ -24,7 +24,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 33;
+    private static int DATABASE_VERSION = 35;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -298,14 +298,18 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     public long insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
         long success = -1;
+        String originalName = course.getName();
 
         ContentValues values = new ContentValues();
-
         int userid = getUserID();
 
         int count = checkForDuplicates(course);
-        if (count > 0) {
-            course.setName(course.getName() + "(" + (count+1) + ")");
+        int index= 1;
+        while (count > 0) {
+            index++;
+            course.setName(originalName + "(" + (index) + ")");
+            Log.d("DEBUG", "name = " + course.getName());
+            count = checkForDuplicates(course);
         }
 
         if (userid >= 0) {
