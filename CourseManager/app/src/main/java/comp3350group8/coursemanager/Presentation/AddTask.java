@@ -61,7 +61,10 @@ public class AddTask extends AppCompatActivity {
                                     AM_PM = "PM";
                                     hour = (hour == 0) ? 12 : hour - 12;
                                 }
-                                taskduetime.setText(hour + ":" + min + " " + AM_PM);
+                                if (min < 10)
+                                    taskduetime.setText(hour + ":0" + min + " " + AM_PM);
+                                else
+                                    taskduetime.setText(hour + ":" + min + " " + AM_PM);
                             }
                         })
                         .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

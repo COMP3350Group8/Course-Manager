@@ -96,18 +96,18 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Course Time"
         android:id="@+id/textView3"
-        android:layout_below="@+id/checkBoxMWF"
-        android:layout_alignParentLeft="true"
         android:nestedScrollingEnabled="false"
-        android:layout_alignParentBottom="false" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
-    <TimePicker
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/timePicker"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:nestedScrollingEnabled="false"
-        android:layout_alignParentBottom="true" />
+        android:text="00:00"
+        android:id="@+id/timeBtn"
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/checkBoxTTh"
+        android:layout_alignEnd="@+id/checkBoxTTh" />
 
 </RelativeLayout>
