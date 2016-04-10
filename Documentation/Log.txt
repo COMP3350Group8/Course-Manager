@@ -189,3 +189,6 @@ April 8, 2016
 - Wrote and ran a Robotium TEst using the Android Studio plugin (Ian)
 	- took an hour or so
 	- 
+April 9, 2016
+- Did some Robotium test to examine the functionality of add courses, add task, log out and log in
+- Regarding acceptance testing, functionality worked according to how customer wants it to for now
