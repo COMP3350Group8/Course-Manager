@@ -33,8 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.etuserName);
         etPassword =(EditText) findViewById(R.id.etPassword);
         blogin =(Button) findViewById(R.id.bLogin);
-        Log.d("DEBUG", "" + email.getText().toString());
-        Log.d("DEBUG", "" + email.getText().toString().trim());
+        //if (!db.getUser(email.getText().toString().trim(), etPassword.getText().toString())
         User user = db.getUser(email.getText().toString().trim(), etPassword.getText().toString());
         Log.d("DEBUG", "" + (user == null));
 
@@ -42,6 +41,9 @@ public class LoginActivity extends AppCompatActivity {
             CurrentUser.setUser(email.getText().toString().trim());
             startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
         }
+        else
+            email.setError("Email or Password is incorrect.");
+
     }
 
     protected void onResume() {

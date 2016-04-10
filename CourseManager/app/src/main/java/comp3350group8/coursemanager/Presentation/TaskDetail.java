@@ -38,14 +38,14 @@ public class TaskDetail extends AppCompatActivity {
         oldWeight = curr.getWeight();
 
         if (curr.getScore() != 0) {
-            output[4] = "" + curr.getScore();
-            double actual = curr.getScore() * curr.getWeight();
+            output[4] = "" + curr.getScore()*curr.getWeight()*100;
+            double actual = curr.getScore() * curr.getWeight()*100;
 
             text = (EditText)findViewById(R.id.taskScore);
             text.setText(output[4], TextView.BufferType.EDITABLE);
 
             TextView t = (TextView)findViewById(R.id.PercentageGrade);
-            String actualString = "" + actual;
+            String actualString = "" + actual + "%";
             t.setText(actualString, TextView.BufferType.NORMAL);
         }
 
@@ -60,7 +60,7 @@ public class TaskDetail extends AppCompatActivity {
         text.setText(output[2], TextView.BufferType.EDITABLE);
         Log.d("DEBUG", "weight " + output[3]);
         text = (EditText)findViewById(R.id.taskWeight);
-            text.setText("/" + Double.parseDouble(output[3])*100 + "%", TextView.BufferType.EDITABLE);
+            text.setText("/" + Double.parseDouble(output[3])*100, TextView.BufferType.EDITABLE);
     }
 
     public void saveTask(View v) {
@@ -74,9 +74,10 @@ public class TaskDetail extends AppCompatActivity {
         boolean hasName = taskName.length() > 0;
 
         if (hasWeight && hasName) {
-            String w = taskWeight.getText().toString();
+            String w = taskWeight.getText().toString().replaceAll("[/%]","");
+            Log.d("WEIGHT", "123weight = " + w);
             try {
-                double weight = Double.valueOf(w);
+                double weight = Double.valueOf(w)/100;
                 Log.d("WEIGHT", "weight = " + weight);
 
                 if (weight >= 0 && weight <= 1) {
@@ -97,14 +98,14 @@ public class TaskDetail extends AppCompatActivity {
                             try {
                                 double score = Double.valueOf(s);
 
-                                if (score >= 0 && score <= 1) {
-                                    newTask.setScore(Double.parseDouble(s));
+                                if (score >= 0 && score <= Double.valueOf(w)) {
+                                    newTask.setScore(Double.parseDouble(s)/Double.valueOf(w));
                                     newTask.setID(CurrentTask.getTask().getID());
 
                                     db.updateTask(newTask);
                                     startActivity(new Intent(TaskDetail.this, TaskList.class));
                                 } else {
-                                    taskScore.setError("Task Score must be between 0 and 1");
+                                    taskScore.setError("Task Score must be between 0 and " + w);
                                 }
                             } catch(NumberFormatException e) {
                                 taskScore.setError("Enter valid decimal number");
@@ -114,10 +115,10 @@ public class TaskDetail extends AppCompatActivity {
                             startActivity(new Intent(TaskDetail.this, TaskList.class));
                         }
                     } else {
-                        taskWeight.setError("Task Weight cannot exceed " + remainingWeight);
+                        taskWeight.setError("Task Weight cannot exceed " + remainingWeight*100);
                     }
                 } else {
-                    taskWeight.setError("Enter a Task Weight between 0 and 1");
+                    taskWeight.setError("Enter a Task Weight between 0 and 100");
                 }
             } catch(NumberFormatException e) {
                 taskWeight.setError("Must be valid decimal number");
