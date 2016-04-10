@@ -50,7 +50,7 @@ public class ListOfCourses extends Activity {
         user = curr.toString();
 
         TextView u = (TextView) findViewById(R.id.UserDescription);
-        u.setText(user, TextView.BufferType.NORMAL);
+        //u.setText(user, TextView.BufferType.NORMAL);
 
         // retrieve contents of "Courses" if any
 
@@ -64,7 +64,7 @@ public class ListOfCourses extends Activity {
         String[] course = ArrayConverter.convertCourses(courses);
 
         if (course.length > 0) {
-            Log.d("DEBUGG", course[0]);
+            Log.d("DEBUG", course[0]);
         }
        // ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
        // lv.setAdapter(adapter);

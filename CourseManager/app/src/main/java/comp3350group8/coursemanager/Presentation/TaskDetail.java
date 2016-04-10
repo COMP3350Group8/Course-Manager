@@ -58,9 +58,9 @@ public class TaskDetail extends AppCompatActivity {
 
         text = (EditText)findViewById(R.id.taskDueTime);
         text.setText(output[2], TextView.BufferType.EDITABLE);
-
+        Log.d("DEBUG", "weight " + output[3]);
         text = (EditText)findViewById(R.id.taskWeight);
-        text.setText(output[3], TextView.BufferType.EDITABLE);
+            text.setText("/" + Double.parseDouble(output[3])*100 + "%", TextView.BufferType.EDITABLE);
     }
 
     public void saveTask(View v) {

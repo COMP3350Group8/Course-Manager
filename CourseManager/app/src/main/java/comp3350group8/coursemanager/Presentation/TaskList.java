@@ -67,7 +67,7 @@ public class TaskList extends Activity {
         s.setText(grade, TextView.BufferType.NORMAL);
 
         double remainingDouble = Grader.setRemainingWeight(tasks);
-        String remaining = "" + remainingDouble + " remaining";
+        String remaining = "" + remainingDouble * 100 + " remaining";
         TextView r = (TextView) findViewById(R.id.Remaining);
         r.setText(remaining, TextView.BufferType.NORMAL);
 

@@ -148,8 +148,8 @@ public class AddTask extends AppCompatActivity {
         } else {
             String w = taskWeight.getText().toString();
             try {
-                double weight = Double.valueOf(w);
-
+                double tempWeight = Integer.valueOf(w);
+                double weight = tempWeight / 100;
                 if (weight <= 1 && weight >= 0) {
                     boolean exceedsRemainingWeight = remainingWeight - weight < 0;
 
@@ -159,6 +159,7 @@ public class AddTask extends AppCompatActivity {
                         Button taskduetime  = (Button) findViewById(R.id.timeBtn);
 
                         // create instance of Task and send to the database
+                        Log.d("DEBUG", "weight" + weight);
                         Task newTask = new Task(taskName.getText().toString(),
                                 taskduedate.getText().toString(),
                                 taskduetime.getText().toString(),

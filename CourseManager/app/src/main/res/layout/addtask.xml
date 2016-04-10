@@ -17,7 +17,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/weight"
-        android:hint="weight"
+        android:hint="% of Grade"
         android:layout_below="@+id/taskName" />
 
     <Button

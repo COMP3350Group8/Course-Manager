@@ -33,12 +33,13 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText) findViewById(R.id.etuserName);
         etPassword =(EditText) findViewById(R.id.etPassword);
         blogin =(Button) findViewById(R.id.bLogin);
-
-        User user = db.getUser(email.getText().toString(), etPassword.getText().toString());
+        Log.d("DEBUG", "" + email.getText().toString());
+        Log.d("DEBUG", "" + email.getText().toString().trim());
+        User user = db.getUser(email.getText().toString().trim(), etPassword.getText().toString());
         Log.d("DEBUG", "" + (user == null));
 
         if (user != null) {
-            CurrentUser.setUser(email.getText().toString());
+            CurrentUser.setUser(email.getText().toString().trim());
             startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
         }
     }
