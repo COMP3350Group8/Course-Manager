@@ -79,7 +79,6 @@ public class TaskList extends Activity {
             addGrade.setVisibility(View.VISIBLE);
         }
 
-        //TODO: maybe use a function pointer for this?
         //select a task
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

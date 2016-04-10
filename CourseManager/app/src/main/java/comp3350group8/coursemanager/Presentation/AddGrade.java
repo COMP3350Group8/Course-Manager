@@ -36,7 +36,6 @@ public class AddGrade extends AppCompatActivity {
             String grade = letterGrade.getText().toString();
             LetterGrade g = new LetterGrade(grade);
 
-            //TODO: get the course and update it with the grade
             long current = CurrentCourse.getID();
             int id = (int) current;
 
