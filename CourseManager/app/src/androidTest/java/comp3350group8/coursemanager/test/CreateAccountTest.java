@@ -4,6 +4,8 @@ import comp3350group8.coursemanager.Presentation.MainScreen;
 import com.robotium.solo.*;
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.Random;
+
 
 public class CreateAccountTest extends ActivityInstrumentationTestCase2<MainScreen> {
   	private Solo solo;
@@ -34,10 +36,13 @@ public class CreateAccountTest extends ActivityInstrumentationTestCase2<MainScre
 		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.name), "John");
         //Enter the text: '777'
 		solo.clearEditText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.studentNum));
-		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.studentNum), "777");
+		Random r = new Random();
+		int randomInt = r.nextInt(1000000);
+		String randomSig = "" + randomInt;
+		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.studentNum), randomSig);
         //Enter the text: 'john12'
 		solo.clearEditText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.emailAddress));
-		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.emailAddress), "john12");
+		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.emailAddress), "john" + randomSig);
         //Enter the text: 'umanitoba'
 		solo.clearEditText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.school));
 		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.school), "umanitoba");

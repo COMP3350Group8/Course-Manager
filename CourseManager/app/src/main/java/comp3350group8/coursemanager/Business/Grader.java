@@ -54,4 +54,20 @@ public class Grader {
     }
 
     public static double getRemainingWeight() {return remainingWeight;}
+
+    public static double calculateScore(double score, double weight) {
+        double calculated = score * weight * 100;
+        RoundNumber rounderNumber = new RoundNumber(calculated);
+        calculated = rounderNumber.roundTo(10);
+
+        return calculated;
+    }
+
+    public static double calculatePercentageScore(double score, double weight) {
+        double percent = score / weight;
+        RoundNumber rounderNumber = new RoundNumber(percent);
+        percent = rounderNumber.roundTo(10000);
+
+        return percent;
+    }
 }

@@ -30,7 +30,6 @@ public class ListOfCourses extends Activity {
     private ListView lv;
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         CurrentCourse.reset();
         setContentView(R.layout.listofcourses);
@@ -39,7 +38,6 @@ public class ListOfCourses extends Activity {
         //Bundle info = getIntent().getExtras();
 
         lv = (ListView) findViewById(R.id.listView);
-        //String[] course= {"COMP 1010", "COMP 1020", "COMP 2130","COMP 2140", "COMP 2150"};
 
         String user = CurrentUser.getUser();
         User curr = db.getUser(user);
@@ -70,29 +68,31 @@ public class ListOfCourses extends Activity {
 //        lv.setAdapter(new myListAdapter(ListOfCourses.this, courses));
 
         //select a course
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("DEBUG", "Selected course with id: " + id);
-
-                if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
-                    int index = (int)id;
-                    Course curr = courses.get(index);
-                    Log.d("DEBUG", "Current course = " + curr.getID());
-
-                    CurrentCourse.setCourse(curr.getName());
-                    CurrentCourse.setID(curr.getID());
-
-                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
-                }
-                //Object o = lv.getItemAtPosition(position);
-
-                startActivity(new Intent(ListOfCourses.this, TaskList.class));
-               // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        lv.setOnItemClickListener(listener);
 
     }
+
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.d("DEBUG", "Selected course with id: " + id);
+
+            if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
+                int index = (int)id;
+                Course curr = courses.get(index);
+                Log.d("DEBUG", "Current course = " + curr.getID());
+
+                CurrentCourse.setCourse(curr.getName());
+                CurrentCourse.setID(curr.getID());
+
+                Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
+            }
+            //Object o = lv.getItemAtPosition(position);
+
+            startActivity(new Intent(ListOfCourses.this, TaskList.class));
+            // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     protected void onResume() {
         super.onResume();

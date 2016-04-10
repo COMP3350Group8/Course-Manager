@@ -33,30 +33,20 @@ public class TaskDetail extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         Task curr = CurrentTask.getTask();
-        EditText text = null;
+        EditText text;
 
         String[] output = {curr.getName(), curr.getDate(), curr.getTime(), "" + curr.getWeight(), ""};
         oldWeight = curr.getWeight();
 
         if (curr.getScore() != 0) {
-            Log.d("DEBUG", "score = " + curr.getScore() + ", weight = " + curr.getWeight());
-            double score = curr.getScore() * curr.getWeight() * 100;
-            RoundNumber rounderNumber = new RoundNumber(score);
-            score = rounderNumber.roundTo(10);
+            double score = getScore(curr);
             output[4] = "" + score;
-
-            double p = score / curr.getWeight();
-            rounderNumber = new RoundNumber(p);
-            p = rounderNumber.roundTo(10000);
-            String percentage = "" + p + "%";
-//            double actual = curr.getScore() * curr.getWeight()*100;
-            Log.d("DEBUG", "score = " + curr.getScore() + ", result = " + output[4] + ", weight = " + curr.getWeight());
+            String percentage = getPercentage(curr, score);
 
             text = (EditText)findViewById(R.id.taskScore);
             text.setText(output[4], TextView.BufferType.EDITABLE);
 
             TextView t = (TextView)findViewById(R.id.PercentageGrade);
-//            String actualString = "" + actual + "%";
             t.setText(percentage, TextView.BufferType.NORMAL);
         }
 
@@ -68,9 +58,19 @@ public class TaskDetail extends AppCompatActivity {
 
         text = (EditText)findViewById(R.id.taskDueTime);
         text.setText(output[2], TextView.BufferType.EDITABLE);
-        Log.d("DEBUG", "weight " + output[3]);
+
         text = (EditText)findViewById(R.id.taskWeight);
         text.setText("/" + Double.parseDouble(output[3])*100, TextView.BufferType.EDITABLE);
+    }
+
+    private double getScore(Task current) {
+        double score = Grader.calculateScore(current.getScore(), current.getWeight());
+        return score;
+    }
+
+    private String getPercentage(Task current, double score) {
+        double p = Grader.calculatePercentageScore(score, current.getWeight());
+        return "" + p + "%";
     }
 
     public void saveTask(View v) {

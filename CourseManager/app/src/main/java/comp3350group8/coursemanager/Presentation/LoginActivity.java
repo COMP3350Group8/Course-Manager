@@ -28,8 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void login(View v)
-    {
+    public void login(View v) {
         EditText email, etPassword;
         email = (EditText) findViewById(R.id.etuserName);
         etPassword =(EditText) findViewById(R.id.etPassword);

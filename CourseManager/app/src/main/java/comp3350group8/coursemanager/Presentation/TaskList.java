@@ -44,10 +44,8 @@ public class TaskList extends Activity {
         //Bundle info = getIntent().getExtras();
 
         lv = (ListView) findViewById(R.id.TaskList);
-        //String[] task= {"Do COMP 1020 Assignment", "Study for Database Exam", "Hand in Honesty Declaration"};
 
         Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
-
         Course curr = db.getCourse((int)CurrentCourse.getID());
         String description = curr.toString();
         Log.d("DEBUG", "Description = " + description);
@@ -80,23 +78,25 @@ public class TaskList extends Activity {
         }
 
         //select a task
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("DEBUG", "Selected course with id: " + id);
-                if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
-                    int index = (int) id;
-                    Task curr = tasks.get(index);
-                    CurrentTask.setTask(curr);
-
-                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
-                }
-                Object o = lv.getItemAtPosition(position);
-                startActivity(new Intent(TaskList.this, TaskDetail.class));
-                // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        lv.setOnItemClickListener(listener);
     }
+
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.d("DEBUG", "Selected course with id: " + id);
+            if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
+                int index = (int) id;
+                Task curr = tasks.get(index);
+                CurrentTask.setTask(curr);
+
+                Log.d("DEBUG", "course = " + CurrentCourse.getCourseName());
+            }
+            Object o = lv.getItemAtPosition(position);
+            startActivity(new Intent(TaskList.this, TaskDetail.class));
+            // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     public void AddTask (View v) {
         startActivity(new Intent(TaskList.this, AddTask.class));

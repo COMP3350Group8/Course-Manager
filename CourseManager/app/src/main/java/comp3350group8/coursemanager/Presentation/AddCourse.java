@@ -84,15 +84,12 @@ public class AddCourse extends AppCompatActivity {
             }
         });
     }
-    //final Intent newActivity = new Intent(AddCourse.this, ListOfCourses.class);
-    public void AddCourse (View v)
-    {
+
+    public void AddCourse (View v) {
         CheckBox ch1 = (CheckBox)findViewById(R.id.checkBoxMWF);
         CheckBox ch2 = (CheckBox)findViewById(R.id.checkBoxTTh);
         String courseDate = "";
-        // String []data = new String[3];
 
-        // retrieve the data supplied to the form
         EditText courseName = (EditText) findViewById(R.id.courseName);
         if(courseName.length() ==  0) {
             courseName.setError("Enter course");
@@ -100,15 +97,17 @@ public class AddCourse extends AppCompatActivity {
             EditText courseloc = (EditText) findViewById(R.id.location);
             EditText coursedescr = (EditText) findViewById(R.id.description);
             EditText courseCredits = (EditText) findViewById(R.id.credits);
+
+            String name = courseName.getText().toString();
+            String location = courseloc.getText().toString();
+            String description = coursedescr.getText().toString();
             String credits = courseCredits.getText().toString();
 
             if (ch1.isChecked()){
-                //If checked, course is on MWF
                 courseDate = "M-W-F";
             }
 
             if (ch2.isChecked()){
-                //If checked, course is on T/Th
                 courseDate = "T-Th";
             }
 
@@ -117,19 +116,8 @@ public class AddCourse extends AppCompatActivity {
 
                 if (c >= 0) {
                     // create instance of Course and send to the database
-                    Course newCourse = new Course(courseName.getText().toString(),
-                            courseloc.getText().toString(),
-                            coursedescr.getText().toString(),
-                            courseDate,
-                            c);
+                    insertCourseIntoDatabase(name, location, description, courseDate, c);
 
-                    long insert = db.insertCourse(newCourse);
-
-                    if (insert > 0) {
-                        startActivity(new Intent(AddCourse.this, ListOfCourses.class));
-                    } else {
-                        Log.d("DEBUG", "Insertion of course: " + newCourse + "\n failed");
-                    }
                 } else {
                     courseCredits.setError("Credit Hours must be represented as a positive number");
                 }
@@ -138,5 +126,17 @@ public class AddCourse extends AppCompatActivity {
             }
         }
 
+    }
+
+    private void insertCourseIntoDatabase(String name, String location, String description, String date, int credits) {
+        Course newCourse = new Course(name, location, description, date, credits);
+
+        long insert = db.insertCourse(newCourse);
+
+        if (insert > 0) {
+            startActivity(new Intent(AddCourse.this, ListOfCourses.class));
+        } else {
+            Log.d("DEBUG", "Insertion of course: " + newCourse + "\n failed");
+        }
     }
 }
