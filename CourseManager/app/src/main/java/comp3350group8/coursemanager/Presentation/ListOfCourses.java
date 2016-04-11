@@ -13,7 +13,9 @@ import comp3350group8.coursemanager.Business.ArrayConverter;
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
+import comp3350group8.coursemanager.Business.GPACalculator;
 import comp3350group8.coursemanager.Business.User;
+import comp3350group8.coursemanager.Business.myListAdapter;
 import comp3350group8.coursemanager.Persistence.Database;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.staticDB;
@@ -28,7 +30,6 @@ public class ListOfCourses extends Activity {
     private ListView lv;
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         CurrentCourse.reset();
         setContentView(R.layout.listofcourses);
@@ -37,54 +38,61 @@ public class ListOfCourses extends Activity {
         //Bundle info = getIntent().getExtras();
 
         lv = (ListView) findViewById(R.id.listView);
-        //String[] course= {"COMP 1010", "COMP 1020", "COMP 2130","COMP 2140", "COMP 2150"};
 
         String user = CurrentUser.getUser();
         User curr = db.getUser(user);
+        courses = db.getCourses();
+        GPACalculator.init(courses);
+        double gpa = GPACalculator.getGPA();
+        curr.setGPA(gpa);
         Log.d("DEBUG", "Current user = " + curr.toString());
         user = curr.toString();
 
         TextView u = (TextView) findViewById(R.id.UserDescription);
         u.setText(user, TextView.BufferType.NORMAL);
 
-        // retrieve contents of "Courses" if any
-        courses = db.getCourses();
         Log.d("DEBUG", "size = " + courses.size());
+        if (courses.size() > 0) {
+            Log.d("DEBUG", "First course = " + courses.get(0));
+        }
+
+        Log.d("DEBUG", "GPA = " + gpa);
         String[] course = ArrayConverter.convertCourses(courses);
 
         if (course.length > 0) {
-            Log.d("DEBUGG", course[0]);
+            Log.d("DEBUG", course[0]);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, course);
         lv.setAdapter(adapter);
 
-        //SubTable table = staticDB.searchTable("Courses");
-        //ArrayList<ListItem> items = table.getAll();
-        //lv.setAdapter(new myListAdapter(ListOfCourses.this, items));
+//        lv.setAdapter(new myListAdapter(ListOfCourses.this, courses));
 
         //select a course
-        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("DEBUG", "Selected course with id: " + id);
-                if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
-                    //TODO: make sure this is getting the right course from the database, array index != ID
-                    int index = (int)id;
-                    Course curr = courses.get(index);
-                    Log.d("DEBUG", "Current course = " + id+1);
-                    CurrentCourse.setCourse(curr.getName());
-                    CurrentCourse.setID(curr.getID());
-
-                    Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
-                }
-                Object o = lv.getItemAtPosition(position);
-
-                startActivity(new Intent(ListOfCourses.this, TaskList.class));
-               // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
+        lv.setOnItemClickListener(listener);
 
     }
+
+    private AdapterView.OnItemClickListener listener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Log.d("DEBUG", "Selected course with id: " + id);
+
+            if (id < Integer.MAX_VALUE && id > Integer.MIN_VALUE) {
+                int index = (int)id;
+                Course curr = courses.get(index);
+                Log.d("DEBUG", "Current course = " + curr.getID());
+
+                CurrentCourse.setCourse(curr.getName());
+                CurrentCourse.setID(curr.getID());
+
+                Log.d("DEBUG", "course = " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
+            }
+            //Object o = lv.getItemAtPosition(position);
+
+            startActivity(new Intent(ListOfCourses.this, TaskList.class));
+            // Toast.makeText(ListOfCourses.this, o.toString(), Toast.LENGTH_LONG).show();
+        }
+    };
 
     protected void onResume() {
         super.onResume();
@@ -97,5 +105,6 @@ public class ListOfCourses extends Activity {
 
     public void logout(View v) {
         startActivity(new Intent(ListOfCourses.this, LoginActivity.class));
+        finish();
     }
 }

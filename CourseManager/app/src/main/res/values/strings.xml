@@ -21,4 +21,5 @@
         completions."
     </string>
     <string name="title_activity_task_detail">TaskDetail</string>
+    <string name="title_activity_add_grade">AddGrade</string>
 </resources>

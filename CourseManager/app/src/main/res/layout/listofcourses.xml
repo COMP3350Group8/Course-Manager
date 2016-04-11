@@ -7,22 +7,24 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
+        android:text="Your Courses"
         android:id="@+id/UserDescription"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_below="@+id/CourseDescription"
+        android:layout_below="@+id/UserDescription"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="74dp"
-        android:layout_above="@+id/button3" />
+        android:layout_above="@+id/button3"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false" />
 
     <Button
         android:layout_width="match_parent"

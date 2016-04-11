@@ -27,13 +27,13 @@
         android:onClick="AddTask"
         android:layout_above="@+id/CourseList"/>
 
-    <!--<Button
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Grades"
-        android:id="@+id/button6"
-        android:onClick="AddGrades"
-        android:layout_above="@+id/AddTask"/>-->
+        android:text="Add Final Grade"
+        android:id="@+id/AddGrade"
+        android:onClick="addGrade"
+        android:layout_above="@+id/CourseList"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
         android:id="@+id/Remaining"
-        android:layout_below="@+id/CourseList"/>
+        android:layout_above="@+id/AddTask"/>
 
     <TextView
         android:layout_width="match_parent"

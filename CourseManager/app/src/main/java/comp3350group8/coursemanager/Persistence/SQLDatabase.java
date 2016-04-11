@@ -13,6 +13,7 @@ import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Business.CurrentCourse;
 import comp3350group8.coursemanager.Business.CurrentUser;
 import comp3350group8.coursemanager.Business.IntAtom;
+import comp3350group8.coursemanager.Business.LetterGrade;
 import comp3350group8.coursemanager.Business.Task;
 import comp3350group8.coursemanager.Business.User;
 
@@ -23,7 +24,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * needs to implement a database
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 22;
+    private static int DATABASE_VERSION = 35;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
@@ -52,7 +53,9 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 " CourseName TEXT NOT NULL, " +
                 " CourseLocation TEXT, " +
                 " CourseDescription TEXT, " +
-                " CourseDate TEXT," +
+                " CourseDate TEXT, " +
+                " CourseCreditHours INTEGER, " +
+                " CourseGrade TEXT," +
                 " FOREIGN KEY(UserID) References Users(ID));";
 
         String CREATE_TASK_TABLE = "CREATE TABLE Tasks ( " +
@@ -290,15 +293,24 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
     }
 
     private static final String TABLE_COURSES = "Courses";
-    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription"};
+    private static final String[] COURSE_COLUMNS = {"ID", "UserID", "CourseName", "CourseLocation", "CourseDescription", "CourseDate", "CourseCreditHours", "CourseGrade"};
 
     public long insertCourse(Course course) {
         SQLiteDatabase db = this.getWritableDatabase();
         long success = -1;
+        String originalName = course.getName();
 
         ContentValues values = new ContentValues();
-
         int userid = getUserID();
+
+        int count = checkForDuplicates(course);
+        int index= 1;
+        while (count > 0) {
+            index++;
+            course.setName(originalName + "(" + (index) + ")");
+            Log.d("DEBUG", "name = " + course.getName());
+            count = checkForDuplicates(course);
+        }
 
         if (userid >= 0) {
             values.put(COURSE_COLUMNS[1], userid);
@@ -306,12 +318,55 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
             values.put(COURSE_COLUMNS[3], course.getLocation());
             values.put(COURSE_COLUMNS[4], course.getDescription());
             values.put(COURSE_COLUMNS[5], course.getDate());
+            values.put(COURSE_COLUMNS[6], course.getCreditHours());
 
             success = db.insert(TABLE_COURSES, null, values);
         }
         db.close();
 
         return success;
+    }
+
+    private int checkForDuplicates(Course checking) {
+        ArrayList<Course> courses = getCourses();
+
+        int count = 0;
+        for (int i = 0; i < courses.size(); i++) {
+            Course curr = courses.get(i);
+
+            if (curr.getName().equals(checking.getName())) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public boolean updateCourse(Course course) {
+        int oldID = course.getID();
+        Course old = getCourse(oldID);
+        Log.d("DEBUG", "old course = " + old);
+        Log.d("DEBUG", "new course = " + course);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        long success = -1;
+        int userid = getUserID();
+
+        ContentValues values = new ContentValues();
+
+        if (userid >= 0) {
+            values.put(COURSE_COLUMNS[1], userid);
+            values.put(COURSE_COLUMNS[2], course.getName());
+            values.put(COURSE_COLUMNS[3], course.getLocation());
+            values.put(COURSE_COLUMNS[4], course.getDescription());
+            values.put(COURSE_COLUMNS[5], course.getDate());
+            values.put(COURSE_COLUMNS[6], course.getCreditHours());
+            values.put(COURSE_COLUMNS[7], course.getGrade().getGrade());
+
+            success = db.update(TABLE_COURSES, values, "ID = " + course.getID(), null);
+        }
+
+        return success > 0;
     }
 
     public Course getCourse(int id) {
@@ -333,7 +388,16 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                     String location = cursor.getString(3);
                     String description = cursor.getString(4);
                     String date = cursor.getString(5);
-                    course = new Course(name, location, description, date);
+                    int credit = Integer.parseInt(cursor.getString(6));
+
+                    course = new Course(name, location, description, date, credit);
+
+                    String grade = cursor.getString(7);
+                    Log.d("Grade", "grade = " + grade);
+                    LetterGrade g = new LetterGrade(grade);
+                    course.setGrade(g);
+                    Log.d("DEBUG", "Course from database = " + course);
+
                     course.setID(Integer.parseInt(cursor.getString(0)));
                 }
             }
@@ -362,8 +426,13 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
                 String date = cursor.getString(5);
-                course = new Course(name, location, description, date);
-                Log.d("list", course.toString());
+                int credit = Integer.parseInt(cursor.getString(6));
+
+                course = new Course(name, location, description, date, credit);
+
+                LetterGrade g = new LetterGrade(cursor.getString(7));
+                course.setGrade(g);
+
                 course.setID(Integer.parseInt(cursor.getString(0)));
                 list.add(course);
             } while (cursor.moveToNext());
@@ -389,10 +458,14 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
                 String location = cursor.getString(3);
                 String description = cursor.getString(4);
                 String date = cursor.getString(5);
+                int credit = Integer.parseInt(cursor.getString(6));
 
-                course = new Course(name, location, description, date);
+                course = new Course(name, location, description, date, credit);
+
+                LetterGrade g = new LetterGrade(cursor.getString(7));
+                course.setGrade(g);
+
                 course.setID(Integer.parseInt(cursor.getString(0)));
-                Log.d("list", course.toString());
 
                 list.add(course);
             } while (cursor.moveToNext());
@@ -410,6 +483,7 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
         long success = -1;
         int courseId = getCourseID();
         int userId = getUserID();
+
         Log.d("DEBUG", "CourseID = " + courseId);
         Log.d("DEBUG", "task = " + task.toString());
 
@@ -558,27 +632,29 @@ public class SQLDatabase  extends SQLiteOpenHelper implements Database{
 
     private int getCourseID() {
         int course = -1;
-        Log.d("DEBUG", "current course: " + CurrentCourse.getCourseName());
+        Log.d("DEBUG", "current course: " + CurrentCourse.getCourseName() + ", " + CurrentCourse.getID());
 
         // we know the user and an array index
         if(CurrentCourse.getCourseName() != null) {
+            Log.d("DEBUG", "getName = " + CurrentCourse.getCourseName());
             SQLiteDatabase db = this.getReadableDatabase();
 
-            String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[2] + "=?";
-            String[] args = new String[]{CurrentCourse.getCourseName()};
+            String query = "SELECT * FROM " + TABLE_COURSES + " WHERE " + COURSE_COLUMNS[1] + "=? AND " + COURSE_COLUMNS[2] + "=?";
+            String[] args = new String[]{"" + getUserID(), CurrentCourse.getCourseName()};
 
             Cursor cursor = db.rawQuery(query, args);
             if (cursor != null) {
+                Log.d("DEBUG", "There were results");
                 cursor.moveToFirst();
 
                 if (cursor.getCount() == 1) {
                     String id = cursor.getString(0);
                     course = Integer.parseInt(id);
                 }
-
                 cursor.close();
             }
         }
+
         return course;
     }
 

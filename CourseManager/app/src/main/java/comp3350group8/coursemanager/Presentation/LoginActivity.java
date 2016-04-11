@@ -27,20 +27,23 @@ public class LoginActivity extends AppCompatActivity {
         CurrentUser.reset();
     }
 
-    public void login(View v)
-    {
+
+    public void login(View v) {
         EditText email, etPassword;
         email = (EditText) findViewById(R.id.etuserName);
         etPassword =(EditText) findViewById(R.id.etPassword);
         blogin =(Button) findViewById(R.id.bLogin);
-
-        User user = db.getUser(email.getText().toString(), etPassword.getText().toString());
+        //if (!db.getUser(email.getText().toString().trim(), etPassword.getText().toString())
+        User user = db.getUser(email.getText().toString().trim(), etPassword.getText().toString());
         Log.d("DEBUG", "" + (user == null));
 
         if (user != null) {
-            CurrentUser.setUser(email.getText().toString());
+            CurrentUser.setUser(email.getText().toString().trim());
             startActivity(new Intent(LoginActivity.this, ListOfCourses.class));
+        } else {
+            email.setError("Email or Password is incorrect.");
         }
+
     }
 
     protected void onResume() {
