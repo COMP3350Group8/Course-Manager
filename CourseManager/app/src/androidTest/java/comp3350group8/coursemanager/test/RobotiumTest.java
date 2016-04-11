@@ -245,20 +245,19 @@ public class RobotiumTest extends ActivityInstrumentationTestCase2<MainScreen> {
 		solo.clearEditText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.weight));
 		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.weight), "20");
         //Click on 00:00
-		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.timeBtn));
+//		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.timeBtn));
         //Click on Cancel
-		solo.clickOnView(solo.getView(android.R.id.button2));
+//		solo.clickOnView(solo.getView(android.R.id.button2));
         //Click on Cancel
-		solo.clickOnView(solo.getView(android.R.id.button2));
+//		solo.clickOnView(solo.getView(android.R.id.button2));
         //Click on 00/00/0000
-		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.dateBtn));
-		//Robotium doesn't seem to like SimpleMonthView
+//		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.dateBtn));
         //Click on SimpleMonthView
 //		solo.clickOnView(solo.getView(android.widget.SimpleMonthView.class, 0));
         //Click on SimpleMonthView
 //		solo.clickOnView(solo.getView(android.widget.SimpleMonthView.class, 0));
         //Click on Ok
-		solo.clickOnView(solo.getView(android.R.id.button1));
+//		solo.clickOnView(solo.getView(android.R.id.button1));
         //Click on Save Task
 		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.saveTask));
         //Wait for activity: 'comp3350group8.coursemanager.Presentation.TaskList'
