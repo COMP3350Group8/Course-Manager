@@ -177,6 +177,10 @@ March 29, 2016
 April 1, 2016
 - I'm going to start working on GPA Calculation, it'll involve adding a credit hours item to the Courses table, and the functionality to take that and the final grade in the course (when remaining weight = 0) and spit out a letter grade (Ian)
 	- took most of the day, didn't finish
+	
+April 3, 2016
+- Added the capability to specify date and time of course. (Anthony)
+- Updated the database so date and time of course have their own column (Anthony)
 
 April 8, 2016
 - Finished writing the GPA Calculation functions, and some associated tests (Ian)

@@ -23,7 +23,7 @@ import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
  * Created by Ian Smith on 2016-02-17.
  */
 public class SQLDatabase  extends SQLiteOpenHelper implements Database{
-    private static int DATABASE_VERSION = 38;
+    private static int DATABASE_VERSION = 40;
     private static final String DATABASE_NAME = "Course Manager";
 
     public SQLDatabase(Context context) {
