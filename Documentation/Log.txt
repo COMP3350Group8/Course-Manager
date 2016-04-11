@@ -196,6 +196,8 @@ April 8, 2016
 April 9, 2016
 - Did some Robotium test to examine the functionality of add courses, add task, log out and log in
 - Regarding acceptance testing, functionality worked according to how customer wants it to for now
+- Did some code refactoring and made a few GUI changes (Graham)
+- Fixed the time enter for addCourse (Graham)
 
 April 10, 2016
 - TaskDetail now shows the score as a proportion of the weight and as a percentage (Ian)
@@ -206,8 +208,4 @@ April 10, 2016
 	- wrote RoundNumber class to take care of rounding doubles to a specified decimal place
 	- tested RoundNumber class 
 	- updated scaffolding for multiple Presentation classes, since weight is now expressed as a portion of 100, rather than 1
-
-April 11, 2016
-- group met to finish iteration
-	- spent an hour rewriting the robotium tests
-	- updated wiki
+- Reworked AddCourse so that a user can enter any combination of weekdays for the day of their course. (Graham)
