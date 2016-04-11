@@ -64,8 +64,8 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="M W F"
-        android:id="@+id/checkBoxMWF"
+        android:text="M"
+        android:id="@+id/chkBoxM"
         android:layout_below="@+id/description"
         android:layout_alignParentLeft="true"
         android:layout_marginTop="56dp"
@@ -74,12 +74,12 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="T Th"
-        android:id="@+id/checkBoxTTh"
+        android:text="T"
+        android:id="@+id/chkBoxT"
         android:checked="false"
-        android:layout_alignTop="@+id/checkBoxMWF"
-        android:layout_toRightOf="@+id/checkBoxMWF"
-        android:layout_marginLeft="105dp" />
+        android:layout_alignTop="@+id/chkBoxM"
+        android:layout_toRightOf="@+id/chkBoxM"
+        android:layout_toEndOf="@+id/chkBoxM" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Course Date"
         android:id="@+id/textView2"
-        android:layout_above="@+id/checkBoxTTh"
+        android:layout_above="@+id/chkBoxT"
         android:layout_alignParentLeft="true" />
 
     <TextView
@@ -98,8 +98,8 @@
         android:id="@+id/textView3"
         android:nestedScrollingEnabled="false"
         android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_toRightOf="@+id/timeBtn"
+        android:layout_toEndOf="@+id/timeBtn" />
 
     <Button
         android:layout_width="wrap_content"
@@ -107,7 +107,37 @@
         android:text="00:00"
         android:id="@+id/timeBtn"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/checkBoxTTh"
-        android:layout_alignEnd="@+id/checkBoxTTh" />
+        android:layout_alignRight="@+id/chkBoxT"
+        android:layout_alignEnd="@+id/chkBoxT" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Th"
+        android:id="@+id/chkBoxTh"
+        android:checked="false"
+        android:layout_alignTop="@+id/chkBoxW"
+        android:layout_toRightOf="@+id/chkBoxW"
+        android:layout_toEndOf="@+id/chkBoxW" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="W"
+        android:id="@+id/chkBoxW"
+        android:checked="false"
+        android:layout_alignTop="@+id/chkBoxT"
+        android:layout_toRightOf="@+id/timeBtn"
+        android:layout_toEndOf="@+id/timeBtn" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="F"
+        android:id="@+id/chkBoxF"
+        android:checked="false"
+        android:layout_alignBottom="@+id/chkBoxTh"
+        android:layout_toRightOf="@+id/chkBoxTh"
+        android:layout_toEndOf="@+id/chkBoxTh" />
 
 </RelativeLayout>

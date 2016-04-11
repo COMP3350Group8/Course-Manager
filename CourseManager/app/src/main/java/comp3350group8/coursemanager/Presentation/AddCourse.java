@@ -1,6 +1,5 @@
 package comp3350group8.coursemanager.Presentation;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,8 +18,6 @@ import android.widget.TimePicker;
 
 import comp3350group8.coursemanager.Business.Course;
 import comp3350group8.coursemanager.Persistence.Database;
-import comp3350group8.coursemanager.Persistence.SQLDatabase;
-import comp3350group8.coursemanager.Persistence.StubDatabase;
 import comp3350group8.coursemanager.R;
 import comp3350group8.coursemanager.Persistence.staticDB;
 
@@ -89,8 +86,11 @@ public class AddCourse extends AppCompatActivity {
     };
 
     public void AddCourse (View v) {
-        CheckBox ch1 = (CheckBox)findViewById(R.id.checkBoxMWF);
-        CheckBox ch2 = (CheckBox)findViewById(R.id.checkBoxTTh);
+        CheckBox ch1 = (CheckBox)findViewById(R.id.chkBoxM);
+        CheckBox ch2 = (CheckBox)findViewById(R.id.chkBoxT);
+        CheckBox ch3 = (CheckBox)findViewById(R.id.chkBoxW);
+        CheckBox ch4 = (CheckBox)findViewById(R.id.chkBoxTh);
+        CheckBox ch5 = (CheckBox)findViewById(R.id.chkBoxF);
         String courseDate = "";
 
         EditText courseName = (EditText) findViewById(R.id.courseName);
@@ -107,11 +107,23 @@ public class AddCourse extends AppCompatActivity {
             String credits = courseCredits.getText().toString();
 
             if (ch1.isChecked()){
-                courseDate = "M-W-F";
+                courseDate += "M ";
             }
 
             if (ch2.isChecked()){
-                courseDate = "T-Th";
+                courseDate += "T ";
+            }
+
+            if (ch3.isChecked()){
+                courseDate += "W ";
+            }
+
+            if (ch4.isChecked()){
+                courseDate += "Th ";
+            }
+
+            if (ch5.isChecked()){
+                courseDate += "F ";
             }
 
             try {

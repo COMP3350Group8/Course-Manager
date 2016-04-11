@@ -77,7 +77,7 @@ public class RobotTest extends ActivityInstrumentationTestCase2<MainScreen> {
 		solo.clearEditText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.credits));
 		solo.enterText((android.widget.EditText) solo.getView(comp3350group8.coursemanager.R.id.credits), "3");
         //Click on M W F
-		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.checkBoxMWF));
+		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.chkBoxM));
         //Click on Save Course
 		solo.clickOnView(solo.getView(comp3350group8.coursemanager.R.id.button4));
         //Wait for activity: 'comp3350group8.coursemanager.Presentation.ListOfCourses'
