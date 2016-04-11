@@ -202,3 +202,8 @@ April 10, 2016
 	- wrote RoundNumber class to take care of rounding doubles to a specified decimal place
 	- tested RoundNumber class 
 	- updated scaffolding for multiple Presentation classes, since weight is now expressed as a portion of 100, rather than 1
+
+April 11, 2016
+- group met to finish iteration
+	- spent an hour rewriting the robotium tests
+	- updated wiki
